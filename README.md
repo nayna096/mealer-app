@@ -1,2 +1,6 @@
 # mealer-app
 SEG 2105 Project
+
+Admin login:
+  username: **********
+  password: **********
