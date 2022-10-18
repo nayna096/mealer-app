@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "878156245869",
+    "firebase_url": "https://dexter-mxhjxt.firebaseio.com",
+    "project_id": "dexter-mxhjxt",
+    "storage_bucket": "dexter-mxhjxt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878156245869:android:9481f76ee91efa158c4864",
+        "android_client_info": {
+          "package_name": "com.example.meallogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878156245869-47tb3kng2oit5bglbivlfkcr12altb5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMZBXxa0VDKkilZqCKP5Vi2AzG088Ftvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878156245869-153saunvr6uu0iivcj0s3cm5lp3tf8mp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
