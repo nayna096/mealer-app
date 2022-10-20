@@ -67,12 +67,16 @@ public class SignUp extends AppCompatActivity {
         });
         cook.setOnClickListener(v ->
         {
-            if (!(TextUtils.isEmpty(user.getText().toString()) && TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Email.getText().toString()))) {
-                Cook newcook = new Cook(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
-                DatabaseReference cookref = db.getReference("Cooks");
-                String id = cookref.push().getKey();
-                cookref.child(id).setValue(newcook);
-                openWelcomeCookScreen();
+            if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
+                if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
+                    Cook newcook = new Cook(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
+                    DatabaseReference cookref = db.getReference("Cooks");
+                    String id = cookref.push().getKey();
+                    cookref.child(id).setValue(newcook);
+                    openWelcomeCookScreen();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "One of the fields is empty", Toast.LENGTH_LONG).show();
             }
