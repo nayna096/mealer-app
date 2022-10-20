@@ -50,7 +50,7 @@ public class SignUp extends AppCompatActivity {
         client.setOnClickListener(v ->
         {
 
-            if (!(TextUtils.isEmpty(user.getText().toString()) && TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Email.getText().toString()))) {
+            if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
                 if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
                     Client newclient = new Client(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
                     DatabaseReference clientref = db.getReference("Clients");
