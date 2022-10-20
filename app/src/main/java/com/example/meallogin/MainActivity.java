@@ -10,6 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,22 +28,26 @@ public class MainActivity extends AppCompatActivity {
 
         //admin
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSignup();
-            }
+        login.setOnClickListener(v ->{}
+                //In the future here the user that is logging in will be read from firebase, to determine
+                //whether they are a client or cook. The corresponding welcome screen will then be opened
+//                openWelcomeScreen()
+        );
+        signup.setOnClickListener(v -> {
+            openSignup();
         });
 
     }
     public void openSignup(){
         Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+    }
+    public void openWelcomeCookScreen(){
+        Intent intent = new Intent(this, WelcomeCookScreen.class);
+        startActivity(intent);
+    }
+    public void openWelcomeClientScreen(){
+        Intent intent = new Intent(this, WelcomeClientScreen.class);
         startActivity(intent);
     }
 }
