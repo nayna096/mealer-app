@@ -2,5 +2,5 @@
 SEG 2105 Project
 
 Admin login:
-  username: **********
-  password: **********
+  username: gdupu
+  password: JoeDalton1
