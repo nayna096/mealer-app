@@ -30,9 +30,10 @@ import java.util.List;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
-
+    String [] restrictedUsers =  {"nayna","gdupu","ikarr","ekoro"};
+    int ret = 0;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
-
+    DatabaseReference dbref = db.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,45 +46,127 @@ public class SignUp extends AppCompatActivity {
         MaterialButton login = (MaterialButton) findViewById(R.id.login);
         MaterialButton cook = (MaterialButton) findViewById(R.id.Cook);
         MaterialButton client = (MaterialButton) findViewById(R.id.Client);
-
+        for(int i = 0;i<restrictedUsers.length;i++){
+            if(user.getText().toString().equals(restrictedUsers[i])){
+                Toast.makeText(getApplicationContext(),"This username is invalid due to an admin conflict",Toast.LENGTH_LONG).show();
+                user.setText("");
+            }
+        }
         login.setOnClickListener(v -> openMainActivity());
         client.setOnClickListener(v ->
         {
-
-            if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
-                if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
-                    Client newclient = new Client(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
-                    DatabaseReference clientref = db.getReference("Clients");
-                    String id = clientref.push().getKey();
-                    clientref.child(id).setValue(newclient);
-                    openWelcomeClientScreen();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
+            for(int i = 0;i<restrictedUsers.length;i++){
+                if(user.getText().toString().equals(restrictedUsers[i])){
+                    Toast.makeText(getApplicationContext(),"This username is invalid due to an admin conflict",Toast.LENGTH_LONG).show();
+                    user.setText("");
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "One of the fields is empty", Toast.LENGTH_LONG).show();
             }
+            dbref.child("Cooks").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        Toast.makeText(getApplicationContext(),"This username is already used by a cook, use a different one", Toast.LENGTH_LONG).show();
+                        user.setText("");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            dbref.child("Clients").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                    if(datasnapshot.exists()){
+                        Toast.makeText(getApplicationContext(),"This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
+                        user.setText("");
+                    }else{
+                        createClient(user,Password,Confirmp,Email);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
 
         });
         cook.setOnClickListener(v ->
         {
-            if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
-                if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
-                    Cook newcook = new Cook(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
-                    DatabaseReference cookref = db.getReference("Cooks");
-                    String id = cookref.push().getKey();
-                    cookref.child(id).setValue(newcook);
-                    openWelcomeCookScreen();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
+            for(int i = 0;i<restrictedUsers.length;i++){
+                if(user.getText().toString().equals(restrictedUsers[i])){
+                    Toast.makeText(getApplicationContext(),"This username is invalid due to an admin conflict",Toast.LENGTH_LONG).show();
+                    user.setText("");
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "One of the fields is empty", Toast.LENGTH_LONG).show();
             }
+            dbref.child("Clients").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()) {
+                        Toast.makeText(getApplicationContext(), "This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
+                        user.setText("");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            dbref.child("Cooks").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                    if(datasnapshot.exists()){
+                        Toast.makeText(getApplicationContext(),"This username is already used by a cook, use a different one", Toast.LENGTH_LONG).show();
+                        user.setText("");
+                    }else{
+                        createCook(user, Password, Confirmp, Email);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         });
 
     }
 
+    public void createClient(EditText user, EditText Password, EditText Confirmp, EditText Email){
+        if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
+            if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
+                Client newclient = new Client(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
+                DatabaseReference clientref = db.getReference("Clients");
+                String id = clientref.push().getKey();
+                clientref.child(id).setValue(newclient);
+                openWelcomeClientScreen();
+            } else {
+                Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "One of the fields is empty", Toast.LENGTH_LONG).show();
+        }
+    }
+    public void createCook(EditText user, EditText Password, EditText Confirmp, EditText Email){
+        if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
+            if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
+                Cook newcook = new Cook(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
+                DatabaseReference cookref = db.getReference("Cooks");
+                String id = cookref.push().getKey();
+                cookref.child(id).setValue(newcook);
+                openWelcomeCookScreen();
+            }else{
+                Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "One of the fields is empty", Toast.LENGTH_LONG).show();
+        }
+    }
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

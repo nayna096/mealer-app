@@ -5,6 +5,7 @@ public class Client {
     private String password;
     private String role;
     private String email;
+    public Client(){}
     public Client(String Username, String Password, String Email){
         this.username = Username;
         this.password = Password;
@@ -17,9 +18,7 @@ public class Client {
     public String getPassword(){
         return this.password;
     }
-    public String getRole(){
-        return this.role;
-    }
+    public String getRole(){return this.role;}
     public String getEmail(){
         return this.email;
     }
