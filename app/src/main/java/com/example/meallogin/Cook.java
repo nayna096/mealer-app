@@ -1,18 +1,29 @@
 package com.example.meallogin;
 
-public class Cook {
+import java.io.Serializable;
+
+public class Cook implements Serializable {
 
     private String username;
     private String password;
     private String role;
     private String email;
-
+    private boolean status;
     public Cook(){}
     public Cook(String Username, String Password, String Email){
         this.username = Username;
         this.password = Password;
         this.role = "Cook";
         this.email = Email;
+        this.status = false;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public void setUsername(String username) {
@@ -46,4 +57,8 @@ public class Cook {
     public String getEmail(){
         return this.email;
     }
+
+    public boolean isSuspended(){return this.status = true;}
+
+
 }

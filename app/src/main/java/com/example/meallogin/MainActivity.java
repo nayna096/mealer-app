@@ -4,16 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,11 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Iterator;
+
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
-    Client client;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,32 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton signup = (MaterialButton) findViewById(R.id.signup);
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
         //admin
+        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
+        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int i = 0;
+                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
 
+                for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){
+                    if(it.hasNext()){
+                        Cook c = it.next().getValue(Cook.class);
+                        createComplaint(c.getEmail(),c);
+//                        it.next();
+                    }else{
+                        break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        Toast.makeText(getApplicationContext(),"s",Toast.LENGTH_LONG).show();
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
                     String pass = password.getText().toString();
@@ -80,7 +103,12 @@ public class MainActivity extends AppCompatActivity {
                                                     public void onDataChange(@NonNull DataSnapshot cookDatasnapshot) {
                                                         if (cookDatasnapshot.exists()) {
                                                             //The correct password was inputed
-                                                            openWelcomeCookScreen();
+
+                                                            for(DataSnapshot ds:cookDatasnapshot.getChildren()){
+                                                                Cook c = ds.getValue(Cook.class);
+                                                                openWelcomeCookScreen(c);
+                                                            }
+
                                                         } else {
                                                             //The incorrect password was inputed
                                                             Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
@@ -129,19 +157,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getdata() {
-        dbref.addValueEventListener(new ValueEventListener() {
-            //                @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Client value = snapshot.getValue(Client.class);
-                client = value;
-            }
-
-            //                @Override
-            public void onCancelled(@NonNull DatabaseError err) {
-                Toast.makeText(MainActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
-            }
-        });
+    public void createComplaint(String description, Cook cook){
+                Complaint complaint = new Complaint(description,cook);
+                DatabaseReference complaintref = db.getReference("Complaints");
+                String id = complaintref.push().getKey();
+                complaintref.child(id).setValue(complaint);
     }
 
     public void openSignup() {
@@ -154,8 +174,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openWelcomeCookScreen() {
-        Intent intent = new Intent(this, WelcomeCookScreen.class);
+    public void openWelcomeCookScreen(Cook c) {
+        Intent intent = new Intent(getApplicationContext(), WelcomeCookScreen.class);
+        intent.putExtra("Cook", c);
         startActivity(intent);
     }
 
