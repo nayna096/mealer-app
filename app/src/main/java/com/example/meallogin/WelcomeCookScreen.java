@@ -25,7 +25,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
         Cook c = (Cook)getIntent().getSerializableExtra("Cook");
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         if(c.isSuspended()){
-            dbref.child("Complaints").orderByChild("Cook/username").equalTo(c.getUsername()).addValueEventListener(new ValueEventListener() {
+            dbref.child("Complaints").orderByChild("cook/username").equalTo(c.getUsername()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
