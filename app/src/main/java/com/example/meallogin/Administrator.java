@@ -7,5 +7,6 @@ public class Administrator {
         this.password = Password;
         this.role = "Administrator";
         this.email = Email;
+        
     }
 }
