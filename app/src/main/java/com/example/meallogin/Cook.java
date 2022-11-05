@@ -2,12 +2,11 @@ package com.example.meallogin;
 
 import java.io.Serializable;
 
-public class Cook implements Serializable {
+public class Cook extends GeneralUser implements Serializable {
 
-    private String username;
-    private String password;
+
     private String role;
-    private String email;
+
     private boolean status;
     public Cook(){}
     public Cook(String Username, String Password, String Email){
@@ -26,21 +25,6 @@ public class Cook implements Serializable {
         this.status = status;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUsername(){
-        return this.username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword(){
-        return this.password;
-    }
 
     public void setRole(String role) {
         this.role = role;
@@ -50,13 +34,6 @@ public class Cook implements Serializable {
         return this.role;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail(){
-        return this.email;
-    }
 
     public boolean isSuspended(){return this.status = true;}
 
