@@ -5,6 +5,7 @@ public abstract class GeneralUser {
     private String password;
     private String role;
     private String email;
+    public GeneralUser(){}
     public String getUsername(){
         return this.username;
     }
