@@ -2,7 +2,7 @@ package com.example.meallogin;
 
 import java.io.Serializable;
 
-public class Cook implements Serializable {
+public class Cook extends GeneralUser implements Serializable {
 
 
     private String role;

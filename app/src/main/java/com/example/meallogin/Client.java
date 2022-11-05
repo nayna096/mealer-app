@@ -1,6 +1,6 @@
 package com.example.meallogin;
 
-public class Client {
+public class Client  extends GeneralUser{
     private String role;
     public Client(){}
     public Client(String Username, String Password, String Email){
