@@ -2,25 +2,25 @@ package com.example.meallogin;
 
 public class Complaint {
     private String description;
-    private String severity;
-    private Cook cook;
+    private String suspensionDate;
+    private String cookUsername;
     public Complaint(){}
 
-    public Complaint(String description, Cook cook){
+    public Complaint(String description, String cookUsername){
         this.description = description;
-        this.cook = cook;
-        this.severity = "unknown";
+        this.cookUsername = cookUsername;
+        this.suspensionDate = "unknown";
     }
 
-    public void setSeverity(String severity) {this.severity = severity;}
+    public void setSuspensionDate(String severity) {this.suspensionDate = severity;}
 
-    public String getSeverity() {return severity;}
+    public String getSuspensionDate() {return suspensionDate;}
 
     public void setDescription(String description) {this.description = description;}
 
     public String getDescription() {return description;}
 
-    public Cook getCook() {return cook;}
+    public String getCookUsername() {return cookUsername;}
 
-    public void setCook(Cook cook) {this.cook = cook;}
+    public void setCookUsername(String cookUsername) {this.cookUsername = cookUsername;}
 }

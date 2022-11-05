@@ -74,52 +74,70 @@ public class MainActivity extends AppCompatActivity {
 
                                 if (snapshot.exists()) {
                                     //There exists a client with this username, was the correct password inputed?
-                                    dbref.child("Clients").orderByChild("password").equalTo(pass).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.exists()) {
-                                                //Correct password
-                                                openWelcomeClientScreen();
-                                            } else {
-                                                //Incorrect password
-                                                Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                                    for(DataSnapshot d: snapshot.getChildren()){
+                                        Client client = d.getValue(Client.class);
+                                        if(client.getPassword().equals(pass)){
+                                            openWelcomeClientScreen();
+                                        }else{
+                                            Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
 
                                         }
-                                    });
+                                    }
+//                                    dbref.child("Clients").orderByChild("password").equalTo(pass).addValueEventListener(new ValueEventListener() {
+//                                        @Override
+//                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                            if (dataSnapshot.exists()) {
+//                                                //Correct password
+//                                                openWelcomeClientScreen();
+//                                            } else {
+//                                                //Incorrect password
+//                                                Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                        }
+//                                    });
                                 } else {
                                     dbref.child("Cooks").orderByChild("username").equalTo(user).addValueEventListener(new ValueEventListener() {
                                         //Check whether username is stored under a cook account
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
                                             if (cooksnapshot.exists()) {
-                                                dbref.child("Cooks").orderByChild("password").equalTo(pass).addValueEventListener(new ValueEventListener() {
-                                                    //There exists a cook account with the username
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot cookDatasnapshot) {
-                                                        if (cookDatasnapshot.exists()) {
-                                                            //The correct password was inputed
-
-                                                            for(DataSnapshot ds:cookDatasnapshot.getChildren()){
-                                                                Cook c = ds.getValue(Cook.class);
-                                                                openWelcomeCookScreen(c);
-                                                            }
-
-                                                        } else {
-                                                            //The incorrect password was inputed
-                                                            Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                for(DataSnapshot cs:cooksnapshot.getChildren()){
+                                                    Cook cook = cs.getValue(Cook.class);
+                                                    if(cook.getPassword().equals(pass)){
+                                                        openWelcomeCookScreen(cook);
+                                                    }else{
+                                                        Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
 
                                                     }
-                                                });
+                                                }
+//                                                dbref.child("Cooks").orderByChild("password").equalTo(pass).addValueEventListener(new ValueEventListener() {
+//                                                    //There exists a cook account with the username
+//                                                    @Override
+//                                                    public void onDataChange(@NonNull DataSnapshot cookDatasnapshot) {
+//                                                        if (cookDatasnapshot.exists()) {
+//                                                            //The correct password was inputed
+//
+//                                                            for(DataSnapshot ds:cookDatasnapshot.getChildren()){
+//                                                                Cook c = ds.getValue(Cook.class);
+//                                                                openWelcomeCookScreen(c);
+//                                                            }
+//
+//                                                        } else {
+//                                                            //The incorrect password was inputed
+//                                                            Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                    }
+//
+//                                                    @Override
+//                                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                                    }
+//                                                });
                                             } else {
                                                 //No account has the username, therefore the account does not exist
                                                 Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
@@ -158,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createComplaint(String description, Cook cook){
-                Complaint complaint = new Complaint(description,cook);
+                Complaint complaint = new Complaint(description,cook.getUsername());
                 DatabaseReference complaintref = db.getReference("Complaints");
                 String id = complaintref.push().getKey();
                 complaintref.child(id).setValue(complaint);

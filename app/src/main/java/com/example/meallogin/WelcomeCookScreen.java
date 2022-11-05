@@ -25,16 +25,16 @@ public class WelcomeCookScreen extends AppCompatActivity {
         Cook c = (Cook)getIntent().getSerializableExtra("Cook");
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         if(c.isSuspended()){
-            dbref.child("Complaints").orderByChild("cook/username").equalTo(c.getUsername()).addValueEventListener(new ValueEventListener() {
+            dbref.child("Complaints").orderByChild("cookUsername").equalTo(c.getUsername()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
                         for(DataSnapshot ds: snapshot.getChildren()){
                             Complaint complaint = ds.getValue(Complaint.class);
-                            if(complaint.getSeverity().equals("permanent")){
+                            if(complaint.getSuspensionDate().equals("permanent")){
                                 message.setText("Your cook account is suspended permanently");
                             }else{
-                                message.setText("Your cook account is suspended until "+complaint.getSeverity());
+                                message.setText("Your cook account is suspended until "+complaint.getSuspensionDate());
                             }
                         }
 
