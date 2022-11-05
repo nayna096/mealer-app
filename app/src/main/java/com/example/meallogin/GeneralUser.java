@@ -4,6 +4,9 @@ public abstract class GeneralUser {
     private String username;
     private String password;
     private String email;
+    private String role;
+
+
     public GeneralUser(){}
     public String getUsername(){
         return this.username;
@@ -23,4 +26,7 @@ public abstract class GeneralUser {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getRole() {return role;}
+    public void setRole(String role) {this.role = role;}
 }
