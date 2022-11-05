@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int i = 0;
                 Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
 
                 for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){

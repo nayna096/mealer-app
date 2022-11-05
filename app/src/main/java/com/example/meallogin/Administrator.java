@@ -5,6 +5,7 @@ public class Administrator {
     private String password;
     private String role;
     private String email;
+    public Administrator(){}
     public Administrator(String Username, String Password, String Email){
         this.username = Username;
         this.password = Password;
