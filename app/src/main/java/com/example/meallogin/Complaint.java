@@ -4,12 +4,14 @@ public class Complaint {
     private String description;
     private String suspensionDate;
     private String cookUsername;
+    private Boolean actioned;
     public Complaint(){}
 
     public Complaint(String description, String cookUsername){
         this.description = description;
         this.cookUsername = cookUsername;
         this.suspensionDate = "unknown";
+        this.actioned = false;
     }
 
     public void setSuspensionDate(String severity) {this.suspensionDate = severity;}
