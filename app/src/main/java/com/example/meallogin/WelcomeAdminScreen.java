@@ -34,7 +34,7 @@ public class WelcomeAdminScreen extends AppCompatActivity {
                         setContentView(R.layout.activity_welcome_admin_screen);
                         return true;
                     case R.id.notification:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,complaintsfrag).commit();
+                        setContentView(R.layout.activity_complaintsfrag);
                         return true;
                     case R.id.settings:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,settingsfrag).commit();

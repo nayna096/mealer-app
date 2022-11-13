@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class complaintsfrag extends AppCompatActivity {
+public class ComplaintsFrag extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
