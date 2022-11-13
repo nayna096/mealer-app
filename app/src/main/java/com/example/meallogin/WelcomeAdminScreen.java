@@ -45,8 +45,6 @@ public class WelcomeAdminScreen extends AppCompatActivity {
             }
         });
 
-
-
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         logout.setOnClickListener(v->
         {

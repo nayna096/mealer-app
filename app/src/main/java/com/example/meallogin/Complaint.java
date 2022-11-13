@@ -25,4 +25,11 @@ public class Complaint {
     public String getCookUsername() {return cookUsername;}
 
     public void setCookUsername(String cookUsername) {this.cookUsername = cookUsername;}
+
+    public boolean getActioned(){
+        return this.actioned;
+    }
+    public void action(){
+        this.actioned = true;
+    }
 }
