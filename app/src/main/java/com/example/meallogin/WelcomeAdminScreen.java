@@ -14,8 +14,6 @@ import com.google.android.material.navigation.NavigationBarView;
 public class WelcomeAdminScreen extends AppCompatActivity {
 
     BottomNavigationView bottomnavi;
-    WelcomeAdminScreen adminwelcome;
-    ComplaintsFrag complaintsfrag;
     SettingsFragment settingsfrag;
 
 
@@ -32,8 +30,10 @@ public class WelcomeAdminScreen extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home:
                         setContentView(R.layout.activity_welcome_admin_screen);
+                        openWelcomeAdminScreen();
                         return true;
                     case R.id.notification:
+                        openComplaintsFrag();
                         setContentView(R.layout.activity_complaintsfrag);
                         return true;
                     case R.id.settings:
@@ -53,6 +53,14 @@ public class WelcomeAdminScreen extends AppCompatActivity {
     }
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void openComplaintsFrag() {
+        Intent intent = new Intent(this, ComplaintsFrag.class);
+        startActivity(intent);
+    }
+    public void openWelcomeAdminScreen() {
+        Intent intent = new Intent(this, WelcomeAdminScreen.class);
         startActivity(intent);
     }
 }

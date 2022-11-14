@@ -13,11 +13,17 @@
         android:layout_margin="15dp"
         android:textStyle="bold"
         android:id="@+id/title"/>
-    
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title"
-        android:id="@+id/recyclerView"/>
+        android:layout_height="607dp"
+        android:layout_below="@+id/title" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomnav"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"/>
 
 </RelativeLayout>

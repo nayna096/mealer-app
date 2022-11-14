@@ -95,6 +95,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@+id/date"
                     android:text="Suspend"
+                    android:id="@+id/suspend"
                     android:textSize="8dp"/>
 
             </RelativeLayout>
