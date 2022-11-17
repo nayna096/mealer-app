@@ -55,11 +55,11 @@ public class WelcomeCookScreen extends AppCompatActivity {
             MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
 
             editMealListButton.setOnClickListener(v -> {
-                // navigate
+                setContentView(R.layout.edit_meal_list_screen);
             });
 
             editMenuButton.setOnClickListener(v -> {
-                // navigate
+                setContentView(R.layout.edit_menu_screen);
             });
         }
 //        message.setText(c.getUsername());
