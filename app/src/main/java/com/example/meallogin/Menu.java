@@ -32,18 +32,21 @@ public class Menu implements Serializable {
         this.offered = offered;
     }
 
+    // non-suspended cook only
     public void addtoMeallist(Meal meal) {
         if (this.meallist.contains(meal) == false) {
             this.meallist.add(meal);
         }
     }
 
+    // non-suspended cook only
     public void addtoOffered(Meal meal) {
         if (this.meallist.contains(meal)&&this.offered.contains(meal)==false) {
             this.offered.add(meal);
         }
     }
 
+    // non-suspended cook only
     public void removefromMeallist(Meal meal) {
         this.meallist.remove(meal);
         if (this.offered.contains(meal)) {
@@ -51,6 +54,7 @@ public class Menu implements Serializable {
         }
     }
 
+    // non-suspended cook only
     public void removefromOffered(Meal meal) {
         this.offered.remove(meal);
     }

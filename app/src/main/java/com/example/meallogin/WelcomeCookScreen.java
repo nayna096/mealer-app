@@ -51,6 +51,16 @@ public class WelcomeCookScreen extends AppCompatActivity {
         }else{
 
             //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
+            MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
+            MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
+
+            editMealListButton.setOnClickListener(v -> {
+                // navigate
+            });
+
+            editMenuButton.setOnClickListener(v -> {
+                // navigate
+            });
         }
 //        message.setText(c.getUsername());
         logout.setOnClickListener(v->
