@@ -50,6 +50,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
             });
         }else{
 
+            //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
         }
 //        message.setText(c.getUsername());
         logout.setOnClickListener(v->
