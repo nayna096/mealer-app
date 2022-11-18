@@ -1,6 +1,7 @@
 package com.example.meallogin;
 
 import java.io.Serializable;
+
 public class Meal implements Serializable{
 
     private String name;
