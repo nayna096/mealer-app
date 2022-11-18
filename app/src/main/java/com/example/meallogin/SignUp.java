@@ -159,7 +159,7 @@ public class SignUp extends AppCompatActivity {
                 DatabaseReference cookref = db.getReference("Cooks");
                 String id = cookref.push().getKey();
                 cookref.child(id).setValue(newcook);
-                openWelcomeCookScreen();
+                openWelcomeCookScreen(newcook);
             }else{
                 Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
             }
@@ -172,8 +172,9 @@ public class SignUp extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openWelcomeCookScreen() {
+    public void openWelcomeCookScreen(Cook c) {
         Intent intent = new Intent(this, WelcomeCookScreen.class);
+        intent.putExtra("Cook", c);
         startActivity(intent);
     }
 
