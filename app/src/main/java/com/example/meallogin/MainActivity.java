@@ -83,11 +83,13 @@ public class MainActivity extends AppCompatActivity {
                                         //Check whether username is stored under a cook account
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
+                                            Toast.makeText(getApplicationContext(),"Hi",Toast.LENGTH_LONG).show();
                                             if (cooksnapshot.exists()) {
                                                 for(DataSnapshot cs:cooksnapshot.getChildren()){
                                                     Cook cook = cs.getValue(Cook.class);
                                                     if(cook.getPassword().equals(pass)){
                                                         //Correct password
+                                                        Toast.makeText(getApplicationContext(),"Hey",Toast.LENGTH_LONG).show();
                                                         openWelcomeCookScreen(cook);
                                                     }else{
                                                         //Incorrect password
