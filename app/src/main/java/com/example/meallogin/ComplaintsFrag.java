@@ -12,14 +12,13 @@ import android.view.MenuItem;
 import com.example.meallogin.R.id;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ComplaintsFrag extends AppCompatActivity {
 
     RecyclerView recyclerview;
     ComplaintAdapter complaintAdapter;
-    BottomNavigationView bottomNavigationView = findViewById(id.bottomnav);
-    SettingsFragment settingsfrag;
 
 
     @Override
@@ -29,25 +28,17 @@ public class ComplaintsFrag extends AppCompatActivity {
         recyclerview = findViewById(R.id.recyclerView);
         setupRecyclerView();
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home:
-                        //setContentView(R.layout.activity_welcome_admin_screen);
-                        openWelcomeAdminScreen();
-                        return true;
-                    case R.id.notification:
-                        //setContentView(R.layout.activity_complaintsfrag);
-                        openComplaintsFrag();
-                        return true;
-                    case R.id.settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,settingsfrag).commit();
-                        return true;
-
-                }
-                return false;
-            }
+        MaterialButton home = (MaterialButton) findViewById(R.id.Home);
+        home.setOnClickListener(v -> {
+            openWelcomeAdminScreen();
+        });
+        MaterialButton complaints = (MaterialButton) findViewById(R.id.complaints);
+        complaints.setOnClickListener(v -> {
+            openComplaintsFrag();
+        });
+        MaterialButton settings = (MaterialButton) findViewById(R.id.settings);
+        settings.setOnClickListener(v -> {
+            openSettingsFrag();
         });
     }
 
@@ -81,6 +72,10 @@ public class ComplaintsFrag extends AppCompatActivity {
     }
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
+        startActivity(intent);
+    }
+    public void openSettingsFrag() {
+        Intent intent = new Intent(this, SettingsFrag.class);
         startActivity(intent);
     }
 }

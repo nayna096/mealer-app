@@ -8,17 +8,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Complaints Action Center"
+        android:text="Settings"
         android:textSize="30dp"
-        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:id="@+id/title"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="595dp"
-        android:layout_below="@+id/title" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +26,8 @@
             android:text="Home"
             android:textSize="9dp"
             android:drawableTop="@drawable/ic_baseline_home_black"
-            android:textColor="@color/black"
             android:layout_toLeftOf="@+id/complaints"
+            android:textColor="@color/black"
             android:visibility="visible"
             tools:visibility="visible"
             android:paddingHorizontal="50dp"/>
@@ -45,8 +39,8 @@
             android:text="Complaints"
             android:layout_centerHorizontal="true"
             android:textSize="9dp"
-            android:drawableTop="@drawable/ic_baseline_notification_important_24"
-            android:textColor="@color/purple_500"
+            android:drawableTop="@drawable/ic_baseline_notification_important_black"
+            android:textColor="@color/black"
             android:visibility="visible"
             tools:visibility="visible"
             android:paddingHorizontal="30dp"/>
@@ -58,8 +52,8 @@
             android:text="Settings"
             android:layout_toRightOf="@+id/complaints"
             android:textSize="9dp"
-            android:drawableTop="@drawable/ic_baseline_settings_24"
-            android:textColor="@color/black"
+            android:drawableTop="@drawable/ic_baseline_settings_purp"
+            android:textColor="@color/purple_500"
             android:visibility="visible"
             tools:visibility="visible"
             android:paddingHorizontal="35dp"/>
