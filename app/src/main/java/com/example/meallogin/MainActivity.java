@@ -33,27 +33,27 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
         //admin
         FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
-        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
-
-                for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){
-                    if(it.hasNext()){
-                        Cook c = it.next().getValue(Cook.class);
-                        createComplaint(c.getEmail(),c);
-                    }else{
-                        break;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
+//
+//                for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){
+//                    if(it.hasNext()){
+//                        Cook c = it.next().getValue(Cook.class);
+//                        createComplaint(c.getEmail(),c);
+//                    }else{
+//                        break;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
                     String pass = password.getText().toString();
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 Complaint complaint = new Complaint(description,cook);
                 DatabaseReference complaintref = db.getReference("Complaints");
                 String id = complaintref.push().getKey();
-                complaintref.child(id).setValue(complaint);
+                complaintref.child(id).setValue(complaint).toString();
     }
 
     public void openSignup() {
