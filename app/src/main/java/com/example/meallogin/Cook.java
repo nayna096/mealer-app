@@ -90,7 +90,7 @@ public class Cook extends GeneralUser implements Serializable {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
     public void setMenu(Menu menu){this.menu = menu;}
 
     public void setSuspensionDate(String date){

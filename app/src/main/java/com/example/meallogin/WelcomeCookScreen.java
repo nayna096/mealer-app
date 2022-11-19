@@ -60,6 +60,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
             editMealListButton.setOnClickListener(v -> {
                 setContentView(R.layout.activity_edit_meal_list_screen);
 
+                //region populate MealList LinearLayout
                 LinearLayout mealListTable = (LinearLayout) findViewById(R.id.mealListTable);
                 String[] mealListNames = cook.getMealListNames();
                 TextView textViewML = new TextView(this);
@@ -68,11 +69,20 @@ public class WelcomeCookScreen extends AppCompatActivity {
                     textViewML.setText(mealListNames[i]);
                     mealListTable.addView(textViewML);
                 }
+                //endregion
+
+                MaterialButton createMealButton = (MaterialButton) findViewById(R.id.mealListCreateNewMealButton);
+                MaterialButton deleteMealButton = (MaterialButton) findViewById(R.id.mealListDeleteMealButton);
+
+                createMealButton.setOnClickListener(v1 -> {
+                    setContentView(R.layout.activity_create_meal_screen);
+                });
             });
 
             editMenuButton.setOnClickListener(v -> {
                 setContentView(R.layout.activity_edit_menu_screen);
 
+                //region populate Menu LinearLayout
                 LinearLayout menuTable = (LinearLayout) findViewById(R.id.menuTable);
                 String[] menuNames = cook.getMenuNames();
                 TextView textViewMN = new TextView(this);
@@ -81,6 +91,9 @@ public class WelcomeCookScreen extends AppCompatActivity {
                     textViewMN.setText(menuNames[i]);
                     menuTable.addView(textViewMN);
                 }
+                //endregion
+
+
             });
         }
 //        message.setText(c.getUsername());
