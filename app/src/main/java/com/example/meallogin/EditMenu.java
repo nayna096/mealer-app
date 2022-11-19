@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -23,7 +24,7 @@ public class EditMenu extends AppCompatActivity {
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
 
         //region populate Menu LinearLayout
-        LinearLayout menuTable = (LinearLayout) findViewById(R.id.menuTable);
+        ListView menuTable = (ListView) findViewById(R.id.menuTable);
         List<String> menuNames = cook.getMenu().menuNames();
         TextView textViewMN = new TextView(this);
 

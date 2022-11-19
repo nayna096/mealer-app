@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -24,7 +25,7 @@ public class EditMealList extends AppCompatActivity {
 
 
         //region populate MealList LinearLayout
-        LinearLayout mealListTable = (LinearLayout) findViewById(R.id.mealListTable);
+        ListView mealListTable = (ListView) findViewById(R.id.mealListTable);
 
         List<String> mealListNames = cook.getMenu().mealListNames();
         TextView textViewML = new TextView(this);

@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".EditMealList">
 
-    <LinearLayout
+    <ListView
         android:id="@+id/mealListTable"
         android:layout_width="415dp"
         android:layout_height="661dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"></ListView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mealListDeleteMealButton"
