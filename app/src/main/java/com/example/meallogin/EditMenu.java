@@ -24,7 +24,7 @@ public class EditMenu extends AppCompatActivity {
 
         //region populate Menu LinearLayout
         LinearLayout menuTable = (LinearLayout) findViewById(R.id.menuTable);
-        List<String> menuNames = cook.getMenu().MenuNames();
+        List<String> menuNames = cook.getMenu().menuNames();
         TextView textViewMN = new TextView(this);
 
         for (int i=0; i<cook.getMenu().menuSize(); i++) {
