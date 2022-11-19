@@ -38,6 +38,7 @@ public class AddMeal extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Meal added successfully", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, WelcomeCookScreen.class);
+            intent.putExtra("Cook",cook);
             startActivity(intent);
         });
     }

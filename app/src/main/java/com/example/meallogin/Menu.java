@@ -38,25 +38,26 @@ public class Menu implements Serializable {
     public void setOffered(ArrayList<Meal> offered) {
         this.offered = offered;
     }
+
     public void setEmptyMessage(String emptyMessage) {this.emptyMessage = "Would you like to add some meals?";}
     //endregion
 
     //region non-suspended cook only
     public void addtoMeallist(Meal meal) {
-        if (this.meallist.contains(meal) == false) {
+        if (!(this.meallist.contains(meal))) {
             this.meallist.add(meal);
         }
     }
 
     public void deletefromMeallist(Meal meal) {
-        if (this.meallist.contains(meal) == false) {
+        if (this.meallist.contains(meal)) {
             this.meallist.remove(meal);
         }
 
     }
 
     public void addtoOffered(Meal meal) {
-        if (this.meallist.contains(meal) && this.offered.contains(meal) == false) {
+        if (this.meallist.contains(meal) && !(this.offered.contains(meal))) {
             this.offered.add(meal);
         }
     }

@@ -41,7 +41,7 @@ public class EditMealList extends AppCompatActivity {
 
         createMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, CreateMeal.class);
-            //intent.putExtra("Cook", cook);
+            intent.putExtra("Cook", cook);
             startActivity(intent);
         });
 
