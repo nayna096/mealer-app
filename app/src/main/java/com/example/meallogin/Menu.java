@@ -7,7 +7,7 @@ import java.util.List;
 public class Menu implements Serializable {
     private ArrayList<Meal> meallist;
     private ArrayList<Meal> offered;
-
+    private String placeholder = "Empty"; //needed to keep Menu from becoming null
     //region Constructors
 
 
@@ -17,6 +17,9 @@ public class Menu implements Serializable {
     }
     //endregion
 
+
+
+
     //region Getters
     public ArrayList<Meal> getMeallist() {
         return meallist;
@@ -25,6 +28,8 @@ public class Menu implements Serializable {
     public ArrayList<Meal> getOffered() {
         return offered;
     }
+
+    public String getPlaceholder() {return placeholder;}
 
     //endregion
 
@@ -37,6 +42,7 @@ public class Menu implements Serializable {
         this.offered = offered;
     }
 
+    public void setPlaceholder(String placeholder) {this.placeholder = placeholder;}
     //endregion
 
     //region non-suspended cook only
