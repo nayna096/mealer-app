@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
@@ -22,10 +24,11 @@ public class WelcomeCookScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_cook_screen);
         EditText message = (EditText)findViewById(R.id.MessageBox);
-        Cook c = (Cook)getIntent().getSerializableExtra("Cook");
+        Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
-        if(c.isSuspended()){
-            dbref.child("Complaints").orderByChild("cookUsername").equalTo(c.getUsername()).addValueEventListener(new ValueEventListener() {
+
+        if(cook.isSuspended()){
+            dbref.child("Complaints").orderByChild("cookUsername").equalTo(cook.getUsername()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
@@ -48,7 +51,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
 
                 }
             });
-        }else{
+        } else {
 
             //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
             MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
@@ -56,10 +59,28 @@ public class WelcomeCookScreen extends AppCompatActivity {
 
             editMealListButton.setOnClickListener(v -> {
                 setContentView(R.layout.activity_edit_meal_list_screen);
+
+                LinearLayout mealListTable = (LinearLayout) findViewById(R.id.mealListTable);
+                String[] mealListNames = cook.getMealListNames();
+                TextView textViewML = new TextView(this);
+
+                for (int i=0; i<cook.getMealListSize(); i++) {
+                    textViewML.setText(mealListNames[i]);
+                    mealListTable.addView(textViewML);
+                }
             });
 
             editMenuButton.setOnClickListener(v -> {
                 setContentView(R.layout.activity_edit_menu_screen);
+
+                LinearLayout menuTable = (LinearLayout) findViewById(R.id.menuTable);
+                String[] menuNames = cook.getMenuNames();
+                TextView textViewMN = new TextView(this);
+
+                for (int i=0; i<cook.getMenuSize(); i++) {
+                    textViewMN.setText(menuNames[i]);
+                    menuTable.addView(textViewMN);
+                }
             });
         }
 //        message.setText(c.getUsername());
