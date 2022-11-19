@@ -52,7 +52,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
                 }
             });
         } else {
-
+            //TODO Isam
             //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
             MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
             MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
@@ -75,7 +75,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
                 MaterialButton deleteMealButton = (MaterialButton) findViewById(R.id.mealListDeleteMealButton);
 
                 createMealButton.setOnClickListener(v1 -> {
-                    setContentView(R.layout.activity_create_meal_screen);
+                    setContentView(R.layout.activity_create_meal_screen); //TODO Lisa
                 });
             });
 
