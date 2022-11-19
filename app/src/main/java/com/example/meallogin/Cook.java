@@ -1,14 +1,14 @@
 package com.example.meallogin;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cook extends GeneralUser implements Serializable {
     private boolean status;
     private Menu menu;
-    private Meal[] mealList;
+    private List<Meal> mealList;
     private String suspensionDate;
-
-    private int mealListIndex;
 
     String Username;
     String Password;
@@ -27,8 +27,6 @@ public class Cook extends GeneralUser implements Serializable {
         this.status = false;
         this.suspensionDate = null;
         this.menu = new Menu(this);
-        this.mealList = new Meal[100];
-        mealListIndex = 0;
     }
     //endregion
 
@@ -41,28 +39,21 @@ public class Cook extends GeneralUser implements Serializable {
         return this.suspensionDate;
     }
 
-    public Meal[] getMealList() {
+    public List<Meal> getMealList() {
 
-        Meal[] result = new Meal[mealListIndex];
-
-        for (int i=0; i<mealListIndex; i++) {
-            result[i] = mealList[i];
-        }
-
-        return result;
+        return mealList;
     }
 
     public Menu getMenu(){return this.menu;}
     //Gonna create a Menu class for each cook, will allow for further differentiation between general users
 
-    public String[] getMealListNames() {
+    public List<String> getMealListNames() {
 
-        String[] result = new String[mealListIndex];
+        List<String> result = new ArrayList<>();
 
-        for (int i=0; i<mealListIndex; i++) {
-            result[i] = mealList[i].getName();
+        for (int i=0; i<mealList.size(); i++) {
+            result.add(mealList.get(i).getName());
         }
-
         return result;
     }
 
@@ -78,11 +69,29 @@ public class Cook extends GeneralUser implements Serializable {
     }
 
     public int getMealListSize() {
-        return mealListIndex;
+        return mealList.size();
     }
 
     public int getMenuSize() {
         return menu.getMenuSize();
+    }
+
+    public Meal getMealByName(String str) {
+        for (int i=0; i<mealList.size(); i++) {
+            if (mealList.get(i).getName().equals(str)) {
+                return mealList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public int getMealIndexInMealList(Meal meal) {
+        for (int i=0; i<mealList.size(); i++) {
+            if (mealList.get(i).equals(meal)) {
+                return i;
+            }
+        }
+        return -1;
     }
     //endregion
 
@@ -99,8 +108,11 @@ public class Cook extends GeneralUser implements Serializable {
     //endregion
 
     public void addToMealList(Meal meal) {
-        mealList[mealListIndex] = meal;
-        mealListIndex++;
+        mealList.add(meal);
+    }
+
+    public void deleteFromMealList(Meal meal) {
+        mealList.remove(meal);
     }
 
     public boolean isSuspended(){return this.status = true;}

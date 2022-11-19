@@ -8,9 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class EditMealList extends AppCompatActivity {
-
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference dbref= db.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +25,11 @@ public class EditMealList extends AppCompatActivity {
 
         //region populate MealList LinearLayout
         LinearLayout mealListTable = (LinearLayout) findViewById(R.id.mealListTable);
-        String[] mealListNames = cook.getMealListNames();
+        List<String> mealListNames = cook.getMealListNames();
         TextView textViewML = new TextView(this);
 
         for (int i=0; i<cook.getMealListSize(); i++) {
-            textViewML.setText(mealListNames[i]);
+            textViewML.setText(mealListNames.get(i));
             mealListTable.addView(textViewML);
         }
         //endregion
@@ -34,6 +39,12 @@ public class EditMealList extends AppCompatActivity {
 
         createMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(getApplicationContext(), CreateMeal.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+
+        deleteMealButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), DeleteMeal.class);
             intent.putExtra("Cook", cook);
             startActivity(intent);
         });

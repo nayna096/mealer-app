@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class EditMenu extends AppCompatActivity {
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+public class EditMenu extends AppCompatActivity {
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference dbref= db.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

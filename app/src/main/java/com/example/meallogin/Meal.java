@@ -1,24 +1,27 @@
 package com.example.meallogin;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Meal implements Serializable{
 
     private String name;
     private String cuisineType;
-    private String[] ingredients;
-    private String[] allergens;
+    private List<String> ingredients;
+    private List<String> allergens;
     private double price;
     private String description;
 
-    // Constructors
+
+
+    //region Constructors
     public Meal(){}
 
     public Meal(String description){
         this.description = description;
     }
 
-    public Meal(String name, String cuisineType, String[] ingredients, String[] allergens, double price, String description) {
+    public Meal(String name, String cuisineType, List<String> ingredients, List<String> allergens, double price, String description) {
         this.name = name;
         this.cuisineType = cuisineType;
         this.ingredients = ingredients;
@@ -26,8 +29,9 @@ public class Meal implements Serializable{
         this.price = price;
         this.description = description;
     }
+    //endregion
 
-    // Getters
+    //region Getters
     public String getName() {
         return name;
     }
@@ -36,11 +40,11 @@ public class Meal implements Serializable{
         return cuisineType;
     }
 
-    public String[] getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
-    public String[] getAllergens() {
+    public List<String> getAllergens() {
         return allergens;
     }
 
@@ -51,8 +55,9 @@ public class Meal implements Serializable{
     public String getDescription() {
         return description;
     }
+    //endregion
 
-    // Setters
+    //region Setters
     public void setName(String name) { // TODO Lisa - should visibility be private for all setters?
         this.name = name;
     }
@@ -61,11 +66,11 @@ public class Meal implements Serializable{
         this.cuisineType = cuisineType;
     }
 
-    public void setIngredients(String[] ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public void setAllergens(String[] allergens) {
+    public void setAllergens(List<String> allergens) {
         this.allergens = allergens;
     }
 
@@ -76,5 +81,12 @@ public class Meal implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+    //endregion
 
+    public boolean equals(Meal m) {
+        if (this.name.equals(m.getName()) && this.cuisineType.equals(m.getCuisineType()) && this.ingredients.equals(m.getIngredients()) && this.allergens.equals(m.getAllergens()) && this.price == m.getPrice() && this.description.equals(m.getDescription())) {
+            return true;
+        }
+        return false;
+    }
 }
