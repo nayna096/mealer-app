@@ -13,9 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ComplaintAdapter extends FirestoreRecyclerAdapter<Complaint, ComplaintAdapter.ComplaintViewHolder> {
     Context context;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference dbref = db.getReference();
 
     public ComplaintAdapter(@NonNull FirestoreRecyclerOptions<Complaint> options, Context context) {
         super(options);
@@ -24,8 +28,24 @@ public class ComplaintAdapter extends FirestoreRecyclerAdapter<Complaint, Compla
 
     @Override
     protected void onBindViewHolder(@NonNull ComplaintViewHolder holder, int position, @NonNull Complaint complaint) {
-        holder.chefName.setText(complaint.getCookUsername());
+        holder.chefName.setText(complaint.getCook().getUsername());
         holder.complaintDescription.setText(complaint.getDescription());
+        holder.permaBan.setOnClickListener(v -> {
+            Cook user = complaint.getCook();
+            user.setStatus(true);
+            user.setSuspensionDate("Never");
+            complaint.action();
+        });
+        holder.suspend.setOnClickListener(v -> {
+            Cook user = complaint.getCook();
+            user.setStatus(true);
+            user.setSuspensionDate(holder.date.getText().toString());
+            complaint.action();
+        });
+        holder.dismiss.setOnClickListener(v -> {
+            Cook user = complaint.getCook();
+            complaint.action();
+        });
 
     }
 

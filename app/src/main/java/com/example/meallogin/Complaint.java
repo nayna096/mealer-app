@@ -3,11 +3,11 @@ package com.example.meallogin;
 public class Complaint {
     private String description;
     private String suspensionDate;
-    private String cookUsername;
+    private Cook cookUsername;
     private Boolean actioned;
     public Complaint(){}
 
-    public Complaint(String description, String cookUsername){
+    public Complaint(String description, Cook cookUsername){
         this.description = description;
         this.cookUsername = cookUsername;
         this.suspensionDate = "unknown";
@@ -22,9 +22,9 @@ public class Complaint {
 
     public String getDescription() {return description;}
 
-    public String getCookUsername() {return cookUsername;}
+    public Cook getCook() {return cookUsername;}
 
-    public void setCookUsername(String cookUsername) {this.cookUsername = cookUsername;}
+    public void setCookUsername(Cook cookUsername) {this.cookUsername = cookUsername;}
 
     public boolean getActioned(){
         return this.actioned;

@@ -14,11 +14,17 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class ComplaintsFrag extends AppCompatActivity {
 
     RecyclerView recyclerview;
     ComplaintAdapter complaintAdapter;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference dbref = db.getReference();
 
 
     @Override
@@ -43,7 +49,9 @@ public class ComplaintsFrag extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        FirestoreRecyclerOptions<Complaint> options = new FirestoreRecyclerOptions.Builder<Complaint>().build();
+        Query query = FirebaseFirestore.getInstance().collection("Complaints").orderBy("username");
+        FirestoreRecyclerOptions<Complaint> options = new FirestoreRecyclerOptions.Builder<Complaint>()
+                .setQuery(query,Complaint.class).build();
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         complaintAdapter = new ComplaintAdapter(options, this);
         recyclerview.setAdapter((complaintAdapter));
