@@ -24,14 +24,14 @@ public class EditMenu extends AppCompatActivity {
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
 
         //region populate Menu LinearLayout
-        ListView menuTable = (ListView) findViewById(R.id.menuTable);
-        List<String> menuNames = cook.getMenu().menuNames();
-        TextView textViewMN = new TextView(this);
-
-        for (int i=0; i<cook.getMenu().menuSize(); i++) {
-            textViewMN.setText(menuNames.get(i));
-            menuTable.addView(textViewMN);
-        }
+//        ListView menuTable = (ListView) findViewById(R.id.menuTable);
+//        List<String> menuNames = cook.getMenu().menuNames();
+//        TextView textViewMN = new TextView(this);
+//
+//        for (int i=0; i<cook.getMenu().menuSize(); i++) {
+//            textViewMN.setText(menuNames.get(i));
+//            menuTable.addView(textViewMN);
+//        }
         //endregion
 
         MaterialButton addMealButton = (MaterialButton) findViewById(R.id.menuAddMealButton);

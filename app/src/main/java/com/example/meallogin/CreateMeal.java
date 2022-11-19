@@ -64,7 +64,6 @@ public class CreateMeal extends AppCompatActivity {
                         }
                     } else {
                         Toast.makeText(getApplicationContext(),"here",Toast.LENGTH_LONG).show();
-
                     }
                 }
 
