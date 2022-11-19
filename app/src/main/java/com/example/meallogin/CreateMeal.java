@@ -34,13 +34,13 @@ public class CreateMeal extends AppCompatActivity {
             String priceStr = ((EditText) findViewById(R.id.newMealPrice)).getText().toString();
             String description = ((EditText) findViewById(R.id.newMealDescription)).getText().toString();
 
-            List<String> ingredientsUnsorted = new ArrayList<>(Arrays.asList(ingredientsStr.split(",")));
-            List<String> ingredients = ingredientsUnsorted.stream().sorted().collect(Collectors.toList());
-            List<String> allergensUnsorted = new ArrayList<>(Arrays.asList(allergensStr.split(",")));
-            List<String> allergens = allergensUnsorted.stream().sorted().collect(Collectors.toList());
+            List<String> ingredients = new ArrayList<>(Arrays.asList(ingredientsStr.split(",")));
+//            List<String> ingredients = ingredientsUnsorted.stream().sorted().collect(Collectors.toList());
+            List<String> allergens = new ArrayList<>(Arrays.asList(allergensStr.split(",")));
+//            List<String> allergens = allergensUnsorted.stream().sorted().collect(Collectors.toList());
             double price = Double.parseDouble(priceStr);
 
-            cook.addToMealList(new Meal(name, cuisineType, ingredients, allergens, price, description));
+            cook.getMenu().addtoMeallist(new Meal(name, cuisineType, ingredients, allergens, price, description));
 
             Toast.makeText(getApplicationContext(), "Meal created successfully", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, WelcomeCookScreen.class);

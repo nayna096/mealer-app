@@ -11,6 +11,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 public class EditMenu extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref= db.getReference();
@@ -22,11 +24,11 @@ public class EditMenu extends AppCompatActivity {
 
         //region populate Menu LinearLayout
         LinearLayout menuTable = (LinearLayout) findViewById(R.id.menuTable);
-        String[] menuNames = cook.getMenuNames();
+        List<String> menuNames = cook.getMenu().MenuNames();
         TextView textViewMN = new TextView(this);
 
-        for (int i=0; i<cook.getMenuSize(); i++) {
-            textViewMN.setText(menuNames[i]);
+        for (int i=0; i<cook.getMenu().MenuSize(); i++) {
+            textViewMN.setText(menuNames.get(i));
             menuTable.addView(textViewMN);
         }
         //endregion
