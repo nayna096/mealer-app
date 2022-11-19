@@ -24,8 +24,8 @@ public class AddMeal extends AppCompatActivity {
             String mealName = ((EditText) findViewById(R.id.toAddTextInput)).getText().toString();
             boolean exists = false;
             int i=0;
-            while (i<cook.getMenu().MealListSize() && exists == false) {
-                if (cook.getMenu().MealListNames().get(i).equals(mealName)) {
+            while (i<cook.getMenu().mealListSize() && exists == false) {
+                if (cook.getMenu().mealListNames().get(i).equals(mealName)) {
                     exists = true;
                 }
                 i++;

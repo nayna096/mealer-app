@@ -26,10 +26,10 @@ public class EditMealList extends AppCompatActivity {
         //region populate MealList LinearLayout
         LinearLayout mealListTable = (LinearLayout) findViewById(R.id.mealListTable);
 
-        List<String> mealListNames = cook.getMenu().MealListNames();
+        List<String> mealListNames = cook.getMenu().mealListNames();
         TextView textViewML = new TextView(this);
 
-        for (int i=0; i<cook.getMenu().MealListSize(); i++) {
+        for (int i=0; i<cook.getMenu().mealListSize(); i++) {
             textViewML.setText(mealListNames.get(i));
             mealListTable.addView(textViewML);
         }
