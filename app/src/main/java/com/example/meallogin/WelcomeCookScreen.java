@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +30,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_cook_screen);
         EditText message = (EditText)findViewById(R.id.MessageBox);
         Cook cook = (Cook)i.getSerializableExtra("Cook");
+        Toast.makeText(getApplicationContext(),"Welcome "+cook.getUsername(),Toast.LENGTH_LONG).show();
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
         MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);

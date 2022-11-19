@@ -88,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                                     Cook cook = cs.getValue(Cook.class);
                                                     if(cook.getPassword().equals(pass)){
                                                         //Correct password
-                                                        Toast.makeText(getApplicationContext(),"Welcome "+cook.getUsername(),Toast.LENGTH_LONG).show();
-                                                        openWelcomeCookScreen(cook);
+                                                         openWelcomeCookScreen(cook);
                                                     }else{
                                                         //Incorrect password
                                                         Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
