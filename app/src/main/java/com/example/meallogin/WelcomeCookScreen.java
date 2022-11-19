@@ -52,48 +52,22 @@ public class WelcomeCookScreen extends AppCompatActivity {
                 }
             });
         } else {
-            //TODO Isam
+
             //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
             MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
             MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
 
             editMealListButton.setOnClickListener(v -> {
-                setContentView(R.layout.activity_edit_meal_list_screen);
+                Intent intent = new Intent(getApplicationContext(), EditMealList.class);
+                intent.putExtra("Cook", cook);
+                startActivity(intent);
 
-                //region populate MealList LinearLayout
-                LinearLayout mealListTable = (LinearLayout) findViewById(R.id.mealListTable);
-                String[] mealListNames = cook.getMealListNames();
-                TextView textViewML = new TextView(this);
-
-                for (int i=0; i<cook.getMealListSize(); i++) {
-                    textViewML.setText(mealListNames[i]);
-                    mealListTable.addView(textViewML);
-                }
-                //endregion
-
-                MaterialButton createMealButton = (MaterialButton) findViewById(R.id.mealListCreateNewMealButton);
-                MaterialButton deleteMealButton = (MaterialButton) findViewById(R.id.mealListDeleteMealButton);
-
-                createMealButton.setOnClickListener(v1 -> {
-                    setContentView(R.layout.activity_create_meal_screen); //TODO Lisa
-                });
             });
 
             editMenuButton.setOnClickListener(v -> {
-                setContentView(R.layout.activity_edit_menu_screen);
-
-                //region populate Menu LinearLayout
-                LinearLayout menuTable = (LinearLayout) findViewById(R.id.menuTable);
-                String[] menuNames = cook.getMenuNames();
-                TextView textViewMN = new TextView(this);
-
-                for (int i=0; i<cook.getMenuSize(); i++) {
-                    textViewMN.setText(menuNames[i]);
-                    menuTable.addView(textViewMN);
-                }
-                //endregion
-
-
+                Intent intent = new Intent(getApplicationContext(), EditMenu.class);
+                intent.putExtra("Cook", cook);
+                startActivity(intent);
             });
         }
 //        message.setText(c.getUsername());

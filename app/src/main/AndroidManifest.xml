@@ -13,6 +13,27 @@
         android:theme="@style/Theme.MealLogin"
         tools:targetApi="31">
         <activity
+            android:name=".CreateMeal"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditMealList"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditMenu"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SettingsFrag"
             android:exported="false">
             <meta-data
