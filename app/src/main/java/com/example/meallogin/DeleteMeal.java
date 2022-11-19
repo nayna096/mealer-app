@@ -27,8 +27,8 @@ public class DeleteMeal extends AppCompatActivity {
         MaterialButton delete = (MaterialButton) findViewById(R.id.permanentlyDeleteButton);
         delete.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toDeleteTextInput)).getText().toString();
-            if (cook.getMenu().getMeallist().contains(cook.getMenu().findMealByName(mealName))) {
-                cook.getMenu().deletefromMeallist(cook.getMenu().findMealByName(mealName));
+            if (cook.getMenu().getMeallist().contains(cook.getMenu().findMealByNameInMeallist(mealName))) {
+                cook.getMenu().deletefromMeallist(cook.getMenu().findMealByNameInMeallist(mealName));
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

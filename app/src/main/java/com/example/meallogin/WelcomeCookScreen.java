@@ -29,7 +29,9 @@ public class WelcomeCookScreen extends AppCompatActivity {
         Intent i = getIntent();
         setContentView(R.layout.activity_welcome_cook_screen);
         EditText message = (EditText)findViewById(R.id.MessageBox);
+        TextView welcome = (TextView)findViewById(R.id.WelcomeMessage);
         Cook cook = (Cook)i.getSerializableExtra("Cook");
+        welcome.setText("Welcome "+cook.getUsername());
         Toast.makeText(getApplicationContext(),"Welcome "+cook.getUsername(),Toast.LENGTH_LONG).show();
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);

@@ -113,7 +113,15 @@ public class Menu implements Serializable {
         return this.offered.size();
     }
 
-    public Meal findMealByName(String str) {
+    public Meal findMealByNameInOffered(String str) {
+        for (int i = 0; i < this.offered.size(); i++) {
+            if (this.offered.get(i).getName().equals(str)) {
+                return this.offered.get(i);
+            }
+        }
+        return null;
+    }
+    public Meal findMealByNameInMeallist(String str) {
         for (int i = 0; i < this.meallist.size(); i++) {
             if (this.meallist.get(i).getName().equals(str)) {
                 return this.meallist.get(i);
@@ -122,6 +130,14 @@ public class Menu implements Serializable {
         return null;
     }
 
+    public int findMealIndexInOffered(Meal meal) {
+        for (int i = 0; i < this.offered.size(); i++) {
+            if (this.offered.get(i).equals(meal)) {
+                return i;
+            }
+        }
+        return -1;
+    }
     public int findMealIndexInMealList(Meal meal) {
         for (int i = 0; i < this.meallist.size(); i++) {
             if (this.meallist.get(i).equals(meal)) {

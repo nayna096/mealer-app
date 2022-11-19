@@ -28,8 +28,8 @@ public class RemoveMeal extends AppCompatActivity {
         MaterialButton remove = (MaterialButton) findViewById(R.id.removeButton);
         remove.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toRemoveTextInput)).getText().toString();
-            if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByName(mealName))) {
-                cook.getMenu().removefromOffered(cook.getMenu().findMealByName(mealName));
+            if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealName))) {
+                cook.getMenu().removefromOffered(cook.getMenu().findMealByNameInOffered(mealName));
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -57,6 +57,7 @@ public class RemoveMeal extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "No such meal is offered", Toast.LENGTH_LONG).show();
             }
             Intent intent = new Intent(this, EditMenu.class);
+            intent.putExtra("Cook", cook);
             startActivity(intent);
         });
 
