@@ -1,9 +1,12 @@
 package com.example.meallogin;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -22,12 +25,21 @@ public class WelcomeCookScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
         setContentView(R.layout.activity_welcome_cook_screen);
         EditText message = (EditText)findViewById(R.id.MessageBox);
-        Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
+        Cook cook = (Cook)i.getSerializableExtra("Cook");
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
-
+        MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
+        MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
         if(cook.isSuspended()){
+
+            //disable the buttons, only non-suspended cooks can use
+//            editMealListButton.setEnabled(false);
+//            editMenuButton.setEnabled(false);
+
+
+            //display suspension
             dbref.child("Complaints").orderByChild("cookUsername").equalTo(cook.getUsername()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -42,6 +54,9 @@ public class WelcomeCookScreen extends AppCompatActivity {
                         }
 
                     }else{
+                        editMealListButton.setEnabled(true);
+                        editMenuButton.setEnabled(true);
+
                         message.setText("No suspension");
                     }
                 }
@@ -51,26 +66,27 @@ public class WelcomeCookScreen extends AppCompatActivity {
 
                 }
             });
-        } else {
-
-            //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
-            MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
-            MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
-
-            editMealListButton.setOnClickListener(v -> {
-                Intent intent = new Intent(this, EditMealList.class);
-                intent.putExtra("Cook", cook);
-                startActivity(intent);
-
-            });
-
-            editMenuButton.setOnClickListener(v -> {
-                Intent intent = new Intent(this, EditMenu.class);
-                intent.putExtra("Cook", cook);
-                startActivity(intent);
-            });
         }
+//        else {
+//
+//            //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
+//            //Turns out this does not work, instead the buttons must be enabled/disabled
+//
+//
+//        }
 //        message.setText(c.getUsername());
+        editMealListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EditMealList.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+
+        });
+
+        editMenuButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EditMenu.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
         logout.setOnClickListener(v->
         {
             openMainActivity();

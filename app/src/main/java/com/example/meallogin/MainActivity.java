@@ -33,27 +33,27 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
         //admin
         FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
-//        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
-//
-//                for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){
-//                    if(it.hasNext()){
-//                        Cook c = it.next().getValue(Cook.class);
-//                        createComplaint(c.getEmail(),c);
-//                    }else{
-//                        break;
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
+
+                for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){
+                    if(it.hasNext()){
+                        Cook c = it.next().getValue(Cook.class);
+                        createComplaint(c.getEmail(),c);
+                    }else{
+                        break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
                     String pass = password.getText().toString();
@@ -83,13 +83,12 @@ public class MainActivity extends AppCompatActivity {
                                         //Check whether username is stored under a cook account
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
-                                            Toast.makeText(getApplicationContext(),"Hi",Toast.LENGTH_LONG).show();
                                             if (cooksnapshot.exists()) {
                                                 for(DataSnapshot cs:cooksnapshot.getChildren()){
                                                     Cook cook = cs.getValue(Cook.class);
                                                     if(cook.getPassword().equals(pass)){
                                                         //Correct password
-                                                        Toast.makeText(getApplicationContext(),"Hey",Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(getApplicationContext(),"Welcome "+cook.getUsername(),Toast.LENGTH_LONG).show();
                                                         openWelcomeCookScreen(cook);
                                                     }else{
                                                         //Incorrect password
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 Complaint complaint = new Complaint(description,cook);
                 DatabaseReference complaintref = db.getReference("Complaints");
                 String id = complaintref.push().getKey();
-                complaintref.child(id).setValue(complaint).toString();
+                complaintref.child(id).setValue(complaint);
     }
 
     public void openSignup() {
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openWelcomeCookScreen(Cook c) {
-        Intent intent = new Intent(getApplicationContext(), WelcomeCookScreen.class);
+        Intent intent = new Intent(this, WelcomeCookScreen.class);
         intent.putExtra("Cook", c);
         startActivity(intent);
     }
