@@ -6,14 +6,18 @@ public class Cook extends GeneralUser implements Serializable {
     private boolean status;
     private Menu menu;
     private String suspensionDate;
+    String Username;
+    String Password;
+    String Role;
+    String email;
 
     public Cook(){}
     
     public Cook(String Username, String Password, String Email){
-        this.setUsername(Username);
-        this.setPassword(Password);
-        this.setRole("Cook");
-        this.setEmail(Email);
+        this.Username = Username;
+        this.Password = Password;
+        this.Role = "Cook";
+        this.email = Email;
         this.status = false;
         this.suspensionDate = null;
         this.menu = new Menu(this);
