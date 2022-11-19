@@ -25,15 +25,15 @@ public class EditMealList extends AppCompatActivity {
 
 
         //region populate MealList LinearLayout
-        ListView mealListTable = (ListView) findViewById(R.id.mealListTable);
-
-        List<String> mealListNames = cook.getMenu().mealListNames();
-        TextView textViewML = new TextView(this);
-
-        for (int i=0; i<cook.getMenu().mealListSize(); i++) {
-            textViewML.setText(mealListNames.get(i));
-            mealListTable.addView(textViewML);
-        }
+//        ListView mealListTable = (ListView) findViewById(R.id.mealListTable);
+//
+//        List<String> mealListNames = cook.getMenu().mealListNames();
+//        TextView textViewML = new TextView(this);
+//
+//        for (int i=0; i<cook.getMenu().mealListSize(); i++) {
+//            textViewML.setText(mealListNames.get(i));
+//            mealListTable.addView(textViewML);
+//        }
         //endregion
 
         MaterialButton createMealButton = (MaterialButton) findViewById(R.id.mealListCreateNewMealButton);

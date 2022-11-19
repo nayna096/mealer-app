@@ -1,5 +1,6 @@
 package com.example.meallogin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +24,9 @@ import java.util.stream.Collectors;
 
 public class CreateMeal extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference dbref= db.getReference();
-//    @RequiresApi(api>Build.VERSION_CODES.N)
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    DatabaseReference dbref = db.getReference();
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +49,32 @@ public class CreateMeal extends AppCompatActivity {
             double price = Double.parseDouble(priceStr);
 
             cook.getMenu().addtoMeallist(new Meal(name, cuisineType, ingredients, allergens, price, description));
+            dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for(DataSnapshot d:snapshot.getChildren()){
+                            Cook c = d.getValue(Cook.class);
+                            if(c.getUsername().equals(cook.getUsername())){
+                                //Find the cook in the db to update their menu
+                                String id = d.getKey(); //Cook-unique id
+                                dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
+                                Toast.makeText(getApplicationContext(), "The meal is successfully created", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(),"here",Toast.LENGTH_LONG).show();
 
-            Toast.makeText(getApplicationContext(), "Meal created successfully", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, WelcomeCookScreen.class);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            Intent intent = new Intent(this, EditMealList.class);
+            intent.putExtra("Cook", cook);
             startActivity(intent);
         });
 
