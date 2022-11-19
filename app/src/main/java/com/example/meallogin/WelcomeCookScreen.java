@@ -37,7 +37,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
                             if(complaint.getSuspensionDate().equals("permanent")){
                                 message.setText("Your cook account is suspended permanently");
                             }else{
-                                message.setText("Your cook account is suspended until "+complaint.getSuspensionDate());
+                                message.setText("Your cook account is suspended until "+complaint.getCook().getSuspensionDate());
                             }
                         }
 

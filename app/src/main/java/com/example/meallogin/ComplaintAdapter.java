@@ -33,7 +33,7 @@ public class ComplaintAdapter extends FirestoreRecyclerAdapter<Complaint, Compla
         holder.permaBan.setOnClickListener(v -> {
             Cook user = complaint.getCook();
             user.setStatus(true);
-            user.setSuspensionDate("Never");
+            user.setSuspensionDate("permanent");
             complaint.action();
         });
         holder.suspend.setOnClickListener(v -> {
