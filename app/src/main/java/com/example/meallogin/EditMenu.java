@@ -2,10 +2,12 @@ package com.example.meallogin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,5 +30,20 @@ public class EditMenu extends AppCompatActivity {
             menuTable.addView(textViewMN);
         }
         //endregion
+
+        MaterialButton addMealButton = (MaterialButton) findViewById(R.id.addButton);
+        MaterialButton removeMealButton = (MaterialButton) findViewById(R.id.removeButton);
+
+        addMealButton.setOnClickListener(v1 -> {
+            Intent intent = new Intent(this, AddMeal.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+
+        removeMealButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), RemoveMeal.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
     }
 }
