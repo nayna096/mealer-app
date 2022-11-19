@@ -1,8 +1,10 @@
 package com.example.meallogin;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 public class CreateMeal extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref= db.getReference();
+//    @RequiresApi(api>Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +38,10 @@ public class CreateMeal extends AppCompatActivity {
             String priceStr = ((EditText) findViewById(R.id.newMealPrice)).getText().toString();
             String description = ((EditText) findViewById(R.id.newMealDescription)).getText().toString();
 
-            List<String> ingredients = new ArrayList<>(Arrays.asList(ingredientsStr.split(",")));
-//            List<String> ingredients = ingredientsUnsorted.stream().sorted().collect(Collectors.toList());
-            List<String> allergens = new ArrayList<>(Arrays.asList(allergensStr.split(",")));
-//            List<String> allergens = allergensUnsorted.stream().sorted().collect(Collectors.toList());
+            List<String> ingredientsUnsorted = new ArrayList<>(Arrays.asList(ingredientsStr.split(",")));
+            List<String> ingredients = ingredientsUnsorted.stream().sorted().collect(Collectors.toList());
+            List<String> allergensUnsorted = new ArrayList<>(Arrays.asList(allergensStr.split(",")));
+            List<String> allergens = allergensUnsorted.stream().sorted().collect(Collectors.toList());
             double price = Double.parseDouble(priceStr);
 
             cook.getMenu().addtoMeallist(new Meal(name, cuisineType, ingredients, allergens, price, description));

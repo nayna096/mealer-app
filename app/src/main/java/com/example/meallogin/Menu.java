@@ -10,8 +10,7 @@ public class Menu implements Serializable {
     private String emptyMessage = "Would you like to add some meals?";
 
     //region Constructors
-//    public Menu() {
-//    }
+
 
     public Menu() {
         this.meallist = new ArrayList<Meal>();
@@ -94,7 +93,7 @@ public class Menu implements Serializable {
         return result;
     }
 
-    public List<String> MenuNames() {
+    public List<String> menuNames() {
 
         List<String> result = new ArrayList<String>();
         if (this.offered.size() > 0) {

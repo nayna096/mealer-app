@@ -22,13 +22,14 @@ import com.google.firebase.database.ValueEventListener;
 public class WelcomeCookScreen extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref= db.getReference();
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         setContentView(R.layout.activity_welcome_cook_screen);
         EditText message = (EditText)findViewById(R.id.MessageBox);
-        Cook cook = (Cook)i.getSerializableExtra("Cook");
+        Cook cook = (Cook)i.getSerializableExtra("Cook",Cook.class);
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
         MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
