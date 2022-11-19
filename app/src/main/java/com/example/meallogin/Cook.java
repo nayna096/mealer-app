@@ -27,7 +27,7 @@ public class Cook extends GeneralUser implements Serializable {
         this.status = status;
     }
 
-    public boolean isSuspended(){return this.status = true;}
+    public boolean isSuspended(){return this.status;}
 
     public void setMenu(Menu menu){this.menu = menu;}
 
