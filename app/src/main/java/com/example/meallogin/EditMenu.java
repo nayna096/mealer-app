@@ -27,14 +27,14 @@ public class EditMenu extends AppCompatActivity {
         List<String> menuNames = cook.getMenu().MenuNames();
         TextView textViewMN = new TextView(this);
 
-        for (int i=0; i<cook.getMenu().MenuSize(); i++) {
+        for (int i=0; i<cook.getMenu().menuSize(); i++) {
             textViewMN.setText(menuNames.get(i));
             menuTable.addView(textViewMN);
         }
         //endregion
 
-        MaterialButton addMealButton = (MaterialButton) findViewById(R.id.addButton);
-        MaterialButton removeMealButton = (MaterialButton) findViewById(R.id.removeButton);
+        MaterialButton addMealButton = (MaterialButton) findViewById(R.id.menuAddMealButton);
+        MaterialButton removeMealButton = (MaterialButton) findViewById(R.id.menuRemoveMealButton);
 
         addMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, AddMeal.class);

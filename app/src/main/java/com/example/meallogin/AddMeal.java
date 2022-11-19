@@ -24,14 +24,14 @@ public class AddMeal extends AppCompatActivity {
             String mealName = ((EditText) findViewById(R.id.toAddTextInput)).getText().toString();
             boolean exists = false;
             int i=0;
-            while (i<cook.getMealListSize() && exists == false) {
-                if (cook.getMealListNames().get(i).equals(mealName)) {
+            while (i<cook.getMenu().mealListSize() && exists == false) {
+                if (cook.getMenu().mealListNames().get(i).equals(mealName)) {
                     exists = true;
                 }
                 i++;
             }
             if (exists) {
-                cook.getMenu().addtoOffered(cook.getMealByName(mealName));
+                cook.getMenu().addtoOffered(cook.getMenu().findMealByName(mealName));
             } else {
                 Toast.makeText(getApplicationContext(), "Failed. Please try again.", Toast.LENGTH_LONG).show();
             }

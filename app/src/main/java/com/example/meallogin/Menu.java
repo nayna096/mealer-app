@@ -79,7 +79,7 @@ public class Menu implements Serializable {
         }
     }
 
-    public List<String> MealListNames() {
+    public List<String> mealListNames() {
 
         List<String> result = new ArrayList<String>();
         if (this.meallist.size() > 0) {
@@ -108,11 +108,11 @@ public class Menu implements Serializable {
         return result;
     }
 
-    public int MealListSize() {
+    public int mealListSize() {
         return this.meallist.size();
     }
 
-    public int MenuSize() {
+    public int menuSize() {
         return this.offered.size();
     }
 
