@@ -7,7 +7,6 @@ import java.util.List;
 public class Menu implements Serializable {
     private ArrayList<Meal> meallist;
     private ArrayList<Meal> offered;
-    private String emptyMessage = "Would you like to add some meals?";
 
     //region Constructors
 
@@ -27,7 +26,6 @@ public class Menu implements Serializable {
         return offered;
     }
 
-    public String getEmptyMessage() {return emptyMessage;}
     //endregion
 
     //region Setters
@@ -39,7 +37,6 @@ public class Menu implements Serializable {
         this.offered = offered;
     }
 
-    public void setEmptyMessage(String emptyMessage) {this.emptyMessage = "Would you like to add some meals?";}
     //endregion
 
     //region non-suspended cook only
@@ -82,28 +79,22 @@ public class Menu implements Serializable {
     public List<String> mealListNames() {
 
         List<String> result = new ArrayList<String>();
-        if (this.meallist.size() > 0) {
-            for (int i = 0; i < this.meallist.size(); i++) {
-                result.add(this.meallist.get(i).getName());
-            }
-
-
-        } else {
-            result.add(emptyMessage);
+        for (int i = 0; i < this.meallist.size(); i++) {
+            result.add(this.meallist.get(i).getName());
         }
+
+
         return result;
     }
 
     public List<String> menuNames() {
 
         List<String> result = new ArrayList<String>();
-        if (this.offered.size() > 0) {
-            for (int i = 0; i < this.offered.size(); i++) {
-                result.add(this.offered.get(i).getName());
-            }
-        } else {
-            result.add(emptyMessage);
+
+        for (int i = 0; i < this.offered.size(); i++) {
+            result.add(this.offered.get(i).getName());
         }
+
 
         return result;
     }
