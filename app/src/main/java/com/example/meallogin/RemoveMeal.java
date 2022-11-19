@@ -23,15 +23,15 @@ public class RemoveMeal extends AppCompatActivity {
         MaterialButton remove = (MaterialButton) findViewById(R.id.removeButton);
         remove.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toRemoveTextInput)).getText().toString();
-            boolean exists = false;
-            int i = 0;
-            while (i < cook.getMenu().mealListSize() && exists == false) {
-                if (cook.getMenu().mealListNames().get(i).equals(mealName)) {
-                    exists = true;
-                }
-                i++;
-            }
-            if (exists) {
+//            boolean exists = false;
+//            int i = 0;
+//            while (i < cook.getMenu().mealListSize() && exists == false) {
+//                if (cook.getMenu().mealListNames().get(i).equals(mealName)) {
+//                    exists = true;
+//                }
+//                i++;
+//            }
+            if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByName(mealName))) {
                 cook.getMenu().removefromOffered(cook.getMenu().findMealByName(mealName));
             } else {
                 Toast.makeText(getApplicationContext(), "Failed. Please try again.", Toast.LENGTH_LONG).show();
