@@ -1,6 +1,6 @@
 package com.example.meallogin;
-
-public class Complaint {
+import java.io.Serializable;
+public class Complaint implements Serializable {
     private String description;
     private String suspensionDate;
     private Cook cookUsername;
@@ -14,6 +14,10 @@ public class Complaint {
         this.actioned = false;
     }
 
+
+
+
+
     public void setSuspensionDate(String severity) {this.suspensionDate = severity;}
 
     public String getSuspensionDate() {return suspensionDate;}
@@ -25,7 +29,12 @@ public class Complaint {
     public Cook getCook() {return cookUsername;}
 
     public void setCookUsername(Cook cookUsername) {this.cookUsername = cookUsername;}
-
+    public Cook getCookUsername() {
+        return cookUsername;
+    }
+    public void setActioned(Boolean actioned) {
+        this.actioned = actioned;
+    }
     public boolean getActioned(){
         return this.actioned;
     }
