@@ -33,8 +33,8 @@ public class EditMealList extends AppCompatActivity {
         MaterialButton deleteMealButton = (MaterialButton) findViewById(R.id.mealListDeleteMealButton);
 
         createMealButton.setOnClickListener(v1 -> {
-            Intent intent = new Intent(getApplicationContext(), CreateMeal.class);
-            intent.putExtra("Cook", cook);
+            Intent intent = new Intent(this, CreateMeal.class);
+            //intent.putExtra("Cook", cook);
             startActivity(intent);
         });
     }

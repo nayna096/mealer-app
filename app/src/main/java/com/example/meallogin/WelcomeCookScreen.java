@@ -58,14 +58,14 @@ public class WelcomeCookScreen extends AppCompatActivity {
             MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
 
             editMealListButton.setOnClickListener(v -> {
-                Intent intent = new Intent(getApplicationContext(), EditMealList.class);
+                Intent intent = new Intent(this, EditMealList.class);
                 intent.putExtra("Cook", cook);
                 startActivity(intent);
 
             });
 
             editMenuButton.setOnClickListener(v -> {
-                Intent intent = new Intent(getApplicationContext(), EditMenu.class);
+                Intent intent = new Intent(this, EditMenu.class);
                 intent.putExtra("Cook", cook);
                 startActivity(intent);
             });
