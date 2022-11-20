@@ -17,12 +17,14 @@ import java.util.List;
 public class EditMealList extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref= db.getReference();
+//    ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        binding = EditMealList
         setContentView(R.layout.activity_edit_meal_list);
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
-
+        ListAdapter listAdapter = new ListAdapter(EditMealList.this,cook.getMenu().getMeallist());
 
         //region populate MealList LinearLayout
 //        ListView mealListTable = (ListView) findViewById(R.id.mealListTable);

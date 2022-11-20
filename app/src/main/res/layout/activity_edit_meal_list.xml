@@ -13,20 +13,21 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></ListView>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/meal_list_item"></ListView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mealListDeleteMealButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="116dp"
         android:text="Delete"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/mealListTable"
         app:layout_constraintStart_toEndOf="@+id/mealListCreateNewMealButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.727"
-        android:visibility="visible"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mealListCreateNewMealButton"
