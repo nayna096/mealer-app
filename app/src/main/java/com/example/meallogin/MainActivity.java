@@ -3,6 +3,7 @@ package com.example.meallogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import java.util.Iterator;
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,5 +162,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public static String validate(String username, String password) {
+        if(username.equals("admin") && password.equals("admin")) {
+            return "Success";
+        } else {
+            return "Login failed";
+        }
+    }
 
 }

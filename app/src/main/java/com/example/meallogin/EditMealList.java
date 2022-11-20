@@ -53,4 +53,8 @@ public class EditMealList extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    public static boolean isSuspended(Cook cook) {
+        return cook.getStatus();
+    }
 }
