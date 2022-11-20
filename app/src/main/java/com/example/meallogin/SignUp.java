@@ -3,6 +3,7 @@ package com.example.meallogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -30,10 +31,18 @@ import java.util.List;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
+    private String username;
+    private String pw;
+    private String confirmpw;
+    private String email;
+
     String [] restrictedUsers =  {"nayna","gdupu","ikarr","ekoro"};
     int ret = 0;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
+
+    public SignUp(Context context) {}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +55,12 @@ public class SignUp extends AppCompatActivity {
         MaterialButton login = (MaterialButton) findViewById(R.id.login);
         MaterialButton cook = (MaterialButton) findViewById(R.id.Cook);
         MaterialButton client = (MaterialButton) findViewById(R.id.Client);
+
+        username = user.getText().toString();
+        pw = Password.getText().toString();
+        confirmpw = Confirmp.getText().toString();
+        email = Email.getText().toString();
+
         for(int i = 0;i<restrictedUsers.length;i++){
             if(user.getText().toString().equals(restrictedUsers[i])){
                 Toast.makeText(getApplicationContext(),"This username is invalid due to an admin conflict",Toast.LENGTH_LONG).show();
@@ -181,5 +196,12 @@ public class SignUp extends AppCompatActivity {
     public void openWelcomeClientScreen() {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
         startActivity(intent);
+    }
+
+    public static String validate(String un, String pw, String cpw, String email) {
+        if (!un.equals("ekoro") && !un.equals("gdupu") && !un.equals("nayna") && !un.equals("ikarr") && !un.equals("admin") && pw.equals(cpw) && !email.equals("")) {
+            return "Success";
+        }
+        return "Login failed";
     }
 }
