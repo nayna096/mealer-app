@@ -49,7 +49,7 @@ public class ComplaintsFrag extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        Query query = FirebaseFirestore.getInstance().collection("Complaints").orderBy("cookUsername");
+        Query query = FirebaseFirestore.getInstance().collection("Complaints").orderBy("username");
         FirestoreRecyclerOptions<Complaint> options = new FirestoreRecyclerOptions.Builder<Complaint>()
                 .setQuery(query,Complaint.class).build();
         recyclerview.setLayoutManager(new LinearLayoutManager(this));

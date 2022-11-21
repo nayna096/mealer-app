@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/teal_200">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            cardCornerRadius="20dp"
+            cardElevation="10dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/chefName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Chef Name"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/complaintDescription"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/chefName"
+                    android:paddingTop="15dp"
+                    android:text="Description"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="220dp"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dismiss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/green"
+                android:text="Dismiss"
+                android:textSize="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/permaBan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dismiss"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/black"
+                android:text="PermaBan"
+                android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/permaBan"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="15dp"
+                android:hint="Temporary (mm/dd/yy)"
+                android:inputType="date"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:background="#40ffffff"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/permaBan"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/date"
+                android:text="Suspend"
+                android:id="@+id/suspend"
+                android:textSize="8dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

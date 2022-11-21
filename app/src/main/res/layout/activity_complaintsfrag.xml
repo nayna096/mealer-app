@@ -18,7 +18,8 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="595dp"
-        android:layout_below="@+id/title" />
+        android:layout_below="@+id/title"
+        tools:listitem="@layout/recycler_complaint_item2" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

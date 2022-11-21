@@ -43,7 +43,6 @@ public class ComplaintAdapter extends FirestoreRecyclerAdapter<Complaint, Compla
             complaint.action();
         });
         holder.dismiss.setOnClickListener(v -> {
-            Cook user = complaint.getCook();
             complaint.action();
         });
 
@@ -52,7 +51,7 @@ public class ComplaintAdapter extends FirestoreRecyclerAdapter<Complaint, Compla
     @NonNull
     @Override
     public ComplaintViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_complaint_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_complaint_item2, parent, false);
         return new ComplaintViewHolder(view);
     }
 
