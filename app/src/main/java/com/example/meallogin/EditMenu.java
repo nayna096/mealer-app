@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.meallogin.databinding.ActivityEditMenuBinding;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,27 +18,31 @@ import java.util.List;
 public class EditMenu extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref= db.getReference();
+    ActivityEditMenuBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_menu);
+
+        binding = ActivityEditMenuBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
-        ListAdapter listAdapter = new ListAdapter(this,cook.getMenu().getMeallist());
+        ListAdapter listAdapter = new ListAdapter(EditMenu.this,cook.getMenu().getOffered());
         //region populate Menu LinearLayout
-        ListView menuTable = (ListView) findViewById(R.id.menuTable);
+//        ListView menuTable = (ListView) findViewById(R.id.menuTable);
 //        List<String> menuNames = cook.getMenu().menuNames();
 //        TextView textViewMN = new TextView(this);
-//
+
 //        for (int i=0; i<cook.getMenu().menuSize(); i++) {
 //            textViewMN.setText(menuNames.get(i));
-//            menuTable.addView(textViewMN);
+//            listAdapter.add(cook.getMenu().getOffered().get(i));
 //        }
+//        menuTable.setAdapter(listAdapter);
         //endregion
-
+        binding.menuTable.setAdapter(listAdapter);
+//        binding.menuTable.setClickable(true);
         MaterialButton addMealButton = (MaterialButton) findViewById(R.id.menuAddMealButton);
         MaterialButton removeMealButton = (MaterialButton) findViewById(R.id.menuRemoveMealButton);
-        menuTable.setAdapter(listAdapter);
-        menuTable.setClickable(true);
+
 
         addMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, AddMeal.class);
