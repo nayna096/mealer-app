@@ -4,33 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cook"
+    app:layout_constraintBottom_toTopOf="parent"
     tools:context=".EditMenu">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menuAddMealButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:visibility="visible"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/menuTable"
+        app:layout_constraintEnd_toStartOf="@id/menuBack"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/menuAddMealButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:visibility="visible"
-            tools:ignore="MissingConstraints"
-            tools:visibility="visible" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menuBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Back"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/menuTable"
+        app:layout_constraintEnd_toStartOf="@id/menuRemoveMealButton"
+        app:layout_constraintStart_toEndOf="@id/menuAddMealButton"
+        tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/menuRemoveMealButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="227dp"
-            android:text="Remove"
-            android:visibility="visible"
-            tools:ignore="MissingConstraints"
-            tools:visibility="visible" />
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menuRemoveMealButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/menuTable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menuBack"
+        tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
 
     <ListView
         android:id="@+id/menuTable"
@@ -43,9 +58,6 @@
         tools:listitem="@layout/meal_list_item">
 
     </ListView>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

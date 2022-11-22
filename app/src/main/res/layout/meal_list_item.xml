@@ -28,8 +28,8 @@
                     android:layout_height="wrap_content"
                     android:text="MealName"
                     android:textColor="@color/black"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="26sp"/>
 
                 <TextView
                     android:id="@+id/MealPrice"

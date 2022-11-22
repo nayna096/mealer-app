@@ -73,7 +73,7 @@ public class EditMenu extends AppCompatActivity {
         });
         MaterialButton addMealButton = (MaterialButton) findViewById(R.id.menuAddMealButton);
         MaterialButton removeMealButton = (MaterialButton) findViewById(R.id.menuRemoveMealButton);
-
+        MaterialButton back = (MaterialButton)findViewById(R.id.menuBack);
 
         addMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, AddMeal.class);
@@ -84,6 +84,11 @@ public class EditMenu extends AppCompatActivity {
         removeMealButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), RemoveMeal.class);
             intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+        back.setOnClickListener(v2->{
+            Intent intent = new Intent(this, WelcomeCookScreen.class);
+            intent.putExtra("Cook",cook);
             startActivity(intent);
         });
     }

@@ -26,6 +26,7 @@ public class RemoveMeal extends AppCompatActivity {
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
 
         MaterialButton remove = (MaterialButton) findViewById(R.id.removeButton);
+        MaterialButton back = (MaterialButton)findViewById(R.id.removeBackButton);
         remove.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toRemoveTextInput)).getText().toString();
             if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealName))) {
@@ -43,8 +44,6 @@ public class RemoveMeal extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "The meal is no longer offered!", Toast.LENGTH_LONG).show();
                                 }
                             }
-                        } else {
-                            Toast.makeText(getApplicationContext(),"here",Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -56,6 +55,11 @@ public class RemoveMeal extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "No such meal is offered", Toast.LENGTH_LONG).show();
             }
+            Intent intent = new Intent(this, EditMenu.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+        back.setOnClickListener(v1->{
             Intent intent = new Intent(this, EditMenu.class);
             intent.putExtra("Cook", cook);
             startActivity(intent);

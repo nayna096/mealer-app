@@ -23,12 +23,14 @@ public class DeleteMeal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_meal);
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
-
+        MaterialButton back = (MaterialButton)findViewById(R.id.deleteBackButton);
         MaterialButton delete = (MaterialButton) findViewById(R.id.permanentlyDeleteButton);
         delete.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toDeleteTextInput)).getText().toString();
             if (cook.getMenu().getMeallist().contains(cook.getMenu().findMealByNameInMeallist(mealName))) {
+                //Ensure that the meal actually exists in the Meal List
                 cook.getMenu().deletefromMeallist(cook.getMenu().findMealByNameInMeallist(mealName));
+                cook.getMenu().getOffered().remove(cook.getMenu().findMealByNameInMeallist(mealName));
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -42,8 +44,6 @@ public class DeleteMeal extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "The meal is successfully deleted", Toast.LENGTH_LONG).show();
                                 }
                             }
-                        } else {
-                            Toast.makeText(getApplicationContext(),"here",Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -55,6 +55,11 @@ public class DeleteMeal extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "No such meal exists", Toast.LENGTH_LONG).show();
             }
+            Intent intent = new Intent(this, EditMealList.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+        back.setOnClickListener(v1->{
             Intent intent = new Intent(this, EditMealList.class);
             intent.putExtra("Cook", cook);
             startActivity(intent);

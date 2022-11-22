@@ -21,7 +21,7 @@ public class EditMealList extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref= db.getReference();
     ActivityEditMealListBinding binding;
-//    ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,12 @@ public class EditMealList extends AppCompatActivity {
 
         MaterialButton createMealButton = (MaterialButton) findViewById(R.id.mealListCreateNewMealButton);
         MaterialButton deleteMealButton = (MaterialButton) findViewById(R.id.mealListDeleteMealButton);
+        MaterialButton back = (MaterialButton)findViewById(R.id.mealListBackButton);
+
+        //Activate the list of meals
         binding.mealListTable.setAdapter(listAdapter);
+
+        //Make them clickable
         binding.mealListTable.setClickable(true);
         createMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, CreateMeal.class);
@@ -86,6 +91,11 @@ public class EditMealList extends AppCompatActivity {
         deleteMealButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, DeleteMeal.class);
             intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+        back.setOnClickListener(v2->{
+            Intent intent = new Intent(this, WelcomeCookScreen.class);
+            intent.putExtra("Cook",cook);
             startActivity(intent);
         });
     }

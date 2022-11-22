@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".RemoveMeal">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/removeBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/toRemoveTextInput"
         android:layout_width="359dp"

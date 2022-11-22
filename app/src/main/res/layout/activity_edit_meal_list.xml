@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cook"
     tools:context=".EditMealList">
 
     <ListView
@@ -20,25 +21,32 @@
         android:id="@+id/mealListDeleteMealButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
         android:text="Delete"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/mealListTable"
-        app:layout_constraintStart_toEndOf="@+id/mealListCreateNewMealButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mealListBackButton"
         tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mealListCreateNewMealButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="Create New Meal"
-        app:layout_constraintBottom_toTopOf="@+id/mealListTable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727"
+        android:text="Create "
         android:visibility="visible"
-        tools:visibility="visible"/>
+        app:layout_constraintBottom_toTopOf="@+id/mealListTable"
+        app:layout_constraintEnd_toStartOf="@id/mealListBackButton"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mealListBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/mealListTable"
+        app:layout_constraintEnd_toStartOf="@id/mealListDeleteMealButton"
+        app:layout_constraintStart_toEndOf="@id/mealListCreateNewMealButton"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

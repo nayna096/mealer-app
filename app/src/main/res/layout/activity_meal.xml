@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cook"
     tools:context=".MealActivity">
 
     <TextView
@@ -15,6 +16,8 @@
         android:text="MealName"
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="42sp" />
 
     <TextView
@@ -26,51 +29,61 @@
         android:layout_marginTop="50dp"
         android:text="Description"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/Price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Name"
+        android:layout_below="@id/Description"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="Price"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/Cuisine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Name"
+        android:layout_below="@id/Price"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:text="Cuisine Type"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/Ingredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Name"
+        android:layout_below="@id/Cuisine"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         android:text="Ingredients"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/Allergens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Name"
+        android:layout_below="@id/Ingredients"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="50dp"
         android:text="Allergens"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/BackButton"

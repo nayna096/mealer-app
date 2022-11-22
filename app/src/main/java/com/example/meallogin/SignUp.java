@@ -41,8 +41,6 @@ public class SignUp extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
 
-    public SignUp(Context context) {}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

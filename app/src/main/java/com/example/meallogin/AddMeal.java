@@ -17,7 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddMeal extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference dbref= db.getReference();
+    DatabaseReference dbref = db.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,25 +26,24 @@ public class AddMeal extends AppCompatActivity {
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
 
         MaterialButton add = (MaterialButton) findViewById(R.id.addButton);
+        MaterialButton back = (MaterialButton)findViewById(R.id.addBackButton);
         add.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toAddTextInput)).getText().toString();
-            if (!(cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInMeallist(mealName)))) {
+            if (!(cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInMeallist(mealName))) && cook.getMenu().getMeallist().contains(cook.getMenu().findMealByNameInMeallist(mealName))) {
                 cook.getMenu().addtoOffered(cook.getMenu().findMealByNameInMeallist(mealName));
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            for(DataSnapshot d:snapshot.getChildren()){
+                            for (DataSnapshot d : snapshot.getChildren()) {
                                 Cook c = d.getValue(Cook.class);
-                                if(c.getUsername().equals(cook.getUsername())){
+                                if (c.getUsername().equals(cook.getUsername())) {
                                     //Find the cook in the db to update their menu
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
                                     Toast.makeText(getApplicationContext(), "The meal is now offered!", Toast.LENGTH_LONG).show();
                                 }
                             }
-                        } else {
-                            Toast.makeText(getApplicationContext(),"here",Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -53,10 +53,18 @@ public class AddMeal extends AppCompatActivity {
                     }
                 });
             } else {
-                Toast.makeText(getApplicationContext(), "This meal is already offered", Toast.LENGTH_LONG).show();
+                if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInMeallist(mealName)))
+                    Toast.makeText(getApplicationContext(), "This meal is already offered", Toast.LENGTH_LONG).show();
+                if(!(cook.getMenu().getMeallist().contains(cook.getMenu().findMealByNameInMeallist(mealName))))
+                    Toast.makeText(getApplicationContext(), "This meal does not exist in the meal list", Toast.LENGTH_LONG).show();
             }
             Intent intent = new Intent(this, EditMenu.class);
-            intent.putExtra("Cook",cook);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
+        });
+        back.setOnClickListener(v1->{
+            Intent intent = new Intent(this, EditMenu.class);
+            intent.putExtra("Cook", cook);
             startActivity(intent);
         });
     }
