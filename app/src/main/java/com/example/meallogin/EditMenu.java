@@ -27,17 +27,6 @@ public class EditMenu extends AppCompatActivity {
         setContentView(binding.getRoot());
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
         ListAdapter listAdapter = new ListAdapter(EditMenu.this,cook.getMenu().getOffered());
-        //region populate Menu LinearLayout
-//        ListView menuTable = (ListView) findViewById(R.id.menuTable);
-//        List<String> menuNames = cook.getMenu().menuNames();
-//        TextView textViewMN = new TextView(this);
-
-//        for (int i=0; i<cook.getMenu().menuSize(); i++) {
-//            textViewMN.setText(menuNames.get(i));
-//            listAdapter.add(cook.getMenu().getOffered().get(i));
-//        }
-//        menuTable.setAdapter(listAdapter);
-        //endregion
         binding.menuTable.setAdapter(listAdapter);
 //        binding.menuTable.setClickable(true);
         MaterialButton addMealButton = (MaterialButton) findViewById(R.id.menuAddMealButton);

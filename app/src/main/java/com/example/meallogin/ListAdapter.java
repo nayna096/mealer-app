@@ -18,7 +18,7 @@ public class ListAdapter extends ArrayAdapter<Meal> {
     public ListAdapter(Context context, ArrayList<Meal> mealArrayList) {
         super(context, R.layout.meal_list_item, R.id.MealName, mealArrayList);
     }
-
+    @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Meal meal = getItem(position);
 
@@ -27,7 +27,6 @@ public class ListAdapter extends ArrayAdapter<Meal> {
         }
 
         TextView name = convertView.findViewById(R.id.MealName);
-//        Toast.makeText(getContext(),meal.getName(),Toast.LENGTH_LONG).show();
         name.setText(meal.getName());
 //        TextView cuisineType = convertView.findViewById(R.id.cuisinetype);
 //        TextView ingredients = convertView.findViewById(R.id.ingredients);
@@ -36,7 +35,6 @@ public class ListAdapter extends ArrayAdapter<Meal> {
 
 
         price.setText(String.valueOf(meal.getPrice()));
-
         return super.getView(position, convertView, parent);
     }
 }

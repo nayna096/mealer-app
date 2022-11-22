@@ -16,11 +16,6 @@ public class Meal implements Serializable{
 
     //region Constructors
     public Meal(){}
-
-    public Meal(String description){
-        this.description = description;
-    }
-
     public Meal(String name, String cuisineType, List<String> ingredients, List<String> allergens, double price, String description) {
         this.name = name;
         this.cuisineType = cuisineType;
@@ -33,7 +28,7 @@ public class Meal implements Serializable{
 
     //region Getters
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getCuisineType() {
@@ -45,11 +40,11 @@ public class Meal implements Serializable{
     }
 
     public List<String> getAllergens() {
-        return allergens;
+        return this.allergens;
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public String getDescription() {
@@ -88,5 +83,8 @@ public class Meal implements Serializable{
             return true;
         }
         return false;
+    }
+    public String toString(){
+        return this.name;
     }
 }
