@@ -3,18 +3,11 @@ package com.example.meallogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,17 +17,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class SignUp extends AppCompatActivity {
     private String username;
     private String pw;
     private String confirmpw;
     private String email;
+    private String Address;
 
     String [] restrictedUsers =  {"nayna","gdupu","ikarr","ekoro"};
     int ret = 0;
@@ -47,6 +35,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         EditText user = (EditText) findViewById(R.id.username);
+        EditText Address = (EditText) findViewById(R.id.address);
         EditText Password = (EditText) findViewById(R.id.password);
         EditText Confirmp = (EditText) findViewById(R.id.confirmp);
         EditText Email = (EditText) findViewById(R.id.email);
@@ -95,7 +84,7 @@ public class SignUp extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
                         user.setText("");
                     }else{
-                        createClient(user,Password,Confirmp,Email);
+                        createClient(user,Password,Confirmp,Email,Address);
                     }
                 }
 
@@ -136,7 +125,7 @@ public class SignUp extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"This username is already used by a cook, use a different one", Toast.LENGTH_LONG).show();
                         user.setText("");
                     }else{
-                        createCook(user, Password, Confirmp, Email);
+                        createCook(user, Password, Confirmp, Email, Address);
                     }
                 }
 
@@ -150,10 +139,10 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    public void createClient(EditText user, EditText Password, EditText Confirmp, EditText Email){
-        if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
+    public void createClient(EditText user, EditText Password, EditText Confirmp, EditText Email, EditText address){
+        if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(address.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
             if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
-                Client newclient = new Client(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
+                Client newclient = new Client(user.getText().toString(), Password.getText().toString(), Email.getText().toString(), address.getText().toString());
                 DatabaseReference clientref = db.getReference("Clients");
                 String id = clientref.push().getKey();
                 clientref.child(id).setValue(newclient);
@@ -165,10 +154,10 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "One of the fields is empty", Toast.LENGTH_LONG).show();
         }
     }
-    public void createCook(EditText user, EditText Password, EditText Confirmp, EditText Email){
-        if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Email.getText().toString()))) {
+    public void createCook(EditText user, EditText Password, EditText Confirmp, EditText Email, EditText address){
+        if (!(TextUtils.isEmpty(user.getText().toString()) || TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(address.getText().toString()) ||  TextUtils.isEmpty(Email.getText().toString()))) {
             if (Confirmp.getText().toString().trim().equals(Password.getText().toString().trim())) {
-                Cook newcook = new Cook(user.getText().toString(), Password.getText().toString(), Email.getText().toString());
+                Cook newcook = new Cook(user.getText().toString(), Password.getText().toString(), Email.getText().toString(), address.getText().toString());
                 DatabaseReference cookref = db.getReference("Cooks");
                 String id = cookref.push().getKey();
                 cookref.child(id).setValue(newcook);
