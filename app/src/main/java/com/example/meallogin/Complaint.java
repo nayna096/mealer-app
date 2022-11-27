@@ -39,4 +39,5 @@ public class Complaint implements Serializable {
     public void action(){
         this.actioned = true;
     }
+    public String toString(){return this.cook.getUsername();}
 }
