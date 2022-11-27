@@ -47,6 +47,7 @@
         android:visibility="visible"
         tools:visibility="visible"
         android:paddingHorizontal="50dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/complaints"
         android:layout_width="wrap_content"
@@ -60,6 +61,7 @@
         android:visibility="visible"
         tools:visibility="visible"
         android:paddingHorizontal="30dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/settings"
         android:layout_width="wrap_content"

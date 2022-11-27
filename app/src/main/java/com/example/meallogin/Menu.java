@@ -55,6 +55,7 @@ public class Menu implements Serializable {
     public void deletefromMeallist(Meal meal) {
         if (this.meallist.contains(meal)) {
             this.meallist.remove(meal);
+            this.offered.remove(meal);
         }
 
     }
@@ -73,13 +74,6 @@ public class Menu implements Serializable {
 
     public void Duplicate() {
         // TODO - to be completed
-    }
-
-    public void removefromMeallist(Meal meal) {
-        this.meallist.remove(meal);
-        if (this.offered.contains(meal)) {
-            this.offered.remove(meal);
-        }
     }
 
     public List<String> mealListNames() {

@@ -13,13 +13,15 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class WelcomeAdminScreen extends AppCompatActivity {
 
-
+    Administrator admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_admin_screen);
 
+        //retrieve Admin with list of outstanding complaints
+        admin = (Administrator) getIntent().getSerializableExtra("Admin");
         MaterialButton home = (MaterialButton) findViewById(R.id.Home);
         home.setOnClickListener(v -> {
             openWelcomeAdminScreen();
@@ -34,25 +36,29 @@ public class WelcomeAdminScreen extends AppCompatActivity {
         });
 
 
-
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
-        logout.setOnClickListener(v->
+        logout.setOnClickListener(v ->
         {
             openMainActivity();
         });
     }
+
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     public void openComplaintsFrag() {
         Intent intent = new Intent(this, ComplaintsFrag.class);
+        intent.putExtra("Admin", admin);
         startActivity(intent);
     }
+
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
         startActivity(intent);
     }
+
     public void openSettingsFrag() {
         Intent intent = new Intent(this, SettingsFrag.class);
         startActivity(intent);

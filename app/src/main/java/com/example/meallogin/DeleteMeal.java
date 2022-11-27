@@ -29,8 +29,9 @@ public class DeleteMeal extends AppCompatActivity {
             String mealName = ((EditText) findViewById(R.id.toDeleteTextInput)).getText().toString();
             if (cook.getMenu().getMeallist().contains(cook.getMenu().findMealByNameInMeallist(mealName))) {
                 //Ensure that the meal actually exists in the Meal List
+                cook.getMenu().removefromOffered(cook.getMenu().findMealByNameInOffered(mealName));
                 cook.getMenu().deletefromMeallist(cook.getMenu().findMealByNameInMeallist(mealName));
-                cook.getMenu().getOffered().remove(cook.getMenu().findMealByNameInMeallist(mealName));
+
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

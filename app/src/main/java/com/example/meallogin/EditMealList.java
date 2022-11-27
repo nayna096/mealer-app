@@ -30,7 +30,10 @@ public class EditMealList extends AppCompatActivity {
         setContentView(binding.getRoot());
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
         ListAdapter listAdapter = new ListAdapter(EditMealList.this,cook.getMenu().getMeallist());
+        //Activate the list of meals
+        binding.mealListTable.setAdapter(listAdapter);
 
+        //Make them clickable
         binding.mealListTable.setClickable(true);
         binding.mealListTable.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -77,11 +80,7 @@ public class EditMealList extends AppCompatActivity {
         MaterialButton deleteMealButton = (MaterialButton) findViewById(R.id.mealListDeleteMealButton);
         MaterialButton back = (MaterialButton)findViewById(R.id.mealListBackButton);
 
-        //Activate the list of meals
-        binding.mealListTable.setAdapter(listAdapter);
 
-        //Make them clickable
-        binding.mealListTable.setClickable(true);
         createMealButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, CreateMeal.class);
             intent.putExtra("Cook", cook);

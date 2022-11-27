@@ -17,11 +17,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
+    Administrator admin = new Administrator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +36,18 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton signup = (MaterialButton) findViewById(R.id.signup);
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
         //admin
+
         FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
         cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
 
-                for(DataSnapshot postSnapshot: snapshot.child("Cooks").getChildren()){
-                    if(it.hasNext()){
+                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
+                    if (it.hasNext()) {
                         Cook c = it.next().getValue(Cook.class);
-                        createComplaint(c.getEmail(),c);
-                    }else{
+                        createComplaint(c.getEmail(), c);
+                    } else {
                         break;
                     }
 
@@ -56,10 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
                     String pass = password.getText().toString();
-                    if (user.trim().equals("admin")&&pass.trim().equals("admin")) {
+                    if (user.trim().equals("admin") && pass.trim().equals("admin")) {
                         openWelcomeAdminScreen();
                     } else {
                         dbref.child("Clients").orderByChild("username").equalTo(user).addValueEventListener(new ValueEventListener() {
@@ -69,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
 
                                 if (snapshot.exists()) {
                                     //There exists a client with this username, was the correct password inputed?
-                                    for(DataSnapshot d: snapshot.getChildren()){
+                                    for (DataSnapshot d : snapshot.getChildren()) {
                                         Client client = d.getValue(Client.class);
-                                        if(client.getPassword().equals(pass)){
+                                        if (client.getPassword().equals(pass)) {
                                             //Correct password
                                             openWelcomeClientScreen();
-                                        }else{
+                                        } else {
                                             //Incorrect password
                                             Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
 
@@ -86,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
                                             if (cooksnapshot.exists()) {
-                                                for(DataSnapshot cs:cooksnapshot.getChildren()){
+                                                for (DataSnapshot cs : cooksnapshot.getChildren()) {
                                                     Cook cook = cs.getValue(Cook.class);
-                                                    if(cook.getPassword().equals(pass)){
+                                                    if (cook.getPassword().equals(pass)) {
                                                         //Correct password
-                                                         openWelcomeCookScreen(cook);
-                                                    }else{
+                                                        openWelcomeCookScreen(cook);
+                                                    } else {
                                                         //Incorrect password
                                                         Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
 
@@ -134,11 +138,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void createComplaint(String description, Cook cook){
-                Complaint complaint = new Complaint(description,cook);
-                DatabaseReference complaintref = db.getReference("Complaints");
-                String id = complaintref.push().getKey();
-                complaintref.child(id).setValue(complaint);
+    public Complaint createComplaint(String description, Cook cook) {
+        Complaint complaint = new Complaint(description, cook);
+        DatabaseReference complaintref = db.getReference("Complaints");
+        String id = complaintref.push().getKey();
+        complaintref.child(id).setValue(complaint);
+        return complaint;
     }
 
     public void openSignup() {
@@ -146,8 +151,35 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void complaintGenerator() {
+        dbref.child("Complaints").orderByChild("suspensionDate").equalTo("unknown").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Complaint complaint = ds.getValue(Complaint.class);
+                        admin.addComplaint(complaint);
+                    }
+                }else{
+                    outstandingList();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+            public ArrayList<Complaint> outstandingList(){
+                ArrayList<Complaint> complaints = new ArrayList<Complaint>();
+                complaints = admin.getComplaints();
+                return complaints;
+            }
+        });
+    }
+
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
+        intent.putExtra("Admin", admin);
         startActivity(intent);
     }
 
@@ -159,11 +191,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openWelcomeClientScreen() {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
+
         startActivity(intent);
     }
 
     public static String validate(String username, String password) {
-        if(username.equals("admin") && password.equals("admin")) {
+        if (username.equals("admin") && password.equals("admin")) {
             return "Success";
         } else {
             return "Login failed";
