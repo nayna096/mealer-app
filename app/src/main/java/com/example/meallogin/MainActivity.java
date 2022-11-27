@@ -151,31 +151,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void complaintGenerator() {
-        dbref.child("Complaints").orderByChild("suspensionDate").equalTo("unknown").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        Complaint complaint = ds.getValue(Complaint.class);
-                        admin.addComplaint(complaint);
-                    }
-                }else{
-                    outstandingList();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-            public ArrayList<Complaint> outstandingList(){
-                ArrayList<Complaint> complaints = new ArrayList<Complaint>();
-                complaints = admin.getComplaints();
-                return complaints;
-            }
-        });
-    }
 
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);

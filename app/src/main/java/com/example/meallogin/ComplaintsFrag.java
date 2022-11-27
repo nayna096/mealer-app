@@ -57,7 +57,7 @@ public class ComplaintsFrag extends AppCompatActivity {
                 }
                 ComplaintAdapter complaintAdapter = new ComplaintAdapter(ComplaintsFrag.this, complaints);
                 binding.complaintTable.setAdapter(complaintAdapter);
-                
+                //future code written here
             }
 
         });
