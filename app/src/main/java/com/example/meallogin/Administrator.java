@@ -11,8 +11,17 @@ public class Administrator  extends GeneralUser{
         this.setPassword("admin");
         this.setRole("Administrator");
         this.setEmail("admin");
+        this.complaints = null;
     }
-//    public Administrator(String Username, String Password, String Email){
+
+    public ArrayList<Complaint> getComplaints() {
+        return complaints;
+    }
+    public void addComplaint(Complaint complaint){
+        this.complaints.add(complaint);
+    }
+
+    //    public Administrator(String Username, String Password, String Email){
 //        this.setUsername(Username);
 //        this.setPassword(Password);
 //        this.email = Email;
