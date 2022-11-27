@@ -82,35 +82,38 @@ public ComplaintAdapter(Context context, ArrayList<Complaint> complaintArrayList
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Complaint complaint = getItem(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.recycler_complaint_item2, parent, false);
+        if (complaint.getActioned() == false){
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.recycler_complaint_item2, parent, false);
+            }
+
+            //set name of cook that received the complaint
+            TextView name = convertView.findViewById(R.id.chefName);
+            name.setText(complaint.getCook().getUsername());
+
+            //display the description of the complaint
+            TextView description = convertView.findViewById(R.id.complaintDescription);
+            description.setText(complaint.getDescription());
+
+            MaterialButton dismiss = convertView.findViewById(R.id.dismiss);
+            dismiss.setOnClickListener(v -> {
+                complaint.action();
+            });
+            EditText date = convertView.findViewById(R.id.date);
+            MaterialButton suspend = convertView.findViewById(R.id.suspend);
+            suspend.setOnClickListener(v -> {
+                complaint.getCook().setStatus(true);
+                complaint.setSuspensionDate(date.getText().toString());
+                complaint.action();
+            });
+            MaterialButton permaBan = convertView.findViewById(R.id.permaBan);
+            permaBan.setOnClickListener(v -> {
+                complaint.getCook().setStatus(true);
+                complaint.setSuspensionDate("permanent");
+                complaint.action();
+            });
         }
 
-        //set name of cook that received the complaint
-        TextView name = convertView.findViewById(R.id.chefName);
-        name.setText(complaint.getCook().getUsername());
-
-        //display the description of the complaint
-        TextView description = convertView.findViewById(R.id.complaintDescription);
-        description.setText(complaint.getDescription());
-
-        MaterialButton dismiss = convertView.findViewById(R.id.dismiss);
-        dismiss.setOnClickListener(v -> {
-            complaint.action();
-        });
-        EditText date = convertView.findViewById(R.id.date);
-        MaterialButton suspend = convertView.findViewById(R.id.suspend);
-        suspend.setOnClickListener(v -> {
-            complaint.getCook().setStatus(true);
-            complaint.getCook().setSuspensionDate(date.getText().toString());
-            complaint.action();
-        });
-        MaterialButton permaBan = convertView.findViewById(R.id.permaBan);
-        permaBan.setOnClickListener(v -> {
-            complaint.getCook().setStatus(true);
-            complaint.getCook().setSuspensionDate("permanent");
-            complaint.action();
-        });
 
 
 //        TextView cuisineType = convertView.findViewById(R.id.cuisinetype);
