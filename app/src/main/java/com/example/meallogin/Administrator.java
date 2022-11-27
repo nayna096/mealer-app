@@ -19,15 +19,4 @@ public class Administrator  extends GeneralUser{
 //
 //    }
 
-    public ArrayList<Complaint> getComplaints() {
-        return complaints;
-    }
-
-    public void setComplaints(ArrayList<Complaint> complaints) {
-        this.complaints = complaints;
-    }
-
-    public void addComplaint(Complaint complaint){
-        complaints.add(complaint);
-    }
 }
