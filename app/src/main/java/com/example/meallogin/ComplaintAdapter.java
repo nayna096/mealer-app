@@ -94,6 +94,24 @@ public ComplaintAdapter(Context context, ArrayList<Complaint> complaintArrayList
         TextView description = convertView.findViewById(R.id.complaintDescription);
         description.setText(complaint.getDescription());
 
+        MaterialButton dismiss = convertView.findViewById(R.id.dismiss);
+        dismiss.setOnClickListener(v -> {
+            complaint.action();
+        });
+        EditText date = convertView.findViewById(R.id.date);
+        MaterialButton suspend = convertView.findViewById(R.id.suspend);
+        suspend.setOnClickListener(v -> {
+            complaint.getCook().setStatus(true);
+            complaint.getCook().setSuspensionDate(date.getText().toString());
+            complaint.action();
+        });
+        MaterialButton permaBan = convertView.findViewById(R.id.permaBan);
+        permaBan.setOnClickListener(v -> {
+            complaint.getCook().setStatus(true);
+            complaint.getCook().setSuspensionDate("permanent");
+            complaint.action();
+        });
+
 
 //        TextView cuisineType = convertView.findViewById(R.id.cuisinetype);
 //        TextView ingredients = convertView.findViewById(R.id.ingredients);
