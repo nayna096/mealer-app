@@ -28,4 +28,52 @@
         android:text="logout"
         android:visibility="visible"
         tools:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#40ffffff"
+            android:text="Home"
+            android:textSize="9dp"
+            android:drawableTop="@drawable/ic_baseline_home_24"
+            android:textColor="@color/purple_500"
+            android:layout_toLeftOf="@+id/complaints"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:paddingHorizontal="50dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/complaints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#40ffffff"
+            android:text="Complaints"
+            android:layout_centerHorizontal="true"
+            android:textSize="9dp"
+            android:drawableTop="@drawable/ic_baseline_notification_important_black"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:paddingHorizontal="30dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#40ffffff"
+            android:text="Settings"
+            android:layout_toRightOf="@+id/complaints"
+            android:textSize="9dp"
+            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:paddingHorizontal="35dp"/>
+    </RelativeLayout>
 </RelativeLayout>
