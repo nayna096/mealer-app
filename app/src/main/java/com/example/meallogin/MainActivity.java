@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                         Client client = d.getValue(Client.class);
                                         if (client.getPassword().equals(pass)) {
                                             //Correct password
-                                            openWelcomeClientScreen();
+                                            openWelcomeClientScreen(client);
                                         } else {
                                             //Incorrect password
                                             Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
@@ -164,9 +164,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openWelcomeClientScreen() {
+    public void openWelcomeClientScreen(Client client) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
-        //intent.putExtra("Cook") Complete to fix client login issue
+        intent.putExtra("Client", client); //Complete to fix client login issue
         startActivity(intent);
     }
 
