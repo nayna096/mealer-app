@@ -14,28 +14,32 @@ public class ClientSettingsFrag extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_settings_frag);
         MaterialButton home = (MaterialButton) findViewById(R.id.Home);
+        Client client = (Client)getIntent().getSerializableExtra("Client");
         home.setOnClickListener(v -> {
-            openWelcomeClient();
+            openWelcomeClient(client);
         });
         MaterialButton search = (MaterialButton) findViewById(R.id.search);
         search.setOnClickListener(v -> {
-            openSearchMeals();
+            openSearchMeals(client);
         });
         MaterialButton settings = (MaterialButton) findViewById(R.id.settings);
         settings.setOnClickListener(v -> {
-            openClientSettingsFrag();
+            openClientSettingsFrag(client);
         });
     }
-    public void openWelcomeClient() {
+    public void openWelcomeClient(Client client) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openClientSettingsFrag() {
+    public void openClientSettingsFrag(Client client) {
         Intent intent = new Intent(this, ClientSettingsFrag.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openSearchMeals() {
+    public void openSearchMeals(Client client) {
         Intent intent = new Intent(this, SearchMeals.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
 }

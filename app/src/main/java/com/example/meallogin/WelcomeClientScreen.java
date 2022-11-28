@@ -24,31 +24,34 @@ public class WelcomeClientScreen extends AppCompatActivity {
         });
         MaterialButton home = (MaterialButton) findViewById(R.id.Home);
         home.setOnClickListener(v -> {
-            openWelcomeClient();
+            openWelcomeClient(client);
         });
         MaterialButton search = (MaterialButton) findViewById(R.id.search);
         search.setOnClickListener(v -> {
-            openSearchMeals();
+            openSearchMeals(client);
         });
         MaterialButton settings = (MaterialButton) findViewById(R.id.settings);
         settings.setOnClickListener(v -> {
-            openClientSettingsFrag();
+            openClientSettingsFrag(client);
         });
     }
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    public void openWelcomeClient() {
+    public void openWelcomeClient(Client client) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openClientSettingsFrag() {
+    public void openClientSettingsFrag(Client client) {
         Intent intent = new Intent(this, ClientSettingsFrag.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openSearchMeals() {
+    public void openSearchMeals(Client client) {
         Intent intent = new Intent(this, SearchMeals.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
 }

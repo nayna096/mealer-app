@@ -27,6 +27,7 @@ public class SearchMeals extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Client client = (Client) getIntent().getSerializableExtra("Client");
         binding = ActivitySearchMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         search = findViewById(R.id.searchMeals);
@@ -48,27 +49,30 @@ public class SearchMeals extends AppCompatActivity {
         });
         MaterialButton home = (MaterialButton) findViewById(R.id.Home);
         home.setOnClickListener(v -> {
-            openWelcomeClientScreen();
+            openWelcomeClientScreen(client);
         });
         MaterialButton search = (MaterialButton) findViewById(R.id.search);
         search.setOnClickListener(v -> {
-            openSearchMeals();
+            openSearchMeals(client);
         });
         MaterialButton settings = (MaterialButton) findViewById(R.id.settings);
         settings.setOnClickListener(v -> {
-            openClientSettingsFrag();
+            openClientSettingsFrag(client);
         });
     }
-    public void openWelcomeClientScreen() {
+    public void openWelcomeClientScreen(Client client) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openClientSettingsFrag() {
+    public void openClientSettingsFrag(Client client) {
         Intent intent = new Intent(this, ClientSettingsFrag.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openSearchMeals() {
+    public void openSearchMeals(Client client) {
         Intent intent = new Intent(this, SearchMeals.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
     }
