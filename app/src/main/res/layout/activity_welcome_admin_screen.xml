@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeAdminScreen">
+    tools:context=".WelcomeAdminScreen"
+    android:background="@drawable/background">
   <TextView
       android:id="@+id/WelcomeMessage"
       android:layout_width="match_parent"
@@ -38,7 +39,7 @@
         android:id="@+id/Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#40ffffff"
         android:text="Home"
         android:textSize="9dp"
         android:drawableTop="@drawable/ic_baseline_home_24"
@@ -52,7 +53,7 @@
         android:id="@+id/complaints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#40ffffff"
         android:text="Complaints"
         android:layout_centerHorizontal="true"
         android:textSize="9dp"
@@ -66,7 +67,7 @@
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#40ffffff"
         android:text="Settings"
         android:layout_toRightOf="@+id/complaints"
         android:textSize="9dp"

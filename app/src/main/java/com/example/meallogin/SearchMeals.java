@@ -39,7 +39,6 @@ public class SearchMeals extends AppCompatActivity {
                 for(DataSnapshot ds: task.getResult().getChildren()){
                     Meal c = ds.getValue(Meal.class);
                     meals.add(c);
-                    //add outstanding complaints to list to be dealt with
                 }
                 MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals);
                 binding.mealTable.setAdapter(mealSearchAdapter);
@@ -49,19 +48,27 @@ public class SearchMeals extends AppCompatActivity {
         });
         MaterialButton home = (MaterialButton) findViewById(R.id.Home);
         home.setOnClickListener(v -> {
-            openWelcomeAdminScreen();
+            openWelcomeClientScreen();
+        });
+        MaterialButton search = (MaterialButton) findViewById(R.id.search);
+        search.setOnClickListener(v -> {
+            openSearchMeals();
         });
         MaterialButton settings = (MaterialButton) findViewById(R.id.settings);
         settings.setOnClickListener(v -> {
-            openSettingsFrag();
+            openClientSettingsFrag();
         });
     }
-    public void openWelcomeAdminScreen() {
-        Intent intent = new Intent(this, WelcomeAdminScreen.class);
+    public void openWelcomeClientScreen() {
+        Intent intent = new Intent(this, WelcomeClientScreen.class);
         startActivity(intent);
     }
-    public void openSettingsFrag() {
-        Intent intent = new Intent(this, SettingsFrag.class);
+    public void openClientSettingsFrag() {
+        Intent intent = new Intent(this, ClientSettingsFrag.class);
+        startActivity(intent);
+    }
+    public void openSearchMeals() {
+        Intent intent = new Intent(this, SearchMeals.class);
         startActivity(intent);
     }
     }
