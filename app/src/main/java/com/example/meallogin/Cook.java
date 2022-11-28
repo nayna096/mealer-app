@@ -17,10 +17,10 @@ public class Cook extends GeneralUser implements Serializable {
         this.setPassword(Password);
         this.setRole("Cook");
         this.setEmail(Email);
+        this.setAddress(address);
         this.status = false;
         this.suspensionDate = null;
         this.menu = new Menu();
-        this.address = address;
     }
     //endregion
 
