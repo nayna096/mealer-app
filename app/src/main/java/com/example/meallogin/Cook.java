@@ -18,7 +18,7 @@ public class Cook extends GeneralUser implements Serializable {
         this.setRole("Cook");
         this.setEmail(Email);
         this.setAddress(address);
-        this.status = false;
+        this.setStatus(false);
         this.suspensionDate = null;
         this.menu = new Menu();
     }
@@ -60,5 +60,5 @@ public class Cook extends GeneralUser implements Serializable {
     }
 
     //endregion
-    public boolean isSuspended(){return this.status = true;}
+    public boolean Suspended(){return this.status = true;}
 }

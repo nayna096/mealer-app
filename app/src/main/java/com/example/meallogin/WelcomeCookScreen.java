@@ -35,7 +35,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
         MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
-        if(cook.isSuspended()){
+        if(cook.getStatus()){
 
             //disable the buttons, only non-suspended cooks can use
             editMealListButton.setEnabled(false);
@@ -57,10 +57,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
                         }
 
                     }else{
-                        editMealListButton.setEnabled(true);
-                        editMenuButton.setEnabled(true);
 
-                        message.setText("No suspension");
                     }
                 }
 
@@ -69,6 +66,10 @@ public class WelcomeCookScreen extends AppCompatActivity {
 
                 }
             });
+        }else{
+            editMealListButton.setEnabled(true);
+            editMenuButton.setEnabled(true);
+            message.setText("No suspension");
         }
 //        else {
 //
