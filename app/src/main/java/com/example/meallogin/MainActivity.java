@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openWelcomeClientScreen() {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
-
+        //intent.putExtra("Cook") Complete to fix client login issue
         startActivity(intent);
     }
 
