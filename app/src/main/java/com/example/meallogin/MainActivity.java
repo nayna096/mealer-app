@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton signup = (MaterialButton) findViewById(R.id.signup);
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
 
+        //This block below auto-generates complaints and stores them in the db. Note the descriptions
+        //are not substantive, and just have the cook's email in them. This occurs everytime the login page
+        //is accessed.
+
 //        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
 //        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
