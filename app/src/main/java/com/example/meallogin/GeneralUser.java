@@ -7,7 +7,7 @@ public abstract class GeneralUser implements Serializable {
     private String password;
     private String email;
     private String role;
-
+    private String address;
 
     public GeneralUser(){}
     public String getUsername(){
@@ -20,6 +20,7 @@ public abstract class GeneralUser implements Serializable {
         return this.email;
     }
     public String getRole() {return role;}
+    public String getAddress() {return address;}
 
     public void setUsername(String username) {this.username = username; }
     public void setPassword(String password) {
@@ -27,4 +28,6 @@ public abstract class GeneralUser implements Serializable {
     }
     public void setEmail(String email) {this.email = email;}
     public void setRole(String role) {this.role = role;}
+    public void setAddress(String address) {this.address = address;}
+
 }

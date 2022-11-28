@@ -27,6 +27,7 @@ public class SearchMeals extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Client client = (Client) getIntent().getSerializableExtra("Client");
         binding = ActivitySearchMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         search = findViewById(R.id.searchMeals);
@@ -39,7 +40,6 @@ public class SearchMeals extends AppCompatActivity {
                 for(DataSnapshot ds: task.getResult().getChildren()){
                     Meal c = ds.getValue(Meal.class);
                     meals.add(c);
-                    //add outstanding complaints to list to be dealt with
                 }
                 MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals);
                 binding.mealTable.setAdapter(mealSearchAdapter);
@@ -49,19 +49,30 @@ public class SearchMeals extends AppCompatActivity {
         });
         MaterialButton home = (MaterialButton) findViewById(R.id.Home);
         home.setOnClickListener(v -> {
-            openWelcomeAdminScreen();
+            openWelcomeClientScreen(client);
+        });
+        MaterialButton search = (MaterialButton) findViewById(R.id.search);
+        search.setOnClickListener(v -> {
+            openSearchMeals(client);
         });
         MaterialButton settings = (MaterialButton) findViewById(R.id.settings);
         settings.setOnClickListener(v -> {
-            openSettingsFrag();
+            openClientSettingsFrag(client);
         });
     }
-    public void openWelcomeAdminScreen() {
-        Intent intent = new Intent(this, WelcomeAdminScreen.class);
+    public void openWelcomeClientScreen(Client client) {
+        Intent intent = new Intent(this, WelcomeClientScreen.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
-    public void openSettingsFrag() {
-        Intent intent = new Intent(this, SettingsFrag.class);
+    public void openClientSettingsFrag(Client client) {
+        Intent intent = new Intent(this, ClientSettingsFrag.class);
+        intent.putExtra("Client", client);
+        startActivity(intent);
+    }
+    public void openSearchMeals(Client client) {
+        Intent intent = new Intent(this, SearchMeals.class);
+        intent.putExtra("Client", client);
         startActivity(intent);
     }
     }

@@ -42,33 +42,31 @@
             android:text="Home"
             android:textSize="9dp"
             android:drawableTop="@drawable/ic_baseline_home_24"
+            android:layout_toLeftOf="@+id/search"
             android:textColor="@color/purple_500"
-            android:layout_toLeftOf="@+id/complaints"
             android:visibility="visible"
             tools:visibility="visible"
             android:paddingHorizontal="50dp"/>
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/complaints"
+            android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#40ffffff"
-            android:text="Complaints"
+            android:text="Search"
             android:layout_centerHorizontal="true"
             android:textSize="9dp"
-            android:drawableTop="@drawable/ic_baseline_notification_important_black"
+            android:drawableTop="@drawable/ic_baseline_search_24"
             android:textColor="@color/black"
             android:visibility="visible"
             tools:visibility="visible"
-            android:paddingHorizontal="30dp"/>
-
+            android:paddingHorizontal="40dp"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#40ffffff"
             android:text="Settings"
-            android:layout_toRightOf="@+id/complaints"
+            android:layout_toRightOf="@+id/search"
             android:textSize="9dp"
             android:drawableTop="@drawable/ic_baseline_settings_24"
             android:textColor="@color/black"

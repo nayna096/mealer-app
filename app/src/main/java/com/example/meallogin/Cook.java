@@ -17,10 +17,10 @@ public class Cook extends GeneralUser implements Serializable {
         this.setPassword(Password);
         this.setRole("Cook");
         this.setEmail(Email);
-        this.status = false;
+        this.setAddress(address);
+        this.setStatus(false);
         this.suspensionDate = null;
         this.menu = new Menu();
-        this.address = address;
     }
     //endregion
 
@@ -60,5 +60,5 @@ public class Cook extends GeneralUser implements Serializable {
     }
 
     //endregion
-    public boolean isSuspended(){return this.status = true;}
+    public boolean Suspended(){return this.status = true;}
 }

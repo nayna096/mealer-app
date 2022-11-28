@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComplaintsFrag">
+    tools:context=".ComplaintsFrag"
+    android:background="@drawable/background">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,6 +13,8 @@
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
         android:id="@+id/title"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +25,7 @@
             android:id="@+id/Home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#40ffffff"
             android:text="Home"
             android:textSize="9dp"
             android:drawableTop="@drawable/ic_baseline_home_black"
@@ -35,7 +38,7 @@
             android:id="@+id/complaints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#40ffffff"
             android:text="Complaints"
             android:layout_centerHorizontal="true"
             android:textSize="9dp"
@@ -48,7 +51,7 @@
             android:id="@+id/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#40ffffff"
             android:text="Settings"
             android:layout_toRightOf="@+id/complaints"
             android:textSize="9dp"

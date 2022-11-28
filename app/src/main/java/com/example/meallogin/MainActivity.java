@@ -23,8 +23,6 @@ import java.util.Iterator;
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
-    Administrator admin = new Administrator();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,30 +33,33 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton login = (MaterialButton) findViewById(R.id.login);
         MaterialButton signup = (MaterialButton) findViewById(R.id.signup);
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
-        //admin
 
-        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
-        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
+        //This block below auto-generates complaints and stores them in the db. Note the descriptions
+        //are not substantive, and just have the cook's email in them. This occurs everytime the login page
+        //is accessed.
 
-                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
-                    if (it.hasNext()) {
-                        Cook c = it.next().getValue(Cook.class);
-                        createComplaint(c.getEmail(), c);
-                    } else {
-                        break;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
+//        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
+//
+//                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
+//                    if (it.hasNext()) {
+//                        Cook c = it.next().getValue(Cook.class);
+//                        createComplaint(c.getEmail(), c);
+//                    } else {
+//                        break;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                         Client client = d.getValue(Client.class);
                                         if (client.getPassword().equals(pass)) {
                                             //Correct password
-                                            openWelcomeClientScreen();
+                                            openWelcomeClientScreen(client);
                                         } else {
                                             //Incorrect password
                                             Toast.makeText(getApplicationContext(), "Account has not been created. Do you want to create it?", Toast.LENGTH_LONG).show();
@@ -154,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
-        intent.putExtra("Admin", admin);
         startActivity(intent);
     }
 
@@ -164,9 +164,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openWelcomeClientScreen() {
+    public void openWelcomeClientScreen(Client client) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
-
+        intent.putExtra("Client", client); //Complete to fix client login issue
         startActivity(intent);
     }
 

@@ -57,8 +57,8 @@ public class ExampleUnitTest {
         cookSuspended.setStatus(true);
         Cook cookNotSuspended = new Cook();
 
-        assertTrue(cookSuspended.isSuspended());
-        assertFalse(cookNotSuspended.isSuspended());
+        assertTrue(cookSuspended.Suspended());
+        assertFalse(cookNotSuspended.Suspended());
     }
 
     public void testRoles() {

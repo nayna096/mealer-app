@@ -18,14 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
-    private String username;
-    private String pw;
-    private String confirmpw;
-    private String email;
-    private String Address;
 
     String [] restrictedUsers =  {"nayna","gdupu","ikarr","ekoro"};
-    int ret = 0;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
 
@@ -42,11 +36,6 @@ public class SignUp extends AppCompatActivity {
         MaterialButton login = (MaterialButton) findViewById(R.id.login);
         MaterialButton cook = (MaterialButton) findViewById(R.id.Cook);
         MaterialButton client = (MaterialButton) findViewById(R.id.Client);
-
-        username = user.getText().toString();
-        pw = Password.getText().toString();
-        confirmpw = Confirmp.getText().toString();
-        email = Email.getText().toString();
 
         for(int i = 0;i<restrictedUsers.length;i++){
             if(user.getText().toString().equals(restrictedUsers[i])){
@@ -146,7 +135,7 @@ public class SignUp extends AppCompatActivity {
                 DatabaseReference clientref = db.getReference("Clients");
                 String id = clientref.push().getKey();
                 clientref.child(id).setValue(newclient);
-                openWelcomeClientScreen();
+                openWelcomeClientScreen(newclient);
             } else {
                 Toast.makeText(getApplicationContext(), "Your password does not match", Toast.LENGTH_LONG).show();
             }
@@ -180,8 +169,9 @@ public class SignUp extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openWelcomeClientScreen() {
+    public void openWelcomeClientScreen(Client c) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
+        intent.putExtra("Client",c);
         startActivity(intent);
     }
 
