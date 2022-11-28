@@ -43,7 +43,7 @@ public class WelcomeCookScreen extends AppCompatActivity {
 
 
             //display suspension
-            dbref.child("Complaints").orderByChild("cookUsername").equalTo(cook.getUsername()).addValueEventListener(new ValueEventListener() {
+            dbref.child("Complaints").orderByChild("cook").getRef().orderByChild(cook.getUsername()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){

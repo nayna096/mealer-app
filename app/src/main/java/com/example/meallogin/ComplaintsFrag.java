@@ -1,4 +1,5 @@
 package com.example.meallogin;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.meallogin.R.id;
 import com.example.meallogin.databinding.ActivityComplaintsfragBinding;
@@ -28,7 +32,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 
@@ -39,25 +48,32 @@ public class ComplaintsFrag extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
     ActivityComplaintsfragBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityComplaintsfragBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        DatabaseReference complaintsRef = db.getReference().child("Complaints");
+        DatabaseReference complaintsRef = db.getReference("Complaints").orderByChild("actioned").equalTo(false).getRef();
         complaintsRef.get().addOnCompleteListener(task -> {
             //Allows for binding to be displayed while reading from database
-            if(task.isSuccessful()){
-                GenericTypeIndicator<ArrayList<Complaint>> t = new GenericTypeIndicator<ArrayList<Complaint>>(){};
+            if (task.isSuccessful()) {
+                GenericTypeIndicator<ArrayList<Complaint>> t = new GenericTypeIndicator<ArrayList<Complaint>>() {
+                };
                 ArrayList<Complaint> complaints = new ArrayList<Complaint>();
-                for(DataSnapshot ds: task.getResult().getChildren()){
+                int i =0;
+                for (DataSnapshot ds : task.getResult().getChildren()) {
                     Complaint c = ds.getValue(Complaint.class);
-                    complaints.add(c);
+                    i++;
+                    if(!(c.getActioned())){
+                        complaints.add(c);
+                    }
                     //add outstanding complaints to list to be dealt with
                 }
                 ComplaintAdapter complaintAdapter = new ComplaintAdapter(ComplaintsFrag.this, complaints);
                 binding.complaintTable.setAdapter(complaintAdapter);
-                //future code written here
+
+
             }
 
         });
@@ -80,10 +96,23 @@ public class ComplaintsFrag extends AppCompatActivity {
             openSettingsFrag();
         });
     }
+
+    public static boolean isValid(String date) {
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        df.setLenient(false);
+        try {
+            df.parse(date.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
+    }
+
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
         startActivity(intent);
     }
+
     public void openSettingsFrag() {
         Intent intent = new Intent(this, SettingsFrag.class);
         startActivity(intent);

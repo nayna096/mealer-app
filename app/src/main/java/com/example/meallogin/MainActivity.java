@@ -23,8 +23,6 @@ import java.util.Iterator;
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
-    Administrator admin = new Administrator();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,30 +33,29 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton login = (MaterialButton) findViewById(R.id.login);
         MaterialButton signup = (MaterialButton) findViewById(R.id.signup);
         MaterialButton forgot = (MaterialButton) findViewById(R.id.forgotpassword);
-        //admin
 
-        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
-        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
-
-                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
-                    if (it.hasNext()) {
-                        Cook c = it.next().getValue(Cook.class);
-                        createComplaint(c.getEmail(), c);
-                    } else {
-                        break;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
+//        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
+//
+//                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
+//                    if (it.hasNext()) {
+//                        Cook c = it.next().getValue(Cook.class);
+//                        createComplaint(c.getEmail(), c);
+//                    } else {
+//                        break;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
@@ -154,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
-        intent.putExtra("Admin", admin);
         startActivity(intent);
     }
 

@@ -36,7 +36,7 @@ public class SignUp extends AppCompatActivity {
         MaterialButton login = (MaterialButton) findViewById(R.id.login);
         MaterialButton cook = (MaterialButton) findViewById(R.id.Cook);
         MaterialButton client = (MaterialButton) findViewById(R.id.Client);
-        
+
         for(int i = 0;i<restrictedUsers.length;i++){
             if(user.getText().toString().equals(restrictedUsers[i])){
                 Toast.makeText(getApplicationContext(),"This username is invalid due to an admin conflict",Toast.LENGTH_LONG).show();
