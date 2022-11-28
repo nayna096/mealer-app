@@ -50,6 +50,7 @@ public class ExampleUnitTest {
         assertEquals(SignUp.validate("admin", "x", "x", "email"), VALID_STRING);
     }
 
+    @Test
     public void testIsCookSuspended() {
 
         Cook cookSuspended = new Cook();
@@ -58,5 +59,15 @@ public class ExampleUnitTest {
 
         assertTrue(cookSuspended.isSuspended());
         assertFalse(cookNotSuspended.isSuspended());
+    }
+
+    public void testRoles() {
+        Cook cook = new Cook();
+        Client client = new Client();
+        Administrator admin = new Administrator();
+
+        assertTrue(cook.getRole().equals("Cook"));
+        assertTrue(client.getRole().equals("Client"));
+        assertTrue(admin.getRole().equals("Admin"));
     }
 }
