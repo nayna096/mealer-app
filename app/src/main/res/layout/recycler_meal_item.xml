@@ -31,7 +31,7 @@
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/complaintDescription"
+                        android:id="@+id/mealDescription"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/chefName"
