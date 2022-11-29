@@ -105,6 +105,9 @@ public class ComplaintAdapter extends ArrayAdapter<Complaint> {
                                     c.setSuspensionDate(date.getText().toString());
                                     String id = ds.getKey();
                                     db.getReference("Complaints").child(id).setValue(c);
+
+                                    remove(complaint);
+                                    notifyDataSetChanged();
                                     //updating complaint in the DB
                                     db.getReference("Cooks").orderByChild("username").equalTo(c.getCook().getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -137,8 +140,7 @@ public class ComplaintAdapter extends ArrayAdapter<Complaint> {
 
                                         }
                                     });
-                                    remove(complaint);
-                                    notifyDataSetChanged();
+
                                     break;
                                 }
                             }

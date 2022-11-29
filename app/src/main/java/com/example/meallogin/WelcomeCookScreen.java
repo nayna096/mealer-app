@@ -67,18 +67,12 @@ public class WelcomeCookScreen extends AppCompatActivity {
                 }
             });
         }else{
+            //non suspended cooks go here
             editMealListButton.setEnabled(true);
             editMenuButton.setEnabled(true);
             message.setText("No suspension");
         }
-//        else {
-//
-//            //Here is where non-suspended cooks go, so this is where the functionality to add/delete meals must go
-//            //Turns out this does not work, instead the buttons must be enabled/disabled
-//
-//
-//        }
-//        message.setText(c.getUsername());
+
         editMealListButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditMealList.class);
             intent.putExtra("Cook", cook);
