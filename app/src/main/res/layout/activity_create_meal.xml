@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateMeal">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="93dp"
         android:layout_height="35dp"
         android:layout_marginTop="68dp"
         android:text="New Meal"
+        android:textColor="#6200EE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,9 +34,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_baseline_check_24"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.862"
@@ -44,9 +46,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/createBackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@id/textView"
         app:layout_constraintHorizontal_bias="0.14"

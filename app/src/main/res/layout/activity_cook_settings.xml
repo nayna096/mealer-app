@@ -4,57 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cook"
-    tools:context=".WelcomeCookScreen">
+    tools:context=".CookSettingsFrag"
+    android:background="@drawable/cook">
 
     <TextView
-        android:id="@+id/WelcomeMessage"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="50dp"
-        android:gravity="center"
-        android:text="Welcome Cook"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="35dp"
-        android:textStyle="bold" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/logout"
+        android:id="@+id/CookSettingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="318dp"
-        android:backgroundTint="@color/purple_500"
-        android:text="logout"
-        android:visibility="visible"
-        tools:visibility="visible" />
-
-    <EditText
-        android:id="@+id/MessageBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/WelcomeMessage"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-black"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:singleLine="false"
-        android:text="Suspension Status"
-        android:textAlignment="center"
-        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="30dp"
         android:textStyle="bold" />
 
     <RelativeLayout
@@ -68,10 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/editMenuButton"
             android:backgroundTint="#40ffffff"
-            android:drawableTop="@drawable/ic_baseline_home_24"
+            android:drawableTop="@drawable/ic_baseline_home_black"
             android:paddingHorizontal="50dp"
             android:text="Home"
-            android:textColor="@color/purple_500"
+            android:textColor="@color/black"
             android:textSize="9dp"
             android:visibility="visible"
             tools:visibility="visible" />
@@ -83,10 +43,10 @@
             android:layout_centerHorizontal="true"
             android:backgroundTint="#40ffffff"
             android:drawableTop="@drawable/ic_baseline_menu_24"
+            android:paddingHorizontal="40dp"
             android:text="Edit Menu"
             android:textColor="@color/black"
             android:textSize="9sp"
-            android:paddingHorizontal="40dp"
             android:visibility="visible"
             tools:visibility="visible" />
 
@@ -96,14 +56,13 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/editMenuButton"
             android:backgroundTint="#40ffffff"
-            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:drawableTop="@drawable/ic_baseline_settings_purp"
             android:paddingHorizontal="35dp"
             android:text="Settings"
-            android:textColor="@color/black"
+            android:textColor="@color/purple_500"
             android:textSize="9dp"
             android:visibility="visible"
             tools:visibility="visible" />
 
     </RelativeLayout>
-
 </RelativeLayout>

@@ -6,16 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.meallogin.databinding.ActivityEditMealListBinding;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.List;
 
 public class EditMealList extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -29,7 +24,7 @@ public class EditMealList extends AppCompatActivity {
         binding = ActivityEditMealListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
-        ListAdapter listAdapter = new ListAdapter(EditMealList.this,cook.getMenu().getMeallist());
+        MealAdapter listAdapter = new MealAdapter(EditMealList.this,cook.getMenu().getMeallist(),cook);
         //Activate the list of meals
         binding.mealListTable.setAdapter(listAdapter);
 

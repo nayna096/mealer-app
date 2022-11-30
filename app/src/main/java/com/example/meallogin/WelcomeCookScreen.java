@@ -32,13 +32,33 @@ public class WelcomeCookScreen extends AppCompatActivity {
         TextView welcome = (TextView)findViewById(R.id.WelcomeMessage);
         Cook cook = (Cook)i.getSerializableExtra("Cook");
         welcome.setText("Welcome "+cook.getUsername());
+
+
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
-        MaterialButton editMealListButton = (MaterialButton) findViewById(R.id.editMealListButton);
+        logout.setOnClickListener(v->{
+            openMainActivity();
+        });
+
+        //initialize the home button
+        MaterialButton home = (MaterialButton) findViewById(R.id.CookHome);
+        home.setOnClickListener(v01->{
+            openCook(cook);
+        });
+
+        //initialize the editMenu button
         MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
+        editMenuButton.setOnClickListener(v -> {
+           openMenu(cook);
+        });
+
+        MaterialButton settings = (MaterialButton) findViewById(R.id.CookSettings);
+        settings.setOnClickListener(v->{
+            openSettings(cook);
+        });
         if(cook.getStatus()){
 
             //disable the buttons, only non-suspended cooks can use
-            editMealListButton.setEnabled(false);
+//            editMealListButton.setEnabled(false);
             editMenuButton.setEnabled(false);
 
 
@@ -68,29 +88,37 @@ public class WelcomeCookScreen extends AppCompatActivity {
             });
         }else{
             //non suspended cooks go here
-            editMealListButton.setEnabled(true);
+//            editMealListButton.setEnabled(true);
             editMenuButton.setEnabled(true);
             message.setText("No suspension");
         }
 
-        editMealListButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, EditMealList.class);
-            intent.putExtra("Cook", cook);
-            startActivity(intent);
-
-        });
-
-        editMenuButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, EditMenu.class);
-            intent.putExtra("Cook", cook);
-            startActivity(intent);
-        });
-        logout.setOnClickListener(v->
-        {
-            openMainActivity();
-        });
+//        editMealListButton.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, EditMealList.class);
+//            intent.putExtra("Cook", cook);
+//            startActivity(intent);
+//
+//        });
 
 
+
+
+
+    }
+    public void openSettings(Cook cook){
+        Intent intent = new Intent(this, CookSettingsFrag.class);
+        intent.putExtra("Cook", cook);
+        startActivity(intent);
+    }
+    public void openCook(Cook cook){
+        Intent intent = new Intent(this, WelcomeCookScreen.class);
+        intent.putExtra("Cook", cook);
+        startActivity(intent);
+    }
+    public void openMenu(Cook cook){
+        Intent intent = new Intent(this, MenuFrag.class);
+        intent.putExtra("Cook", cook);
+        startActivity(intent);
     }
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);

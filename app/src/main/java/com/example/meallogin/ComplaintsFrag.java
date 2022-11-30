@@ -97,17 +97,6 @@ public class ComplaintsFrag extends AppCompatActivity {
         });
     }
 
-    public static boolean isValid(String date) {
-        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        df.setLenient(false);
-        try {
-            df.parse(date.trim());
-        } catch (ParseException pe) {
-            return false;
-        }
-        return true;
-    }
-
     public void openWelcomeAdminScreen() {
         Intent intent = new Intent(this, WelcomeAdminScreen.class);
         startActivity(intent);

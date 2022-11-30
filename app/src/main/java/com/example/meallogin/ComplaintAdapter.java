@@ -166,14 +166,6 @@ public class ComplaintAdapter extends ArrayAdapter<Complaint> {
             complaint.action();
             this.notifyDataSetChanged();
         });
-
-
-//        TextView cuisineType = convertView.findViewById(R.id.cuisinetype);
-//        TextView ingredients = convertView.findViewById(R.id.ingredients);
-//        TextView allergens = convertView.findViewById(R.id.allergens);
-//        TextView price = convertView.findViewById(R.id.MealPrice);
-
-
         return super.getView(position, convertView, parent);
     }
 

@@ -18,9 +18,7 @@ import java.util.ArrayList;
 
 public class SearchMeals extends AppCompatActivity {
 
-    ComplaintAdapter complaintAdapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference dbref = db.getReference();
     ActivitySearchMealsBinding binding;
     EditText search;
 
