@@ -69,7 +69,7 @@ public class CreateMeal extends AppCompatActivity {
                                     //Find the cook in the db to update their menu
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
-
+                                    break;
                                 }
                             }
                         }
@@ -81,13 +81,13 @@ public class CreateMeal extends AppCompatActivity {
 
                     }
                 });
-                Intent intent = new Intent(CreateMeal.this, MenuFrag.class);
-                intent.putExtra("Cook", cook);
-                startActivity(intent);
             }else{
                 //This meal already exists
-                Toast.makeText(getApplicationContext(),"This meal already exists in your Meal List!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"This meal already exists!", Toast.LENGTH_LONG).show();
             }
+            Intent intent = new Intent(this, MenuFrag.class);
+            intent.putExtra("Cook", cook);
+            startActivity(intent);
         });
         back.setOnClickListener(v1->{
             Intent intent = new Intent(this, MenuFrag.class);

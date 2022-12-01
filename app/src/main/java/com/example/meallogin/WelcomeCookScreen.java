@@ -3,11 +3,13 @@ package com.example.meallogin;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -88,23 +90,16 @@ public class WelcomeCookScreen extends AppCompatActivity {
             });
         }else{
             //non suspended cooks go here
-//            editMealListButton.setEnabled(true);
             editMenuButton.setEnabled(true);
             message.setText("No suspension");
         }
-
-//        editMealListButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, EditMealList.class);
-//            intent.putExtra("Cook", cook);
-//            startActivity(intent);
-//
-//        });
 
 
 
 
 
     }
+
     public void openSettings(Cook cook){
         Intent intent = new Intent(this, CookSettingsFrag.class);
         intent.putExtra("Cook", cook);

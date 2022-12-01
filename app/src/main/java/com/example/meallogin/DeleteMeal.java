@@ -23,7 +23,6 @@ public class DeleteMeal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_meal);
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
-        MaterialButton back = (MaterialButton)findViewById(R.id.deleteBackButton);
         MaterialButton delete = (MaterialButton) findViewById(R.id.permanentlyDeleteButton);
         delete.setOnClickListener(v -> {
             String mealName = ((EditText) findViewById(R.id.toDeleteTextInput)).getText().toString();
@@ -56,12 +55,7 @@ public class DeleteMeal extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "No such meal exists", Toast.LENGTH_LONG).show();
             }
-            Intent intent = new Intent(this, EditMealList.class);
-            intent.putExtra("Cook", cook);
-            startActivity(intent);
-        });
-        back.setOnClickListener(v1->{
-            Intent intent = new Intent(this, EditMealList.class);
+            Intent intent = new Intent(this, MenuFrag.class);
             intent.putExtra("Cook", cook);
             startActivity(intent);
         });
