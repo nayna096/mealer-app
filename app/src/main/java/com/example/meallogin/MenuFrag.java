@@ -1,21 +1,15 @@
 package com.example.meallogin;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.meallogin.databinding.ActivityMenuFragBinding;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MenuFrag extends AppCompatActivity {
     DatabaseReference dbref = FirebaseDatabase.getInstance().getReference();
@@ -89,6 +83,9 @@ public class MenuFrag extends AppCompatActivity {
         settings.setOnClickListener(v->{
             openSettings(cook);
         });
+
+    }
+    void onViewStateRestored(Bundle bundle){
 
     }
     public void openSettings(Cook cook){

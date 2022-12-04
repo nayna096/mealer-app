@@ -65,29 +65,12 @@ public class WelcomeCookScreen extends AppCompatActivity {
 
 
             //display suspension
-            dbref.child("Complaints").orderByChild("cook").getRef().orderByChild(cook.getUsername()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        for(DataSnapshot ds: snapshot.getChildren()){
-                            Complaint complaint = ds.getValue(Complaint.class);
-                            if(complaint.getSuspensionDate().equals("permanent")){
-                                message.setText("Your cook account is suspended permanently");
-                            }else{
-                                message.setText("Your cook account is suspended until "+complaint.getCook().getSuspensionDate());
-                            }
-                        }
+            if(cook.getSuspensionDate().equals("permanent")){
+                message.setText("Your account is suspended permanently");
+            }else{
+                message.setText("Your account is suspended until "+cook.getSuspensionDate());
+            }
 
-                    }else{
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
         }else{
             //non suspended cooks go here
             editMenuButton.setEnabled(true);

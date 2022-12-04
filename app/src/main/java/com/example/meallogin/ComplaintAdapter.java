@@ -94,59 +94,48 @@ public class ComplaintAdapter extends ArrayAdapter<Complaint> {
                 db.getReference("Complaints").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
+                        if(snapshot.exists()){
                             int i = 0;
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                if (i != position) {
+                            for(DataSnapshot ds: snapshot.getChildren()){
+                                if(i!=position){
                                     i++;
-                                } else {
+                                }else{
                                     Complaint c = ds.getValue(Complaint.class);
                                     c.setActioned(true);
                                     c.setSuspensionDate(date.getText().toString());
+                                    c.getCook().setStatus(true);
+                                    c.getCook().setSuspensionDate(date.getText().toString());
                                     String id = ds.getKey();
                                     db.getReference("Complaints").child(id).setValue(c);
 
-                                    remove(complaint);
-                                    notifyDataSetChanged();
-                                    //updating complaint in the DB
-                                    db.getReference("Cooks").orderByChild("username").equalTo(c.getCook().getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
-                                            if (cooksnapshot.exists()) {
-                                                for (DataSnapshot cs : cooksnapshot.getChildren()) {
-                                                    Cook cook = cs.getValue(Cook.class);//updating cook in the DB
-                                                    cook.setStatus(true);
-                                                    try {
-                                                        //if there are multiple complaints on the same cook, the latest suspension decided by
-                                                        //the admin will be given
-                                                        Date currentDate = new SimpleDateFormat("MM/dd/yyyy").parse(cook.getSuspensionDate());
-                                                        Date newDate = new SimpleDateFormat("MM/dd/yyyy").parse(date.getText().toString());
-                                                        if (newDate.after(currentDate)) {
-                                                            //if a suspension date for a complaint is more recent than
-                                                            //than the last
-                                                            cook.setSuspensionDate(newDate.toString());
-                                                        }
-                                                    } catch (ParseException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    String cid = cs.getKey();
-                                                    db.getReference("Cooks").child(cid).setValue(cook);
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-
-                                    break;
                                 }
                             }
                         }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
+                dbref = db.getReference("Cooks");
+                dbref.orderByChild("username").equalTo(complaint.getCook().getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            Cook newcook;
+                            for(DataSnapshot snap: dataSnapshot.getChildren()){
+                                Cook oldcook = snap.getValue(Cook.class);
+                                newcook = oldcook;
+                                newcook.setStatus(true);
+                                newcook.setSuspensionDate(date.getText().toString());
+                                String addy = snap.getKey();
+                                dbref.child(addy).setValue(newcook);
+                                remove(complaint);
+                                notifyDataSetChanged();
+                                //updating cook in the db+updating listview
+                            }
+                        }
                     }
 
                     @Override
@@ -161,10 +150,57 @@ public class ComplaintAdapter extends ArrayAdapter<Complaint> {
         });
         MaterialButton permaBan = convertView.findViewById(R.id.permaBan);
         permaBan.setOnClickListener(v -> {
-            complaint.getCook().setStatus(true);
-            complaint.setSuspensionDate("permanent");
-            complaint.action();
-            this.notifyDataSetChanged();
+            db.getReference("Complaints").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        int i = 0;
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            if(i!=position){
+                                i++;
+                            }else{
+                                Complaint c = ds.getValue(Complaint.class);
+                                c.setActioned(true);
+                                c.setSuspensionDate("permanent");
+                                c.getCook().setStatus(true);
+                                c.getCook().setSuspensionDate("permanent");
+                                String id = ds.getKey();
+                                db.getReference("Complaints").child(id).setValue(c);
+
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            dbref = db.getReference("Cooks");
+            dbref.orderByChild("username").equalTo(complaint.getCook().getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        Cook newcook;
+                        for(DataSnapshot snap: dataSnapshot.getChildren()){
+                            Cook oldcook = snap.getValue(Cook.class);
+                            newcook = oldcook;
+                            newcook.setStatus(true);
+                            newcook.setSuspensionDate("permanent");
+                            String addy = snap.getKey();
+                            dbref.child(addy).setValue(newcook);
+                            remove(complaint);
+                            notifyDataSetChanged();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         });
         return super.getView(position, convertView, parent);
     }

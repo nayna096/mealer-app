@@ -22,6 +22,9 @@ public class CookSettingsFrag extends AppCompatActivity {
             openCook(cook);
         });
         MaterialButton editMenuButton = (MaterialButton) findViewById(R.id.editMenuButton);
+        if(cook.getStatus()){
+            editMenuButton.setEnabled(false);
+        }
         editMenuButton.setOnClickListener(v -> {
             openMenu(cook);
         });

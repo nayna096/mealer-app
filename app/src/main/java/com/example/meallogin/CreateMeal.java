@@ -1,6 +1,7 @@
 package com.example.meallogin;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,6 +88,7 @@ public class CreateMeal extends AppCompatActivity {
             }
             Intent intent = new Intent(this, MenuFrag.class);
             intent.putExtra("Cook", cook);
+            Toast.makeText(getApplicationContext(),"Hey", Toast.LENGTH_LONG).show();
             startActivity(intent);
         });
         back.setOnClickListener(v1->{
@@ -96,4 +98,5 @@ public class CreateMeal extends AppCompatActivity {
         });
 
     }
+
 }
