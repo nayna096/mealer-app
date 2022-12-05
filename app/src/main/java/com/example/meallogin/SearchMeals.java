@@ -29,7 +29,7 @@ public class SearchMeals extends AppCompatActivity {
         binding = ActivitySearchMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         search = findViewById(R.id.searchMeals);
-        DatabaseReference complaintsRef = db.getReference().child("Cooks").child("Menu").child("offered");
+        DatabaseReference complaintsRef = db.getReference("Cooks").child("Menu").child("offered");
         complaintsRef.get().addOnCompleteListener(task -> {
             //Allows for binding to be displayed while reading from database
             if(task.isSuccessful()){
