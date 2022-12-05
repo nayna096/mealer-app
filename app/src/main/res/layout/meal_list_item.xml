@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+<!--    android:focusable="false"-->
+<!--    android:focusableInTouchMode="false"-->
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/DeleteMeal"
@@ -15,7 +19,7 @@
             android:visibility="visible"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-        <LinearLayout
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -41,33 +45,42 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="200dp"
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="false"
+        android:paddingTop="25dp"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/AddMeal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="false"
-            android:paddingTop="25dp"
-            android:visibility="visible"
-            tools:visibility="visible">
+            android:layout_alignParentTop="false"
+            android:text="Offer"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/AddMeal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="false"
-                android:text="Offer"
-                android:textColor="@color/white"
-                android:textSize="9sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/RemoveMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Recall"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/RemoveMeal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="Recall"
-                android:textColor="@color/white"
-                android:textSize="9sp" />
+    </RelativeLayout>
 
-        </RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ViewMeal"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="212dp"
+        android:background="@drawable/ic_baseline_preview_24"
+        android:textColor="@color/white"
+        android:textSize="9sp" />
 </RelativeLayout>

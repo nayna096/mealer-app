@@ -1,8 +1,6 @@
 package com.example.meallogin;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Cook extends GeneralUser implements Serializable {
     private boolean status;

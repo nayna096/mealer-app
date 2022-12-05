@@ -1,6 +1,7 @@
 package com.example.meallogin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,43 @@ public class MealAdapter extends ArrayAdapter<Meal> {
         name.setText(mealname);
         TextView price = convertView.findViewById(R.id.MealPrice);
         price.setText(String.valueOf(meal.getPrice()));
+        MaterialButton viewMeal = convertView.findViewById(R.id.ViewMeal);
+        viewMeal.setOnClickListener(v->{
+            //The page that pops up when you click on an individual meal
+            Intent intent = new Intent(getContext(), MealActivity.class);
+            intent.putExtra("Name", cook.getMenu().getMeallist().get(position).getName());
+            intent.putExtra("Price", cook.getMenu().getMeallist().get(position).getPrice());
+            intent.putExtra("Description", cook.getMenu().getMeallist().get(position).getDescription());
+            intent.putExtra("Cuisine Type", cook.getMenu().getMeallist().get(position).getCuisineType());
 
+            //Turn the Arraylists into Strings
+            StringBuffer in = new StringBuffer();
+            StringBuffer al = new StringBuffer();
+            int n = 0;
+            for (String s : cook.getMenu().getMeallist().get(position).getIngredients()) {
+                in.append(s);
+                //Append the word
+                n++;
+                //if not the last word, add a comma and a space
+                if (n == cook.getMenu().getMeallist().get(position).getIngredients().size() == false) {
+                    in.append(", ");
+                }
+            }
+            n = 0;
+            for (String s : cook.getMenu().getMeallist().get(position).getAllergens()) {
+                al.append(s);
+                n++;
+                if (n == cook.getMenu().getMeallist().get(position).getAllergens().size() == false) {
+                    in.append(", ");
+                }
+            }
+
+            intent.putExtra("Ingredients", in.toString());
+            intent.putExtra("Allergens", al.toString());
+            intent.putExtra("Previous Class", EditMenu.class);
+            intent.putExtra("Cook", cook);
+            getContext().startActivity(intent);
+        });
         MaterialButton addMeal = convertView.findViewById(R.id.AddMeal);
         if (!(cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname)))) {
             addMeal.setEnabled(true);
@@ -65,6 +102,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
                                     Toast.makeText(getContext(), "The meal is now offered!", Toast.LENGTH_LONG).show();
+                                    notifyDataSetChanged();
                                 }
                             }
                         }
@@ -103,6 +141,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
                                     Toast.makeText(getContext(), "The meal is no longer offered!", Toast.LENGTH_LONG).show();
+                                    notifyDataSetChanged();
                                 }
                             }
                         }
@@ -135,6 +174,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
                                 String id = d.getKey(); //Cook-unique id
                                 dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
                                 Toast.makeText(getContext(), "The meal is successfully deleted", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
                             }
                         }
                     }

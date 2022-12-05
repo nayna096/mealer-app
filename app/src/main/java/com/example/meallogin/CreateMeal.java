@@ -88,7 +88,6 @@ public class CreateMeal extends AppCompatActivity {
             }
             Intent intent = new Intent(this, MenuFrag.class);
             intent.putExtra("Cook", cook);
-            Toast.makeText(getApplicationContext(),"Hey", Toast.LENGTH_LONG).show();
             startActivity(intent);
         });
         back.setOnClickListener(v1->{

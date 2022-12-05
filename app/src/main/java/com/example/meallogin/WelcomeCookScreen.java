@@ -60,7 +60,6 @@ public class WelcomeCookScreen extends AppCompatActivity {
         if(cook.getStatus()){
 
             //disable the buttons, only non-suspended cooks can use
-//            editMealListButton.setEnabled(false);
             editMenuButton.setEnabled(false);
 
 
