@@ -38,27 +38,27 @@ public class MainActivity extends AppCompatActivity {
         //are not substantive, and just have the cook's email in them. This occurs everytime the login page
         //is accessed.
 
-        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
-        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
-                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
-                    if (it.hasNext()) {
-                        Cook c = it.next().getValue(Cook.class);
-                        createComplaint(c.getEmail(), c);
-                    } else {
-                        break;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        FirebaseDatabase cooksdb = dbref.child("Cooks").getDatabase();
+//        cooksdb.getReference().orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> it = snapshot.child("Cooks").getChildren().iterator();
+//                for (DataSnapshot postSnapshot : snapshot.child("Cooks").getChildren()) {
+//                    if (it.hasNext()) {
+//                        Cook c = it.next().getValue(Cook.class);
+//                        createComplaint(c.getEmail(), c);
+//                    } else {
+//                        break;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         login.setOnClickListener(v -> {
                     String user = username.getText().toString();
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     }
                                 } else {
-                                    dbref.child("Cooks").orderByChild("username").equalTo(user).addValueEventListener(new ValueEventListener() {
+                                    dbref.child("Cooks").orderByChild("username").equalTo(user).addListenerForSingleValueEvent(new ValueEventListener() {
                                         //Check whether username is stored under a cook account
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         });
         forgot.setOnClickListener(v ->
         {
+            openReset();
             //Read from database to find username/email, then update password
         });
 
@@ -145,7 +146,10 @@ public class MainActivity extends AppCompatActivity {
         complaintref.child(id).setValue(complaint);
         return complaint;
     }
-
+    public void openReset(){
+        Intent intent = new Intent(this, UsernameVerification.class);
+        startActivity(intent);
+    }
     public void openSignup() {
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);

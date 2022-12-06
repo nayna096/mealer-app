@@ -15,19 +15,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class PasswordReset extends AppCompatActivity {
+public class UsernameVerification extends AppCompatActivity {
     DatabaseReference dbref = FirebaseDatabase.getInstance().getReference();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password_reset);
-        TextView password = (TextView) findViewById(R.id.newPassword);
-        GeneralUser user = (GeneralUser) getIntent().getSerializableExtra("User");
-        MaterialButton reset = (MaterialButton) findViewById(R.id.reset);
-        reset.setOnClickListener(v -> {
-            String pass = password.getText().toString();
-            dbref.child("Clients").orderByChild("username").equalTo(user.getUsername()).addValueEventListener(new ValueEventListener() {
+        setContentView(R.layout.activity_username_verification);
+        TextView username = (TextView)findViewById(R.id.checkUsername);
+        MaterialButton check = (MaterialButton)findViewById(R.id.check);
+        check.setOnClickListener(v->{
+            String user = username.getText().toString();
+            dbref.child("Clients").orderByChild("username").equalTo(user).addValueEventListener(new ValueEventListener() {
                 //Check whether username is stored under a client account
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -36,25 +34,22 @@ public class PasswordReset extends AppCompatActivity {
                         //There exists a client with this username, was the correct password inputed?
                         for (DataSnapshot d : snapshot.getChildren()) {
                             Client client = d.getValue(Client.class);
-                            String id = d.getKey();
-                            dbref.child("Clients").child(id).child("password").setValue(pass);
-                            openLogin();
+                            openPasswordReset(client);
                         }
                     } else {
-                        dbref.child("Cooks").orderByChild("username").equalTo(user.getUsername()).addValueEventListener(new ValueEventListener() {
+                        dbref.child("Cooks").orderByChild("username").equalTo(user).addValueEventListener(new ValueEventListener() {
                             //Check whether username is stored under a cook account
                             @Override
                             public void onDataChange(@NonNull DataSnapshot cooksnapshot) {
                                 if (cooksnapshot.exists()) {
                                     for (DataSnapshot cs : cooksnapshot.getChildren()) {
                                         Cook cook = cs.getValue(Cook.class);
-                                        String id = cs.getKey();
-                                        dbref.child("Cooks").child(id).child("password").setValue(pass);
-                                        openLogin();
-
+                                        openPasswordReset(cook);
                                     }
+                                } else {
+                                    //No account has the username, therefore the account does not exist
+                                    Toast.makeText(getApplicationContext(), "No account has this username", Toast.LENGTH_LONG).show();
                                 }
-
 
                             }
 
@@ -63,7 +58,6 @@ public class PasswordReset extends AppCompatActivity {
                             }
                         });
                     }
-                    Toast.makeText(getApplicationContext(), "Password reset!", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
@@ -71,12 +65,11 @@ public class PasswordReset extends AppCompatActivity {
 
                 }
             });
-
         });
     }
-
-    public void openLogin() {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void openPasswordReset(GeneralUser user){
+        Intent intent = new Intent(this,PasswordReset.class);
+        intent.putExtra("User",user);
         startActivity(intent);
     }
 }
