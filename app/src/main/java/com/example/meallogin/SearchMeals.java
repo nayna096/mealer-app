@@ -38,27 +38,22 @@ public class SearchMeals extends AppCompatActivity {
                 ArrayList<Meal> meals = new ArrayList<Meal>();
                 for(DataSnapshot ds: task.getResult().getChildren()){
                     for (DataSnapshot dsi: ds.child("menu/offered").getChildren()){
-                        if (dsi.getValue().equals(null)){
-                            break;
-                        }else{
-                            Meal c = dsi.getValue(Meal.class);
-                            meals.add(c);
+                        Meal c = dsi.getValue(Meal.class);
+                        meals.add(c);
                         }
 
                     }
-
-                }
 
                 MaterialButton go = findViewById(R.id.enterSearch);
                 go.setOnClickListener(v -> {
                     ArrayList<Meal> meals2 = new ArrayList<Meal>();
-                    for (int i = meals.size(); i > 1; i--){
+                    for (int i = 0; i < meals.size(); i++){
+                        System.out.println(i);
                         if (meals.get(i).getName().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))){
                             meals2.add(meals.get(i));
                         }
                     }
-                    Meal something = new Meal("smth",null,null,null,20,"pre good");
-                    meals2.add(something);
+
                     MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals2);
                     binding.mealTable.setAdapter(mealSearchAdapter);
                 });

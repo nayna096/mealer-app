@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MealSearchAdapter extends ArrayAdapter<Meal> {
     public MealSearchAdapter(@NonNull Context context, ArrayList<Meal> mealList) {
-        super(context, R.layout.recycler_meal_item, mealList);
+        super(context, R.layout.recycler_meal_item, R.id.chefName, mealList);
     }
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
