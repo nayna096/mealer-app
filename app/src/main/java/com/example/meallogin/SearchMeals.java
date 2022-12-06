@@ -57,6 +57,8 @@ public class SearchMeals extends AppCompatActivity {
                             meals2.add(meals.get(i));
                         }
                     }
+                    Meal something = new Meal("smth",null,null,null,20,"pre good");
+                    meals2.add(something);
                     MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals2);
                     binding.mealTable.setAdapter(mealSearchAdapter);
                 });
