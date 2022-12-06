@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class MealSearchAdapter extends ArrayAdapter<Meal> {
     public MealSearchAdapter(@NonNull Context context, ArrayList<Meal> mealList) {
-        super(context, R.layout.meal_list_item, mealList);
+        super(context, R.layout.recycler_meal_item, mealList);
     }
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
             Meal meal = getItem(position);
 
                 if (convertView == null) {
-                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.meal_list_item, parent, false);
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.recycler_meal_item, parent, false);
                 }
 
                 TextView name = convertView.findViewById(R.id.chefName);

@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchMeals extends AppCompatActivity {
 
@@ -25,22 +26,40 @@ public class SearchMeals extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Client client = (Client) getIntent().getSerializableExtra("Client");
+        Client client = (Client) getIntent().getSerializableExtra("Clients");
         binding = ActivitySearchMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         search = findViewById(R.id.searchMeals);
-        DatabaseReference complaintsRef = db.getReference("Cooks").child("Menu").child("offered");
-        complaintsRef.get().addOnCompleteListener(task -> {
+        DatabaseReference cooksRef = db.getReference("Cooks").orderByChild("status").equalTo(false).getRef();
+        cooksRef.get().addOnCompleteListener(task -> {
             //Allows for binding to be displayed while reading from database
             if(task.isSuccessful()){
                 GenericTypeIndicator<ArrayList<Meal>> t = new GenericTypeIndicator<ArrayList<Meal>>(){};
                 ArrayList<Meal> meals = new ArrayList<Meal>();
                 for(DataSnapshot ds: task.getResult().getChildren()){
-                    Meal c = ds.getValue(Meal.class);
-                    meals.add(c);
+                    for (DataSnapshot dsi: ds.child("menu/offered").getChildren()){
+                        if (dsi.getValue().equals(null)){
+                            break;
+                        }else{
+                            Meal c = dsi.getValue(Meal.class);
+                            meals.add(c);
+                        }
+
+                    }
+
                 }
-                MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals);
-                binding.mealTable.setAdapter(mealSearchAdapter);
+
+                MaterialButton go = findViewById(R.id.enterSearch);
+                go.setOnClickListener(v -> {
+                    ArrayList<Meal> meals2 = new ArrayList<Meal>();
+                    for (int i = meals.size(); i > 1; i--){
+                        if (meals.get(i).getName().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))){
+                            meals2.add(meals.get(i));
+                        }
+                    }
+                    MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals2);
+                    binding.mealTable.setAdapter(mealSearchAdapter);
+                });
                 //future code written here
             }
 

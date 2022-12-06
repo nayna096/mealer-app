@@ -58,8 +58,7 @@ public class ComplaintsFrag extends AppCompatActivity {
         complaintsRef.get().addOnCompleteListener(task -> {
             //Allows for binding to be displayed while reading from database
             if (task.isSuccessful()) {
-                GenericTypeIndicator<ArrayList<Complaint>> t = new GenericTypeIndicator<ArrayList<Complaint>>() {
-                };
+                GenericTypeIndicator<ArrayList<Complaint>> t = new GenericTypeIndicator<ArrayList<Complaint>>() {};
                 ArrayList<Complaint> complaints = new ArrayList<Complaint>();
                 int i =0;
                 for (DataSnapshot ds : task.getResult().getChildren()) {
