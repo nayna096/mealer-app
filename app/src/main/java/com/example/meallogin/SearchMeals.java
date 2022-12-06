@@ -33,24 +33,54 @@ public class SearchMeals extends AppCompatActivity {
         DatabaseReference cooksRef = db.getReference("Cooks").orderByChild("status").equalTo(false).getRef();
         cooksRef.get().addOnCompleteListener(task -> {
             //Allows for binding to be displayed while reading from database
-            if(task.isSuccessful()){
-                GenericTypeIndicator<ArrayList<Meal>> t = new GenericTypeIndicator<ArrayList<Meal>>(){};
+            if (task.isSuccessful()) {
+                GenericTypeIndicator<ArrayList<Meal>> t = new GenericTypeIndicator<ArrayList<Meal>>() {
+                };
                 ArrayList<Meal> meals = new ArrayList<Meal>();
-                for(DataSnapshot ds: task.getResult().getChildren()){
-                    for (DataSnapshot dsi: ds.child("menu/offered").getChildren()){
+                ArrayList<String> cooks = new ArrayList<>();
+                ArrayList<Menu> menus = new ArrayList<>();
+                for (DataSnapshot ds : task.getResult().getChildren()) {
+                    Cook cook = ds.getValue(Cook.class);
+                    cooks.add(cook.getUsername());
+                    menus.add(cook.getMenu());
+                    for (DataSnapshot dsi : ds.child("menu/meals").getChildren()) {
                         Meal c = dsi.getValue(Meal.class);
-                        meals.add(c);
+                        if (c.isOffered()) {
+                            meals.add(c);
                         }
 
                     }
 
+                }
+
                 MaterialButton go = findViewById(R.id.enterSearch);
                 go.setOnClickListener(v -> {
                     ArrayList<Meal> meals2 = new ArrayList<Meal>();
-                    for (int i = 0; i < meals.size(); i++){
-                        System.out.println(i);
-                        if (meals.get(i).getName().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))){
+                    for (int i = 0; i < meals.size(); i++) {
+//                        System.out.println(i);
+                        //the search filters
+
+                        //searching by meal name
+                        if (meals.get(i).getName().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))) {
                             meals2.add(meals.get(i));
+                        }
+                        //searching by cuisine type
+                        if(meals.get(i).getCuisineType().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))){
+                            meals2.add(meals.get(i));
+                        }
+
+                        //searching by cook name
+                        if(cooks.contains(search.getText().toString())){
+                            for(int j = 0;j<cooks.size();j++){
+                                if(cooks.get(j).equals(search.getText().toString())){
+                                    for(int k = 0;k< menus.get(j).getMeals().size();k++){
+                                        if(menus.get(j).getMeals().get(k).isOffered()){
+                                            meals2.add(menus.get(j).getMeals().get(k));
+                                        }
+                                    }
+                                }
+                            }
+                            break;
                         }
                     }
 
@@ -74,20 +104,23 @@ public class SearchMeals extends AppCompatActivity {
             openClientSettingsFrag(client);
         });
     }
+
     public void openWelcomeClientScreen(Client client) {
         Intent intent = new Intent(this, WelcomeClientScreen.class);
         intent.putExtra("Client", client);
         startActivity(intent);
     }
+
     public void openClientSettingsFrag(Client client) {
         Intent intent = new Intent(this, ClientSettingsFrag.class);
         intent.putExtra("Client", client);
         startActivity(intent);
     }
+
     public void openSearchMeals(Client client) {
         Intent intent = new Intent(this, SearchMeals.class);
         intent.putExtra("Client", client);
         startActivity(intent);
     }
-    }
+}
 
