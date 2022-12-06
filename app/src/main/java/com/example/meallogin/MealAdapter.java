@@ -44,7 +44,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
         TextView price = convertView.findViewById(R.id.MealPrice);
         price.setText(String.valueOf(meal.getPrice()));
         MaterialButton viewMeal = convertView.findViewById(R.id.ViewMeal);
-        viewMeal.setOnClickListener(v->{
+        viewMeal.setOnClickListener(v -> {
 
             //The page that pops up when you click on an individual meal
             Intent intent = new Intent(getContext(), MealActivity.class);
@@ -81,6 +81,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
             intent.putExtra("Cook", cook);
             getContext().startActivity(intent);
         });
+
         MaterialButton addMeal = convertView.findViewById(R.id.AddMeal);
         if (!(cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname)))) {
             addMeal.setEnabled(true);
@@ -91,28 +92,26 @@ public class MealAdapter extends ArrayAdapter<Meal> {
         addMeal.setOnClickListener(v -> {
             if (!(cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname))) && cook.getMenu().getMeallist().contains(cook.getMenu().findMealByNameInMeallist(mealname))) {
                 cook.getMenu().addtoOffered(cook.getMenu().findMealByNameInMeallist(mealname));
-                dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            for (DataSnapshot d : snapshot.getChildren()) {
-                                Cook c = d.getValue(Cook.class);
-                                if (c.getUsername().equals(cook.getUsername())) {
-                                    //Find the cook in the db to update their menu
-                                    String id = d.getKey(); //Cook-unique id
-                                    dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
-                                    Toast.makeText(getContext().getApplicationContext(), "The meal is now offered!", Toast.LENGTH_LONG).show();
-                                    notifyDataSetChanged();
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+//                dbref = db.getReference("Cooks");
+//                dbref.orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        if (snapshot.exists()) {
+//                            for (DataSnapshot d : snapshot.getChildren()) {
+//                                //Find the cook in the db to update their menu
+//                                String id = d.getKey(); //Cook-unique id
+//                                dbref.child(id).child("menu").setValue(cook.getMenu());
+                                Toast.makeText(getContext(), "The meal is now offered!", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
             } else {
                 if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname)))
                     Toast.makeText(getContext(), "This meal is already offered", Toast.LENGTH_LONG).show();
@@ -122,36 +121,35 @@ public class MealAdapter extends ArrayAdapter<Meal> {
         });
 
         MaterialButton removeMeal = convertView.findViewById(R.id.RemoveMeal);
-        if(cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname))){
+        if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname))) {
             removeMeal.setEnabled(true);
-        }else{
+        } else {
             removeMeal.setEnabled(false);
         }
         removeMeal.setOnClickListener(v -> {
             if (cook.getMenu().getOffered().contains(cook.getMenu().findMealByNameInOffered(mealname))) {
                 cook.getMenu().removefromOffered(cook.getMenu().findMealByNameInOffered(mealname));
-                dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            for (DataSnapshot d : snapshot.getChildren()) {
-                                Cook c = d.getValue(Cook.class);
-                                if (c.getUsername().equals(cook.getUsername())) {
-                                    //Find the cook in the db to update their menu
-                                    String id = d.getKey(); //Cook-unique id
-                                    dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
-                                    Toast.makeText(getContext().getApplicationContext(), "The meal is no longer offered!", Toast.LENGTH_LONG).show();
-                                    notifyDataSetChanged();
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+//                dbref = db.getReference("Cooks");
+//                dbref.orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        if (snapshot.exists()) {
+//                            for (DataSnapshot d : snapshot.getChildren()) {
+//                                //Find the cook in the db to update their menu
+//                                String id = d.getKey(); //Cook-unique id
+//                                dbref.child(id).child("menu").setValue(cook.getMenu());
+                                Toast.makeText(getContext(), "The meal is no longer offered!", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+//
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
             } else {
                 Toast.makeText(getContext(), "No such meal is offered", Toast.LENGTH_LONG).show();
             }
@@ -163,28 +161,27 @@ public class MealAdapter extends ArrayAdapter<Meal> {
             cook.getMenu().removefromOffered(cook.getMenu().findMealByNameInOffered(mealname));
             cook.getMenu().deletefromMeallist(cook.getMenu().findMealByNameInMeallist(mealname));
 
-            dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (DataSnapshot d : snapshot.getChildren()) {
-                            Cook c = d.getValue(Cook.class);
-                            if (c.getUsername().equals(cook.getUsername())) {
-                                //Find the cook in the db to update their menu
-                                String id = d.getKey(); //Cook-unique id
-                                dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
-                                Toast.makeText(getContext(), "The meal is successfully deleted", Toast.LENGTH_LONG).show();
-                                notifyDataSetChanged();
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+//            dbref = db.getReference("Cooks");
+//            dbref.orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    if (snapshot.exists()) {
+//                        for (DataSnapshot d : snapshot.getChildren()) {
+//                            //Find the cook in the db to update their menu
+//                            String id = d.getKey(); //Cook-unique id
+                            notifyDataSetChanged();
+//                            dbref.child(id).child("menu").setValue(cook.getMenu());
+                            Toast.makeText(getContext(), "The meal is successfully deleted", Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
         });
 
         return super.getView(position, convertView, parent);

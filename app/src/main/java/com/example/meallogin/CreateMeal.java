@@ -86,7 +86,7 @@ public class CreateMeal extends AppCompatActivity {
                 //This meal already exists
                 Toast.makeText(getApplicationContext(),"This meal already exists!", Toast.LENGTH_LONG).show();
             }
-            Intent intent = new Intent(this, MenuFrag.class);
+            Intent intent = new Intent(CreateMeal.this, MenuFrag.class);
             intent.putExtra("Cook", cook);
             startActivity(intent);
         });
