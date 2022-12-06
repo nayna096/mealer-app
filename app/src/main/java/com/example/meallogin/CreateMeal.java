@@ -57,9 +57,9 @@ public class CreateMeal extends AppCompatActivity {
             //endregion
 
             Meal meal = new Meal(name, cuisineType, ingredients, allergens, price, description);
-            if(cook.getMenu().getMeallist().contains(meal)==false){
+            if(cook.getMenu().getMeals().contains(meal)==false){
                 //Check that the meal doesn't already exist in the cook's meal list
-                cook.getMenu().addtoMeallist(meal);
+                cook.getMenu().getMeals().add(meal);
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

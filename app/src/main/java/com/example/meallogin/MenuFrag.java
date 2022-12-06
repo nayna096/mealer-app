@@ -25,7 +25,7 @@ public class MenuFrag extends AppCompatActivity {
         binding = ActivityMenuFragBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        MealAdapter mealAdapter = new MealAdapter(MenuFrag.this, cook.getMenu().getMeallist(), cook);
+        MealAdapter mealAdapter = new MealAdapter(MenuFrag.this, cook.getMenu().getMeals(), cook);
         binding.CookMeals.setAdapter(mealAdapter);
 
         MaterialButton createMeal = (MaterialButton) findViewById(R.id.CreateMeal);

@@ -11,7 +11,7 @@ public class Meal implements Serializable{
     private List<String> allergens;
     private double price;
     private String description;
-
+    private boolean offered;
 
 
     //region Constructors
@@ -23,7 +23,9 @@ public class Meal implements Serializable{
         this.allergens = allergens;
         this.price = price;
         this.description = description;
+        this.offered = false;
     }
+
     //endregion
 
     //region Getters
@@ -34,7 +36,6 @@ public class Meal implements Serializable{
     public String getCuisineType() {
         return cuisineType;
     }
-
     public List<String> getIngredients() {
         return ingredients;
     }
@@ -50,13 +51,15 @@ public class Meal implements Serializable{
     public String getDescription() {
         return description;
     }
-    //endregion
 
+    public boolean isOffered() {return offered;}
+
+    //endregion
     //region Setters
+
     public void setName(String name) { // TODO Lisa - should visibility be private for all setters?
         this.name = name;
     }
-
     public void setCuisineType(String cuisineType) {
         this.cuisineType = cuisineType;
     }
@@ -76,6 +79,8 @@ public class Meal implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setOffered(boolean offered) {this.offered = offered;}
     //endregion
 
     public boolean equals(Meal m) {

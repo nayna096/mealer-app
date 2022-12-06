@@ -40,7 +40,6 @@ public class MealActivity extends AppCompatActivity {
         binding.Allergens.setText("Allergens: "+Allergens.toString());
 
         //retrieve data that is used to return to the previous screen
-        Class origin = (Class)intent.getSerializableExtra("Previous Class");
         Cook cook = (Cook)intent.getSerializableExtra("Cook");
 
 
