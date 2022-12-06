@@ -45,6 +45,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
         price.setText(String.valueOf(meal.getPrice()));
         MaterialButton viewMeal = convertView.findViewById(R.id.ViewMeal);
         viewMeal.setOnClickListener(v->{
+
             //The page that pops up when you click on an individual meal
             Intent intent = new Intent(getContext(), MealActivity.class);
             intent.putExtra("Name", cook.getMenu().getMeallist().get(position).getName());
@@ -85,7 +86,6 @@ public class MealAdapter extends ArrayAdapter<Meal> {
             addMeal.setEnabled(true);
         } else {
             addMeal.setEnabled(false);
-
         }
 
         addMeal.setOnClickListener(v -> {
@@ -101,7 +101,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
                                     //Find the cook in the db to update their menu
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
-                                    Toast.makeText(getContext(), "The meal is now offered!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext().getApplicationContext(), "The meal is now offered!", Toast.LENGTH_LONG).show();
                                     notifyDataSetChanged();
                                 }
                             }
@@ -140,7 +140,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
                                     //Find the cook in the db to update their menu
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
-                                    Toast.makeText(getContext(), "The meal is no longer offered!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext().getApplicationContext(), "The meal is no longer offered!", Toast.LENGTH_LONG).show();
                                     notifyDataSetChanged();
                                 }
                             }
@@ -186,6 +186,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
                 }
             });
         });
+
         return super.getView(position, convertView, parent);
     }
 }

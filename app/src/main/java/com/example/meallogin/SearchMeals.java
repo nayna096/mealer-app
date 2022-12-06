@@ -26,7 +26,7 @@ public class SearchMeals extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Client client = (Client) getIntent().getSerializableExtra("Clients");
+        Client client = (Client) getIntent().getSerializableExtra("Client");
         binding = ActivitySearchMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         search = findViewById(R.id.searchMeals);
