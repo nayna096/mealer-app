@@ -92,7 +92,6 @@ public class SearchMeals extends AppCompatActivity {
                     MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals2, client);
                     binding.mealTable.setAdapter(mealSearchAdapter);
                 });
-                //future code written here
             }
 
         });

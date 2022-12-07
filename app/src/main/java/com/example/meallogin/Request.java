@@ -67,4 +67,6 @@ public class Request implements Serializable {
 
     public void setClient(Client client) {this.client = client;}
     //end region
+
+    public String toString(){return this.meal.getName();}
 }

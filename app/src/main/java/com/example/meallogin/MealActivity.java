@@ -46,10 +46,11 @@ public class MealActivity extends AppCompatActivity {
         Button back = (Button) findViewById(R.id.BackButton);
         back.setOnClickListener(v->
         {
-            Intent i = new Intent(MealActivity.this,MenuFrag.class);
-            i.putExtra("Cook",cook);
-            //return to the specific screen from which we left
-            startActivity(i);
+            finish();
+//            Intent i = new Intent(MealActivity.this,MenuFrag.class);
+//            i.putExtra("Cook",cook);
+//            //return to the specific screen from which we left
+//            startActivity(i);
         });
     }
 }

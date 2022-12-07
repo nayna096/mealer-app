@@ -27,7 +27,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
     Cook cook;
 
     public MealAdapter(Context context, ArrayList<Meal> mealArrayList, Cook cook) {
-        super(context, R.layout.meal_list_item, R.id.MealName, mealArrayList);
+        super(context, R.layout.meal_list_item, R.id.RequestedMeal, mealArrayList);
         this.cook = cook;
     }
 
@@ -39,11 +39,11 @@ public class MealAdapter extends ArrayAdapter<Meal> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.meal_list_item, parent, false);
         }
 
-        TextView name = convertView.findViewById(R.id.MealName);
+        TextView name = convertView.findViewById(R.id.RequestedMeal);
         name.setText(mealname);
         TextView price = convertView.findViewById(R.id.MealPrice);
         price.setText(String.valueOf(meal.getPrice()));
-        MaterialButton viewMeal = convertView.findViewById(R.id.ViewMeal);
+        MaterialButton viewMeal = convertView.findViewById(R.id.ViewRequest);
         viewMeal.setOnClickListener(v -> {
 
             //The page that pops up when you click on an individual meal
@@ -81,7 +81,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
             getContext().startActivity(intent);
         });
 
-        MaterialButton addMeal = convertView.findViewById(R.id.AddMeal);
+        MaterialButton addMeal = convertView.findViewById(R.id.ComplaintButton);
         if (!(cook.getMenu().getMeals().get(position).isOffered())) {
             addMeal.setEnabled(true);
         } else {
@@ -119,7 +119,7 @@ public class MealAdapter extends ArrayAdapter<Meal> {
             }
         });
 
-        MaterialButton removeMeal = convertView.findViewById(R.id.RemoveMeal);
+        MaterialButton removeMeal = convertView.findViewById(R.id.RateButton);
         if (cook.getMenu().getMeals().get(position).isOffered()) {
             removeMeal.setEnabled(true);
         } else {

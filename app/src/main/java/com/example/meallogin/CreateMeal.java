@@ -37,7 +37,7 @@ public class CreateMeal extends AppCompatActivity {
         Cook cook = (Cook) getIntent().getSerializableExtra("Cook");
 
         MaterialButton done = (MaterialButton) findViewById(R.id.doneButton);
-        MaterialButton back = (MaterialButton)findViewById(R.id.createBackButton);
+        MaterialButton back = (MaterialButton) findViewById(R.id.createBackButton);
         done.setOnClickListener(v -> {
             //region Reading user input
             String name = ((EditText) findViewById(R.id.newMealName)).getText().toString();
@@ -57,16 +57,16 @@ public class CreateMeal extends AppCompatActivity {
             //endregion
 
             Meal meal = new Meal(name, cuisineType, ingredients, allergens, price, description);
-            if(cook.getMenu().getMeals().contains(meal)==false){
+            if (cook.getMenu().getMeals().contains(meal) == false) {
                 //Check that the meal doesn't already exist in the cook's meal list
                 cook.getMenu().getMeals().add(meal);
                 dbref.child("Cooks").orderByChild("username").equalTo(cook.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            for(DataSnapshot d:snapshot.getChildren()){
+                            for (DataSnapshot d : snapshot.getChildren()) {
                                 Cook c = d.getValue(Cook.class);
-                                if(c.getUsername().equals(cook.getUsername())){
+                                if (c.getUsername().equals(cook.getUsername())) {
                                     //Find the cook in the db to update their menu
                                     String id = d.getKey(); //Cook-unique id
                                     dbref.child("Cooks").child(id).child("menu").setValue(cook.getMenu());
@@ -82,18 +82,19 @@ public class CreateMeal extends AppCompatActivity {
 
                     }
                 });
-            }else{
+            } else {
                 //This meal already exists
-                Toast.makeText(getApplicationContext(),"This meal already exists!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "This meal already exists!", Toast.LENGTH_LONG).show();
             }
             Intent intent = new Intent(CreateMeal.this, MenuFrag.class);
             intent.putExtra("Cook", cook);
             startActivity(intent);
         });
-        back.setOnClickListener(v1->{
-            Intent intent = new Intent(this, MenuFrag.class);
-            intent.putExtra("Cook", cook);
-            startActivity(intent);
+        back.setOnClickListener(v1 -> {
+            finish();
+//            Intent intent = new Intent(this, MenuFrag.class);
+//            intent.putExtra("Cook", cook);
+//            startActivity(intent);
         });
 
     }

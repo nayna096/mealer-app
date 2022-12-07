@@ -139,13 +139,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public Complaint createComplaint(String description, Cook cook) {
-        Complaint complaint = new Complaint(description, cook);
-        DatabaseReference complaintref = db.getReference("Complaints");
-        String id = complaintref.push().getKey();
-        complaintref.child(id).setValue(complaint);
-        return complaint;
-    }
+//    public Complaint createComplaint(String description, Cook cook) {
+//        Complaint complaint = new Complaint(description, cook);
+//        DatabaseReference complaintref = db.getReference("Complaints");
+//        String id = complaintref.push().getKey();
+//        complaintref.child(id).setValue(complaint);
+//        return complaint;
+//    }
     public void openReset(){
         Intent intent = new Intent(this, UsernameVerification.class);
         startActivity(intent);

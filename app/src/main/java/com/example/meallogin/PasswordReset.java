@@ -22,9 +22,9 @@ public class PasswordReset extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
-        TextView password = (TextView) findViewById(R.id.requestDescription);
+        TextView password = (TextView) findViewById(R.id.ComplaintText);
         GeneralUser user = (GeneralUser) getIntent().getSerializableExtra("User");
-        MaterialButton reset = (MaterialButton) findViewById(R.id.orderButton);
+        MaterialButton reset = (MaterialButton) findViewById(R.id.sendComplaint);
         reset.setOnClickListener(v -> {
             String pass = password.getText().toString();
             dbref.child("Clients").orderByChild("username").equalTo(user.getUsername()).addValueEventListener(new ValueEventListener() {

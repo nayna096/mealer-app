@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/MealName"
+                android:id="@+id/RequestedMeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MealName"
@@ -56,7 +56,7 @@
         tools:visibility="visible">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/AddMeal"
+            android:id="@+id/ComplaintButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="false"
@@ -65,7 +65,7 @@
             android:textSize="9sp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/RemoveMeal"
+            android:id="@+id/RateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -76,7 +76,7 @@
     </RelativeLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/ViewMeal"
+        android:id="@+id/ViewRequest"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="212dp"
