@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background"
-    tools:context=".PasswordReset">
+    tools:context=".RequestDescriptionPage">
 
     <EditText
         android:id="@+id/requestDescription"
@@ -17,11 +18,17 @@
         android:background="#40ffffff"
         android:drawableLeft="@drawable/ic_baseline_info_24"
         android:drawablePadding="20dp"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="Write any description for the request"
         android:padding="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_baseline_arrow_back_24_black"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/requestMessage"
@@ -30,7 +37,7 @@
         android:layout_marginTop="75dp"
         android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:text="Enter a new password"
+        android:text="Please enter any request you have for your order"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold" />
@@ -45,6 +52,5 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
-        android:text="Reset Password" />
-
+        android:text="Order" />
 </RelativeLayout>

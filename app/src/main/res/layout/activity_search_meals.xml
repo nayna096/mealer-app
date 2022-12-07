@@ -21,15 +21,16 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/searchMeals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/MealsTitle"
-        android:hint="Search Meals"
         android:drawableLeft="@drawable/ic_baseline_search_24"
-        android:id="@+id/searchMeals"
+        android:hint="Search Meals"
         android:paddingHorizontal="5dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"/>
+        android:textColorHint="@color/black"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"

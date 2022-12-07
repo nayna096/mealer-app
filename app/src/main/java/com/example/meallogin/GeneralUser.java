@@ -30,4 +30,6 @@ public abstract class GeneralUser implements Serializable {
     public void setRole(String role) {this.role = role;}
     public void setAddress(String address) {this.address = address;}
 
+    public String toString(){return this.username;}
+
 }

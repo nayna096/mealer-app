@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +33,20 @@ public class WelcomeCookScreen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_cook_screen);
         EditText message = (EditText)findViewById(R.id.MessageBox);
         TextView welcome = (TextView)findViewById(R.id.WelcomeMessage);
+        TextView ratingMessage = (TextView)findViewById(R.id.ratingMessage);
+        RatingBar bar = (RatingBar)findViewById(R.id.ratingBar);
         Cook cook = (Cook)i.getSerializableExtra("Cook");
         welcome.setText("Welcome "+cook.getUsername());
-
+        float rating = 0;
+        int offered = 0;
+        for(int a = 0;a<cook.getMenu().getMeals().size();a++){
+            if(cook.getMenu().getMeals().get(a).isOffered()){
+                offered++;
+                rating+=cook.getMenu().getMeals().get(a).getRating();
+            }
+        }
+        bar.setRating(rating/offered);
+        ratingMessage.setText("Your rating: "+String.valueOf(rating/offered));
 
         MaterialButton logout = (MaterialButton) findViewById(R.id.logout);
         logout.setOnClickListener(v->{

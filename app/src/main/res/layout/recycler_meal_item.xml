@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="#40ffffff">
 
-            <androidx.cardview.widget.CardView
-                cardCornerRadius="20dp"
-                cardElevation="10dp"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="20dp">
+    <androidx.cardview.widget.CardView
+        cardCornerRadius="20dp"
+        cardElevation="10dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="#40ffffff">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/chefName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Chef Name"
-                        android:textSize="20dp" />
+            <TextView
+                android:id="@+id/chefName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mealname"
+                android:layout_marginTop="10dp"
+                android:text="Chef Name"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
 
-                    <TextView
-                        android:id="@+id/mealDescription"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/chefName"
-                        android:paddingTop="15dp"
-                        android:text="Description"
-                        android:textSize="12dp" />
+            <TextView
+                android:id="@+id/mealname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Meal"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
 
-                </RelativeLayout>
+            <TextView
+                android:id="@+id/mealDescription"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chefName"
+                android:paddingTop="10dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
 
-            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:layout_width="220dp"
@@ -43,14 +58,38 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/something"
+                    android:id="@+id/removeFromCart"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_above="@id/MealDetails"
+                    android:layout_alignLeft="@id/MealDetails"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_baseline_remove_circle_24_black"
+                    app:backgroundTint="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/MealDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_above="@id/MealDetails"
+                    android:layout_alignLeft="@id/MealDetails"
                     android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/black"
-                    android:text="something"
-                    android:textSize="12dp" />
+                    android:text="View Details"
+                    app:backgroundTint="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addToCart"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_above="@id/MealDetails"
+                    android:layout_alignRight="@id/MealDetails"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_baseline_add_circle_24_black"
+                    android:textSize="12dp"
+                    app:backgroundTint="@color/black"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </RelativeLayout>
 

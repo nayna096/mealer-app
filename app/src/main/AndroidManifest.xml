@@ -13,6 +13,20 @@
         android:theme="@style/Theme.MealLogin"
         tools:targetApi="31">
         <activity
+            android:name=".RequestDescriptionPage"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MealPreview"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UsernameVerification"
             android:exported="false">
             <meta-data

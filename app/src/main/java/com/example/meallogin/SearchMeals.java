@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -36,17 +38,19 @@ public class SearchMeals extends AppCompatActivity {
             if (task.isSuccessful()) {
                 GenericTypeIndicator<ArrayList<Meal>> t = new GenericTypeIndicator<ArrayList<Meal>>() {
                 };
-                ArrayList<Meal> meals = new ArrayList<Meal>();
+                ArrayList<Tuple> meals = new ArrayList<Tuple>();
                 ArrayList<String> cooks = new ArrayList<>();
+                ArrayList<Cook> CookObs = new ArrayList<>();
                 ArrayList<Menu> menus = new ArrayList<>();
                 for (DataSnapshot ds : task.getResult().getChildren()) {
                     Cook cook = ds.getValue(Cook.class);
+                    CookObs.add(cook);
                     cooks.add(cook.getUsername());
                     menus.add(cook.getMenu());
                     for (DataSnapshot dsi : ds.child("menu/meals").getChildren()) {
                         Meal c = dsi.getValue(Meal.class);
                         if (c.isOffered()) {
-                            meals.add(c);
+                            meals.add(new Tuple(c, cook));
                         }
 
                     }
@@ -54,28 +58,29 @@ public class SearchMeals extends AppCompatActivity {
                 }
 
                 MaterialButton go = findViewById(R.id.enterSearch);
+
                 go.setOnClickListener(v -> {
-                    ArrayList<Meal> meals2 = new ArrayList<Meal>();
+                    ArrayList<Tuple> meals2 = new ArrayList<Tuple>();
                     for (int i = 0; i < meals.size(); i++) {
 //                        System.out.println(i);
                         //the search filters
 
                         //searching by meal name
-                        if (meals.get(i).getName().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))) {
+                        if (meals.get(i).getMeal().getName().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))) {
                             meals2.add(meals.get(i));
                         }
                         //searching by cuisine type
-                        if(meals.get(i).getCuisineType().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))){
+                        if(meals.get(i).getMeal().getCuisineType().toLowerCase(Locale.ROOT).contains(search.getText().toString().toLowerCase(Locale.ROOT))){
                             meals2.add(meals.get(i));
                         }
 
                         //searching by cook name
                         if(cooks.contains(search.getText().toString())){
                             for(int j = 0;j<cooks.size();j++){
-                                if(cooks.get(j).equals(search.getText().toString())){
+                                if(cooks.get(j).contains(search.getText().toString())){
                                     for(int k = 0;k< menus.get(j).getMeals().size();k++){
                                         if(menus.get(j).getMeals().get(k).isOffered()){
-                                            meals2.add(menus.get(j).getMeals().get(k));
+                                            meals2.add(new Tuple(menus.get(j).getMeals().get(k),CookObs.get(j)));
                                         }
                                     }
                                 }
@@ -84,7 +89,7 @@ public class SearchMeals extends AppCompatActivity {
                         }
                     }
 
-                    MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals2);
+                    MealSearchAdapter mealSearchAdapter = new MealSearchAdapter(SearchMeals.this, meals2, client);
                     binding.mealTable.setAdapter(mealSearchAdapter);
                 });
                 //future code written here
@@ -123,4 +128,34 @@ public class SearchMeals extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+ class Tuple implements Serializable{
+    public Tuple (){}
+    Meal meal;
+    Cook cook;
+     public Tuple (Meal meal, Cook cook){
+        this.meal = meal;
+        this.cook = cook;
+     }
+
+     public Meal getMeal() {
+         return this.meal;
+     }
+
+     public void setMeal(Meal meal) {
+         this.meal = meal;
+     }
+
+     public Cook getCook() {
+         return this.cook;
+     }
+
+     public void setCook(Cook cook) {
+         this.cook = cook;
+     }
+
+     public String toString(){
+        return this.cook.toString();
+     }
+ }
 

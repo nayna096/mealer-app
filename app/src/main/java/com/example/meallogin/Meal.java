@@ -12,7 +12,8 @@ public class Meal implements Serializable{
     private double price;
     private String description;
     private boolean offered;
-
+    private double rating;
+    private int count;
 
     //region Constructors
     public Meal(){}
@@ -24,6 +25,8 @@ public class Meal implements Serializable{
         this.price = price;
         this.description = description;
         this.offered = false;
+        this.rating = 0;
+        this.count = 0;
     }
 
     //endregion
@@ -54,6 +57,10 @@ public class Meal implements Serializable{
 
     public boolean isOffered() {return offered;}
 
+    public double getRating() {return rating;}
+
+    public int getCount() {return count;}
+
     //endregion
     //region Setters
 
@@ -81,6 +88,13 @@ public class Meal implements Serializable{
     }
 
     public void setOffered(boolean offered) {this.offered = offered;}
+
+    public void setRating(double rating) {
+        this.count++;
+        this.rating = (rating+this.rating)/this.count ;
+    }
+
+    public void setCount(int count) {this.count = count;}
     //endregion
 
     public boolean equals(Meal m) {
