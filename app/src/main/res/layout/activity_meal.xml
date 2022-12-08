@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cook"
+    android:background="#7079AA"
     tools:context=".MealActivity">
 
     <TextView
@@ -87,7 +87,9 @@
 
     <Button
         android:id="@+id/BackButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:background="@drawable/ic_baseline_arrow_back_24" />
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_baseline_arrow_back_24_black"
+        app:iconTint="#000000"
+        app:strokeColor="#000000" />
 </RelativeLayout>

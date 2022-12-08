@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
+    android:background="#7079AA"
     tools:context=".UsernameVerification">
 
     <com.google.android.material.button.MaterialButton
@@ -20,14 +20,14 @@
 
     <TextView
         android:id="@+id/CheckMessage"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
         android:layout_marginTop="75dp"
         android:layout_marginBottom="50dp"
         android:gravity="center"
         android:text="Enter your username to see if you have already created an account"
         android:textColor="@color/black"
-        android:textSize="25dp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <EditText

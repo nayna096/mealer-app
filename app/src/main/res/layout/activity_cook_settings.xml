@@ -7,6 +7,7 @@
     tools:context=".CookRequests"
     android:background="@drawable/cook">
 
+
     <TextView
         android:id="@+id/CookSettingsTitle"
         android:layout_width="wrap_content"

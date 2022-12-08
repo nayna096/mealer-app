@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#7079AA"
     tools:context=".WelcomeClientScreen">
     <TextView
         android:id="@+id/WelcomeMessage"
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:text="logout"
+        android:textColor="@color/white"
         android:visibility="visible"
         tools:visibility="visible" />
 
@@ -42,7 +43,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:background="#7079AA">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Home"

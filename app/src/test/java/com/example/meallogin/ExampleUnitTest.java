@@ -61,6 +61,7 @@ public class ExampleUnitTest {
         assertFalse(cookNotSuspended.Suspended());
     }
 
+    @Test
     public void testRoles() {
         Cook cook = new Cook();
         Client client = new Client();
