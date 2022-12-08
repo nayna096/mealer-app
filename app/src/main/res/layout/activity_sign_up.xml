@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#7079AA"
     tools:context=".SignUp">
 
     <com.google.android.material.button.MaterialButton
@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/signup"
@@ -145,12 +146,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:backgroundTint="@color/black"
-            android:text="Cook" />
+            android:text="Cook"
+            android:textColor="@color/white"/>
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Client"
         android:text="Client"
+        android:textColor="@color/white"
         android:backgroundTint="@color/black"
         android:layout_margin="20dp"/>
 

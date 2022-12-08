@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/cook"
+    android:background="#7079AA"
     tools:context=".MenuFrag">
 
     <com.google.android.material.button.MaterialButton
@@ -24,11 +24,10 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/CreateMeal"
         android:layout_width="50dp"
-        android:layout_height="24dp"
+        android:layout_height="43dp"
         android:layout_above="@id/CookMeals"
-        android:layout_below="@id/yourMeals"
-        android:layout_alignParentEnd="false"
-        android:layout_marginLeft="0dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="119dp"
         android:layout_toRightOf="@id/CookEnterSearch"
         android:background="@drawable/ic_baseline_add_circle_24"
         android:backgroundTint="@color/purple_500"
@@ -61,7 +60,8 @@
         android:minHeight="48dp"
         android:paddingHorizontal="5dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        android:background="#19ffffff"/>
 
     <ListView
         android:id="@+id/CookMeals"
@@ -75,7 +75,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#7079AA">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/CookHome"

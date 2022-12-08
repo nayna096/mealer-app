@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CookSettingsFrag"
-    android:background="@drawable/cook">
+    android:background="#7079AA">
 
     <TextView
         android:id="@+id/CookSettingsTitle"

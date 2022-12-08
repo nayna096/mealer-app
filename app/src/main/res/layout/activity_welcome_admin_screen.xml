@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WelcomeAdminScreen"
-    android:background="@drawable/background">
+    android:background="#7079AA">
   <TextView
       android:id="@+id/WelcomeMessage"
       android:layout_width="match_parent"
@@ -27,6 +27,7 @@
       android:layout_height="wrap_content"
       android:backgroundTint="@color/black"
       android:text="logout"
+      android:textColor="@color/white"
       android:visibility="visible"
       tools:visibility="visible" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/background"
+    tools:background="#7079AA"
     tools:context=".ComplaintDescriptionPage">
 
     <EditText
@@ -15,7 +15,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#40ffffff"
+        android:background="#19ffffff"
         android:drawableLeft="@drawable/ic_baseline_info_24"
         android:drawablePadding="20dp"
         android:hint="Write your complaint here"
@@ -52,5 +52,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
-        android:text="send" />
+        android:text="send"
+        android:textColor="@color/white"
+        />
 </RelativeLayout>
