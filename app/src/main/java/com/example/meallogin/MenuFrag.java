@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
 import com.example.meallogin.databinding.ActivityMenuFragBinding;
 import com.google.android.material.button.MaterialButton;
@@ -50,7 +47,7 @@ public class MenuFrag extends AppCompatActivity {
     }
 
     public void openSettings(Cook cook) {
-        Intent intent = new Intent(this, CookSettingsFrag.class);
+        Intent intent = new Intent(this, CookRequests.class);
         intent.putExtra("Cook", cook);
         startActivity(intent);
     }

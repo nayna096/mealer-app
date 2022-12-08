@@ -66,10 +66,9 @@
     <ListView
         android:id="@+id/CookMeals"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="490dp"
         android:layout_below="@id/CookSearchMeals"
         tools:listitem="@layout/meal_list_item" />
-<!--        android:clickable="true"-->
 
 
     <RelativeLayout
@@ -111,9 +110,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/editMenuButton"
             android:backgroundTint="#40ffffff"
-            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:drawableTop="@drawable/ic_baseline_notificationsblack"
             android:paddingHorizontal="35dp"
-            android:text="Settings"
+            android:text="Requests"
             android:textColor="@color/black"
             android:textSize="9dp"
             android:visibility="visible"
