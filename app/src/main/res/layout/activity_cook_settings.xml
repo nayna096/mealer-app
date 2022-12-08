@@ -4,18 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CookSettingsFrag"
-    android:background="#7079AA">
+    tools:context=".CookRequests"
+    android:background="@drawable/cook">
+
 
     <TextView
         android:id="@+id/CookSettingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Settings"
+        android:text="Requests"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold" />
+    <ListView
+        android:id="@+id/complaintTable"
+        android:layout_width="match_parent"
+        android:layout_height="615dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/CookSettingsTitle"
+        tools:listitem="@layout/recycler_request_item" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,9 +64,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/editMenuButton"
             android:backgroundTint="#40ffffff"
-            android:drawableTop="@drawable/ic_baseline_settings_purp"
+            android:drawableTop="@drawable/ic_baseline_notifications_purp"
             android:paddingHorizontal="35dp"
-            android:text="Settings"
+            android:text="Requests"
             android:textColor="@color/purple_500"
             android:textSize="9dp"
             android:visibility="visible"
