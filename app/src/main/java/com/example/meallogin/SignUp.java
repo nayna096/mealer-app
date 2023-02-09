@@ -22,7 +22,7 @@ public class SignUp extends AppCompatActivity {
     String restrictedUsers = "nayna";
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbref = db.getReference();
-
+    String [] acceptedEmails = {"outlook.com","bell.net","gmail.com","mail.com","yahoo.com","iCloud.com"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,70 +37,80 @@ public class SignUp extends AppCompatActivity {
         MaterialButton cook = (MaterialButton) findViewById(R.id.Cook);
         MaterialButton client = (MaterialButton) findViewById(R.id.Client);
 
-        if (user.getText().toString().equals(restrictedUsers)) {
-            Toast.makeText(getApplicationContext(), "This username is invalid due to an admin conflict", Toast.LENGTH_LONG).show();
-            user.setText("");
-        }
+//        if (user.getText().toString().equals(restrictedUsers)) {
+//            Toast.makeText(getApplicationContext(), "This username is invalid due to an admin conflict", Toast.LENGTH_LONG).show();
+//            user.setText("");
+//        }
         login.setOnClickListener(v -> openMainActivity());
+        String emailUsed = Email.getText().toString();
         client.setOnClickListener(v ->
         {
-            if (user.getText().toString().equals(restrictedUsers)) {
-                Toast.makeText(getApplicationContext(), "This username is invalid due to an admin conflict", Toast.LENGTH_LONG).show();
-                user.setText("");
+//            if (user.getText().toString().equals(restrictedUsers)) {
+//                Toast.makeText(getApplicationContext(), "This username is invalid due to an admin conflict", Toast.LENGTH_LONG).show();
+//                user.setText("");
+//            }
+
+            if(emailChecker(emailUsed)){
+
+                dbref.child("Cooks").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Toast.makeText(getApplicationContext(), "This username is already used by a cook, use a different one", Toast.LENGTH_LONG).show();
+                            user.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                dbref.child("Clients").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        if (datasnapshot.exists()) {
+                            Toast.makeText(getApplicationContext(), "This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
+                            user.setText("");
+                        } else {
+                            createClient(user, Password, Confirmp, Email, Address);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }else{
+                Toast.makeText(getApplicationContext(),"Choose a valid email",Toast.LENGTH_LONG).show();
+                Email.setText("");
             }
-            dbref.child("Cooks").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        Toast.makeText(getApplicationContext(), "This username is already used by a cook, use a different one", Toast.LENGTH_LONG).show();
-                        user.setText("");
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            dbref.child("Clients").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                    if (datasnapshot.exists()) {
-                        Toast.makeText(getApplicationContext(), "This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
-                        user.setText("");
-                    } else {
-                        createClient(user, Password, Confirmp, Email, Address);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
 
 
         });
         cook.setOnClickListener(v ->
         {
-            if (user.getText().toString().equals(restrictedUsers)) {
-                Toast.makeText(getApplicationContext(), "This username is invalid due to an admin conflict", Toast.LENGTH_LONG).show();
-                user.setText("");
-            }
-            dbref.child("Clients").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        Toast.makeText(getApplicationContext(), "This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
-                        user.setText("");
+
+//            if (user.getText().toString().equals(restrictedUsers)) {
+//                Toast.makeText(getApplicationContext(), "This username is invalid due to an admin conflict", Toast.LENGTH_LONG).show();
+//                user.setText("");
+//            }
+            if(emailChecker(emailUsed)){
+                dbref.child("Clients").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Toast.makeText(getApplicationContext(), "This username is already used by a client, use a different one", Toast.LENGTH_LONG).show();
+                            user.setText("");
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+                    }
+                });
             dbref.child("Cooks").orderByChild("username").equalTo(user.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -117,6 +127,11 @@ public class SignUp extends AppCompatActivity {
 
                 }
             });
+
+            }else{
+                Toast.makeText(getApplicationContext(),"Choose a valid email",Toast.LENGTH_LONG).show();
+                Email.setText("");
+            }
 
         });
 
@@ -176,5 +191,24 @@ public class SignUp extends AppCompatActivity {
             return "Success";
         }
         return "Login failed";
+    }
+    private boolean emailChecker(String s){
+        if(!(s.contains("@"))) {
+            return false;
+        }else{
+            char [] c = s.toCharArray();
+            for(int i = 0;i<c.length;i++){
+                if(c[i]=='@'){
+                    String esp = s.substring(i,c.length-1);
+                     for(int j = 0;j<acceptedEmails.length;j++){
+                         if(esp.equals(acceptedEmails[j])){
+                             return true;
+                         }
+                     }
+                     return false;
+                }
+            }
+        }
+        return false;
     }
 }
